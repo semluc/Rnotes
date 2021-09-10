@@ -6,6 +6,7 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
 # Build settings
 theme: just-the-docs
+#remote_theme: pmarsceill/just-the-docs
 color_scheme: light
 
 
@@ -28,13 +29,29 @@ just_the_docs:
 aux_links:
   "Theme":
     - "//pmarsceill.github.io/just-the-docs/"
+  "Github":
+    - "//github.com/semluc/Rnotes"
 
 aux_links_new_tab: true
 
 back_to_top: true
 back_to_top_text: "Back to top"
 
+# Footer "Edit this page on GitHub" link text
+gh_edit_link: true # show or hide edit this page link
+gh_edit_link_text: "Edit this page on GitHub."
+gh_edit_repository: "https://github.com/semluc/Rnotes" # the github URL for your repo
+gh_edit_branch: "master" # the branch that your docs is served from
+# gh_edit_source: docs # the source that your files originate from
+gh_edit_view_mode: "edit" # "tree" or "edit" if you want the user to jump into the editor immediately
+
+
+# Footer last edited timestamp
+#last_edit_timestamp: true # show or hide edit time - page must have `last_modified_date` defined in the frontmatter
+#last_edit_time_format: "%b %e %Y at %I:%M %p" # uses ruby's time format: https://ruby-doc.org/stdlib-2.7.0/libdoc/time/rdoc/Time.html
+
 footer_content: "<a href=/contact.html>Contact</a>&nbsp;&nbsp;&nbsp;<a href=/privacy.html>Privacy Policy</a>&nbsp;&nbsp;&nbsp;<a href=/privacy.html>Legal Notice</a>"
+
 
 search.previews: 3
 
