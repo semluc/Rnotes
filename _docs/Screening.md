@@ -1,0 +1,239 @@
+---
+layout: default
+title: Screening
+nav_order: 1
+---
+
+# Navigation Structure
+{: .no_toc }
+
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+1. TOC
+{:toc}
+</details>
+
+# Prerequisites
+
+Load required packages:
+
+``` r
+#import libraries
+library(psych)
+library(summarytools)
+library(psychTools)
+library(clipr)
+library(car)
+library(haven)
+#load corr-table function from file
+source("correlation.R")
+```
+
+Import our datasets
+
+``` r
+#import data
+dat <- read.table("uk_ipip300_data1.csv", sep = ";", header = TRUE) 
+dat1 <- read.table("stepd.csv", sep = ";", header = TRUE) 
+```
+
+# Screening
+
+Screen the dataset: Stats, Freq, Graph, Cases, Missing
+
+``` r
+cor.mat <- subset(dat1, select =c(iip_acc, iip_cold, iip_dom, iip_sac, iip_int))
+dfSummary(cor.mat)
+```
+
+    ## Data Frame Summary  
+    ## cor.mat  
+    ## Dimensions: 150 x 5  
+    ## Duplicates: 0  
+    ## 
+    ## ---------------------------------------------------------------------------------------------------------
+    ## No   Variable    Stats / Values           Freqs (% of Valid)   Graph                 Valid      Missing  
+    ## ---- ----------- ------------------------ -------------------- --------------------- ---------- ---------
+    ## 1    iip_acc     Mean (sd) : 13.1 (5.9)   26 distinct values       :                 150        0        
+    ##      [integer]   min < med < max:                                . : .               (100.0%)   (0.0%)   
+    ##                  1 < 13 < 27                                     : : :                                   
+    ##                  IQR (CV) : 8 (0.5)                            : : : : .                                 
+    ##                                                                : : : : : .                               
+    ## 
+    ## 2    iip_cold    Mean (sd) : 9.7 (6)      25 distinct values         :               150        0        
+    ##      [integer]   min < med < max:                                .   :               (100.0%)   (0.0%)   
+    ##                  0 < 9 < 25                                    . : : :   :                               
+    ##                  IQR (CV) : 9 (0.6)                            : : : : . : .                             
+    ##                                                                : : : : : : : : . :                       
+    ## 
+    ## 3    iip_dom     Mean (sd) : 5.4 (3.7)    15 distinct values     :                   150        0        
+    ##      [integer]   min < med < max:                              : :   .               (100.0%)   (0.0%)   
+    ##                  0 < 5 < 18                                    : : : :                                   
+    ##                  IQR (CV) : 4 (0.7)                            : : : : .                                 
+    ##                                                                : : : : : . .   .                         
+    ## 
+    ## 4    iip_sac     Mean (sd) : 14.4 (5.9)   26 distinct values       :                 150        0        
+    ##      [integer]   min < med < max:                                  : :               (100.0%)   (0.0%)   
+    ##                  0 < 14 < 31                                     . : :                                   
+    ##                  IQR (CV) : 8 (0.4)                              : : : :                                 
+    ##                                                                : : : : :                                 
+    ## 
+    ## 5    iip_int     Mean (sd) : 6.9 (4.4)    21 distinct values       :                 150        0        
+    ##      [integer]   min < med < max:                                  :                 (100.0%)   (0.0%)   
+    ##                  0 < 6 < 24                                    . : :   :                                 
+    ##                  IQR (CV) : 6 (0.6)                            : : : : :                                 
+    ##                                                                : : : : : : .                             
+    ## ---------------------------------------------------------------------------------------------------------
+
+## Frequency table
+
+``` r
+freq(dat1$gender, order = "freq")
+```
+
+    ## Frequencies  
+    ## dat1$gender  
+    ## Type: Integer  
+    ## 
+    ##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+    ## ----------- ------ --------- -------------- --------- --------------
+    ##           1    100     66.67          66.67     66.67          66.67
+    ##           0     50     33.33         100.00     33.33         100.00
+    ##        <NA>      0                               0.00         100.00
+    ##       Total    150    100.00         100.00    100.00         100.00
+
+## Cross-Table
+
+How many have A and B?
+
+``` r
+ctable(dat1$episode,dat1$partner)
+```
+
+    ## Cross-Tabulation, Row Proportions  
+    ## episode * partner  
+    ## Data Frame: dat1  
+    ## 
+    ## --------- --------- ------------ ------------ --------------
+    ##             partner            0            1          Total
+    ##   episode                                                   
+    ##         0             48 (63.2%)   28 (36.8%)    76 (100.0%)
+    ##         1             45 (60.8%)   29 (39.2%)    74 (100.0%)
+    ##     Total             93 (62.0%)   57 (38.0%)   150 (100.0%)
+    ## --------- --------- ------------ ------------ --------------
+
+## Descriptive statistics
+
+``` r
+psych::describe(dat1$iip_acc)
+```
+
+    ##    vars   n  mean   sd median trimmed  mad min max range skew kurtosis   se
+    ## X1    1 150 13.13 5.94     13   13.04 5.93   1  27    26 0.09    -0.63 0.48
+
+# Recode variables
+
+Recode items:  
+1 -\> 0  
+2 -\> 1  
+…
+
+``` r
+dat1$exp_content_r <- recode(dat1$exp_content, "1=0; 2=1; 3=2; 4=2")
+```
+
+# Aggregate variables
+
+Aggregate variables per mean (or: median, sum, min, max)
+
+``` r
+dat$Extra_total <- apply(dat[,c("Extra_1", "Extra_2", "Extra_3", "Extra_4")], 1, mean, na.rm = TRUE)
+```
+
+# Save dataset
+
+Save R dataframe “dat1” to filename dat2.csv
+
+``` r
+write.table(dat1, file="dat2.csv", sep=";", dec = ".")
+```
+
+Save R dataframe “dat1” to filename dat2.sav
+
+``` r
+write_sav(dat1, "dat2.sav")
+```
+
+# Cronbach’s alpha
+
+Calculate cronbach’s alpha of a defined subset
+
+``` r
+alpha(subset(dat, select = c(Extra_1,Extra_2,Extra_3,Extra_4)), check.keys =TRUE)
+```
+
+    ## 
+    ## Reliability analysis   
+    ## Call: alpha(x = subset(dat, select = c(Extra_1, Extra_2, Extra_3, Extra_4)), 
+    ##     check.keys = TRUE)
+    ## 
+    ##   raw_alpha std.alpha G6(smc) average_r S/N   ase mean   sd median_r
+    ##       0.81      0.81    0.77      0.52 4.4 0.012  3.7 0.89     0.54
+    ## 
+    ##  lower alpha upper     95% confidence boundaries
+    ## 0.79 0.81 0.84 
+    ## 
+    ##  Reliability if an item is dropped:
+    ##         raw_alpha std.alpha G6(smc) average_r S/N alpha se   var.r med.r
+    ## Extra_1      0.77      0.77    0.70      0.53 3.4    0.016 0.00497  0.55
+    ## Extra_2      0.77      0.77    0.70      0.53 3.4    0.016 0.00440  0.55
+    ## Extra_3      0.73      0.73    0.65      0.48 2.8    0.019 0.00163  0.46
+    ## Extra_4      0.78      0.78    0.70      0.54 3.6    0.016 0.00021  0.55
+    ## 
+    ##  Item statistics 
+    ##           n raw.r std.r r.cor r.drop mean  sd
+    ## Extra_1 600  0.79  0.79  0.69   0.62  3.8 1.1
+    ## Extra_2 598  0.79  0.79  0.68   0.61  3.5 1.1
+    ## Extra_3 599  0.84  0.84  0.78   0.70  3.6 1.1
+    ## Extra_4 598  0.78  0.78  0.67   0.60  3.7 1.1
+    ## 
+    ## Non missing response frequency for each item
+    ##            0    1    2    3    4    5 miss
+    ## Extra_1 0.00 0.03 0.14 0.16 0.37 0.30    0
+    ## Extra_2 0.01 0.04 0.17 0.19 0.40 0.20    0
+    ## Extra_3 0.01 0.03 0.16 0.17 0.42 0.22    0
+    ## Extra_4 0.01 0.02 0.13 0.14 0.46 0.24    0
+
+# Correlation-Table
+
+Use the definied subset Subset for the table
+
+``` r
+cor.mat <- subset(dat1, select =c(iip_acc, iip_cold, iip_dom, iip_sac, iip_int))
+```
+
+Calculate corr table from subset and insert mean and SD  
+\*\* p\<.01, \*p\<.05
+
+``` r
+c <- correlation_matrix(cor.mat, digits=2, use='lower', replace_diagonal=T, type = "pearson",) 
+c <- data.frame(SD = format(round(sapply(cor.mat, sd, na.rm = TRUE),2),nsmall=2), c)
+c <- data.frame(M = format(round(colMeans(cor.mat),2),nsmall=2), c)
+print(c)
+```
+
+    ##              M   SD iip_acc iip_cold iip_dom iip_sac iip_int
+    ## iip_acc  13.13 5.94                                         
+    ## iip_cold  9.73 6.02  0.25**                                 
+    ## iip_dom   5.42 3.67  0.12     0.45**                        
+    ## iip_sac  14.41 5.92  0.73**   0.23**  0.21*                 
+    ## iip_int   6.86 4.43  0.34**   0.14    0.48**  0.41**
+
+Copy corr-table to clipboard
+
+``` r
+write_clip(c)
+```

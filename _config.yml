@@ -1,0 +1,41 @@
+title: Rnotes
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+#twitter_username: ""
+#github_username: ""
+
+# Build settings
+theme: just-the-docs
+color_scheme: light
+
+
+# Define Jekyll collections
+collections:
+  docs:
+    permalink: "/:collection/:path/"
+    output: true
+  other:
+    permalink: "/:collection/:path/"
+    output: true
+
+just_the_docs:
+  collections:
+    docs:
+      name: Documentation
+    other:
+      name: other
+
+aux_links:
+  "Theme":
+    - "//pmarsceill.github.io/just-the-docs/"
+
+aux_links_new_tab: true
+
+back_to_top: true
+back_to_top_text: "Back to top"
+
+footer_content: "<a href=/contact.html>Contact</a>&nbsp;&nbsp;&nbsp;<a href=/privacy.html>Privacy Policy</a>&nbsp;&nbsp;&nbsp;<a href=/privacy.html>Legal Notice</a>"
+
+search.previews: 3
+
+heading_anchors: true
