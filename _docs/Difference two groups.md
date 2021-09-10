@@ -90,7 +90,7 @@ Plot difference with boxplot
 boxplot(iip_tot ~ gender, data=dat,names=c("male","female"))
 ```
 
-![](/assets/images/MeanDiff_e_files/figure-markdown_github/unnamed-chunk-5-1.png)
+![](/assets/images/Differencetwogroups/figure-markdown_github/unnamed-chunk-5-1.png)
 
 # Assumption testing
 
@@ -113,7 +113,7 @@ Normalty test with histogram
 hist(dat$iip_tot)
 ```
 
-![](/assets/images/MeanDiff_e_files/figure-markdown_github/unnamed-chunk-7-1.png)
+![](/assets/images/Differencetwogroups/figure-markdown_github/unnamed-chunk-7-1.png)
 
 Normalty test with QQ-Plot
 
@@ -121,7 +121,7 @@ Normalty test with QQ-Plot
 PlotQQ(dat$iip_tot) 
 ```
 
-![](/assets/images/MeanDiff_e_files/figure-markdown_github/unnamed-chunk-8-1.png)
+![](/assets/images/Differencetwogroups/figure-markdown_github/unnamed-chunk-8-1.png)
 
 Homogeneity of variance test with lavene test  
 Levene test ns= homogeneity  

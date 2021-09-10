@@ -67,7 +67,7 @@ Plot difference
 boxplot(iip_tot ~ exp_content_r, data=dat,names=c("low","mid","high"))
 ```
 
-![](/assets/images/MeanDiffPlus_e_files/figure-markdown_github/unnamed-chunk-3-1.png)
+![](/assets/images/Differencemoregroups/figure-markdown_github/unnamed-chunk-3-1.png)
 
 # Assumption testing
 
@@ -78,7 +78,7 @@ a1 <- aov(dat$iip_tot ~ dat$exp_content_r)
 hist(rstandard(a1))
 ```
 
-![](/assets/images/MeanDiffPlus_e_files/figure-markdown_github/unnamed-chunk-4-1.png)
+![](/assets/images/Differencemoregroups/figure-markdown_github/unnamed-chunk-4-1.png)
 
 Normalty test with QQ-Plot
 
@@ -87,7 +87,7 @@ a1 <- aov(dat$iip_tot ~ dat$exp_content_r)
 qqPlot(a1)
 ```
 
-![](/assets/images/MeanDiffPlus_e_files/figure-markdown_github/unnamed-chunk-5-1.png)
+![](/assets/images/Differencemoregroups/figure-markdown_github/unnamed-chunk-5-1.png)
 
     ## [1] 109 141
 
