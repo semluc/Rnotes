@@ -180,6 +180,30 @@ Aggregate variables per mean (or: median, sum, min, max)
 dat$Extra_total <- apply(dat[,c("Extra_1", "Extra_2", "Extra_3", "Extra_4")], 1, mean, na.rm = TRUE)
 ```
 
+# Calculate classes
+
+we want to divide age in 3 similar sized classes by 33% and 66%
+
+``` r
+dat1$age_c <- dat1$age
+dat1$age_c[dat1$age_c <= 36] <- 1
+dat1$age_c[dat1$age_c > 36 & dat1$age_c <= 47] <- 2
+dat1$age_c[dat1$age_c > 47] <- 3
+freq(dat1$age_c)
+```
+
+    ## Frequencies  
+    ## dat1$age_c  
+    ## Type: Numeric  
+    ## 
+    ##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+    ## ----------- ------ --------- -------------- --------- --------------
+    ##           1     50     33.33          33.33     33.33          33.33
+    ##           2     48     32.00          65.33     32.00          65.33
+    ##           3     52     34.67         100.00     34.67         100.00
+    ##        <NA>      0                               0.00         100.00
+    ##       Total    150    100.00         100.00    100.00         100.00
+
 # Save dataset
 
 Save R dataframe “dat1” to filename dat2.csv
