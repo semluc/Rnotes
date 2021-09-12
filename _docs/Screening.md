@@ -145,6 +145,33 @@ Recode items:
 dat1$exp_content_r <- recode(dat1$exp_content, "1=0; 2=1; 3=2; 4=2")
 ```
 
+# Add var Label per factor
+
+``` r
+#Change values from 0 to no exp
+dat1$exp_content_r[dat1$exp_content_r =="0"] <- "no exp"
+dat1$exp_content_r[dat1$exp_content_r =="1"] <- "med exp"
+dat1$exp_content_r[dat1$exp_content_r =="2"] <- "high exp"
+
+#change to factor
+dat1$exp_content_r <- as.factor(dat1$exp_content_r)
+
+#result
+freq(dat1$exp_content_r)
+```
+
+    ## Frequencies  
+    ## dat1$exp_content_r  
+    ## Type: Factor  
+    ## 
+    ##                  Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+    ## -------------- ------ --------- -------------- --------- --------------
+    ##       high exp     59     39.33          39.33     39.33          39.33
+    ##        med exp     34     22.67          62.00     22.67          62.00
+    ##         no exp     57     38.00         100.00     38.00         100.00
+    ##           <NA>      0                               0.00         100.00
+    ##          Total    150    100.00         100.00    100.00         100.00
+
 # Aggregate variables
 
 Aggregate variables per mean (or: median, sum, min, max)
