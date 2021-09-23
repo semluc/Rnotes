@@ -109,7 +109,7 @@ freq(dat1$gender, order = "freq")
 
 ``` r
 #copy dataset with no missings
-dat.o <- na.omit(dat
+dat.o <- na.omit(dat)
 ```
 
 
