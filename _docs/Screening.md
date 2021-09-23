@@ -105,6 +105,14 @@ freq(dat1$gender, order = "freq")
     ##        <NA>      0                               0.00         100.00
     ##       Total    150    100.00         100.00    100.00         100.00
 
+## Omit missings
+
+``` r
+#copy dataset with no missings
+dat.o <- na.omit(dat
+```
+
+
 ## Cross-Table
 
 How many have A and B?
