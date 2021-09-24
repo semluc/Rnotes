@@ -233,6 +233,9 @@ semTools::clipboard(fit.cfa.pers,what = "fit")
 
 # CFA: Bifactor model
 
+The bifactor model hypothesizes a general factor, onto which all items load, and a series of orthogonal (uncorrelated) skill-specific grouping factors. The model is particularly valuable for evaluating the empirical plausibility of subscales and the practical impact of dimensionality assumptions on test scores (Dunn & McCray,2020)
+
+
 Same assumptions like above
 
 ## Specify model
