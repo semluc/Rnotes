@@ -231,8 +231,6 @@ I use [this](/other/Modelfit from R) how to use it. Excel-file to quickly interp
 semTools::clipboard(fit.cfa.pers,what = "fit")
 ```
 
-    ## File saved in the clipboard; please paste it in any program you wish.
-
 # CFA: Bifactor model
 
 Same assumptions like above
@@ -408,5 +406,3 @@ I use [this](/other/Modelfit from R) how to use it. Excel-file to quickly interp
 ``` r
 semTools::clipboard(fit.cfa.pers.bi,what = "fit") 
 ```
-
-    ## File saved in the clipboard; please paste it in any program you wish.
