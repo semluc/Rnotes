@@ -225,6 +225,7 @@ summary(fit.cfa.pers, standardized= TRUE, fit.measures=TRUE)
 this command will copy the model fit indices to our clipboard. Just
 paste it into the excel file, which you can download here. The model
 indices will be interpreted on the right.
+I use [this](/other/Modelfit from R) how to use it. Excel-file to quickly interpret modelfit.
 
 ``` r
 semTools::clipboard(fit.cfa.pers,what = "fit")
@@ -402,6 +403,7 @@ summary(fit.cfa.pers.bi, standardized= TRUE, fit.measures=TRUE)
     ##     ne                1.000                               1.000    1.000
 
 # Copy modelfit to Clipboard
+I use [this](/other/Modelfit from R) how to use it. Excel-file to quickly interpret modelfit.
 
 ``` r
 semTools::clipboard(fit.cfa.pers.bi,what = "fit") 
