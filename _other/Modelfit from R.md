@@ -6,7 +6,8 @@ nav_order: 2
 
 
 
-## correlation.R
+## Modelfit interpreter
 
-Basic R function to call.  
+This excel file will allow to easily read modelfit from SEM or CFA analysis in R  
+
 [Download](/download/Modelfit.from.R.xlsx) this script – and see [here](/docs/Screening/#correlation-table) how to use it.
