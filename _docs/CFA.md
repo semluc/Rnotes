@@ -257,7 +257,7 @@ pers.bi <- '
 fit.cfa.pers.bi <- cfa(pers.bi, data=dat, estimator ="MLM", std.lv=TRUE)
 ```
 
-# Plot of model
+## Plot of model
 
 ``` r
 #First make row order with x= hight, y = width of variable position
@@ -402,7 +402,7 @@ summary(fit.cfa.pers.bi, standardized= TRUE, fit.measures=TRUE)
     ##     ag                1.000                               1.000    1.000
     ##     ne                1.000                               1.000    1.000
 
-# Copy modelfit to Clipboard
+## Copy modelfit to Clipboard
 I use [this](/other/Modelfit from R) how to use it. Excel-file to quickly interpret modelfit.
 
 ``` r
