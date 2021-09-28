@@ -80,7 +80,7 @@ mvn(dat.extra, mvnTest = c("mardia"), multivariatePlot = "qq", desc = F, showOut
     ## $multivariateOutliers
     ## NULL
 
-see [here](/docs/outliers) how to check for outliers (Leverage / Influence).
+See [here](/docs/outliers) how to check for outliers (Leverage / Influence).
 
 ## Specify model
 
@@ -404,7 +404,7 @@ summary(fit.cfa.pers.bi, standardized= TRUE, fit.measures=TRUE)
     ##     ne                1.000                               1.000    1.000
 
 ## Copy modelfit to Clipboard
-I use [this](/other/Modelfit from R) how to use it. Excel-file to quickly interpret modelfit.
+I use [this](/other/Modelfit from R) Excel-file to quickly interpret modelfit.
 
 ``` r
 semTools::clipboard(fit.cfa.pers.bi,what = "fit") 

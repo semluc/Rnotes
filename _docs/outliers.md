@@ -33,7 +33,7 @@ dat <- read.table("uk_ipip300_data1.csv", sep = ";", header = TRUE)
 
 # Multivariate outliers: Leverage
 
-use small df
+Use smaller df to evaluate MD of all variables
 ``` r
 extra.labels <- c("Opene_1", "Opene_2", "Opene_3", "Opene_4", 
                   "Agree_1", "Agree_2", "Agree_3", "Agree_4", 
@@ -49,8 +49,6 @@ Test for outliers (Leverage) using Mahalanobis distances default is a thershold 
 ``` r
 library(performance)
 ```
-
-    ## Warning: Paket 'performance' wurde unter R Version 4.1.1 erstellt
 
 ``` r
 md <- check_outliers(dat.extra, threshold  = stats::qchisq(p = 1 - 0.001, df = ncol(dat.extra)))
@@ -147,21 +145,6 @@ model <- '
 library(faoutlier)
 ```
 
-    ## Warning: Paket 'faoutlier' wurde unter R Version 4.1.1 erstellt
-
-    ## Lade nötiges Paket: sem
-
-    ## 
-    ## Attache Paket: 'sem'
-
-    ## Die folgenden Objekte sind maskiert von 'package:lavaan':
-    ## 
-    ##     cfa, sem
-
-    ## Lade nötiges Paket: mvtnorm
-
-    ## Lade nötiges Paket: parallel
-
 ``` r
 gCDresult2 <- gCD(dat, model, orthogonal=TRUE)
 print(gCDresult2)
@@ -219,8 +202,6 @@ Alternatively “rmsea”, “tli…”
 ``` r
 library(influence.SEM)
 ```
-
-    ## Warning: Paket 'influence.SEM' wurde unter R Version 4.1.1 erstellt
 
 ``` r
 FI <- fitinfluence("cfi",model,dat)

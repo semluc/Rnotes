@@ -39,7 +39,7 @@ dat1 <- read.table("stepd.csv", sep = ";", header = TRUE)
 ```
 
 # Rename variables
-weird quirk when importing .dat first variable is named "ï.."
+Weird quirk when importing .dat first variable is named "ï.."
 
 ``` r
 library(tidyverse)
@@ -218,7 +218,7 @@ dat$Extra_total <- apply(dat[,c("Extra_1", "Extra_2", "Extra_3", "Extra_4")], 1,
 
 # Calculate classes
 
-we want to divide age in 3 similar sized classes by 33% and 66%
+We want to divide age in 3 similar sized classes by 33% and 66%
 
 ``` r
 dat1$age_c <- dat1$age
@@ -242,13 +242,13 @@ freq(dat1$age_c)
 
 # Select cases using subset
 
-select all cases between age 21 and 28
+Select all cases between age 21 and 28
 
 ``` r
 dat.t <- subset(dat, age>=21 & age <= 28)
 ```
 
-select all cases who are either 18 or 60
+Select all cases who are either 18 or 60
 
 ``` r
 dat.t <- subset(dat, age== 18 | age == 60)
