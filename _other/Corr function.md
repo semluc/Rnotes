@@ -8,8 +8,16 @@ nav_order: 1
 
 ## correlation.R
 
-Basic R function to call.  
-[Download](/download/correlation.R) this script – and see [here](/docs/Screening/#correlation-table) how to use it.
+Basic R function to call:
+  
+``` r
+library(devtools)
+source_url("https://rnts.netlify.app/download/correlation.R")
+```
+
+Alternatively: [Download](/download/correlation.R) this script. 
+  
+See [here](/docs/Screening/#correlation-table) how to use it.
 
 
 
