@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Difference two groups
-nav_order: 2
+nav_order: 3
 ---
 
 # Navigation Structure

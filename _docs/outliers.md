@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Outlier detection
-partent: Screening
 nav_order: 2
 ---
 

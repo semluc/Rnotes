@@ -1,7 +1,7 @@
 ---
 layout: default
 title: CFA
-nav_order: 4
+nav_order: 5
 ---
 
 # Navigation Structure
@@ -42,9 +42,7 @@ dat <- read.table("uk_ipip300_data1.csv", sep = ";", header = TRUE)
 
 ## Assumption testing
 
-Test for multivariate normality and outliers based on Mahalanobis
-distance
-
+Test for multivariate normality 
 ``` r
 #First: new dataset with variables of interest
 extra.labels <- c("Opene_1", "Opene_2", "Opene_3", "Opene_4", 
@@ -81,6 +79,8 @@ mvn(dat.extra, mvnTest = c("mardia"), multivariatePlot = "qq", desc = F, showOut
     ## 
     ## $multivariateOutliers
     ## NULL
+
+see [here](/docs/outliers) how to check for outliers (Leverage / Influence).
 
 ## Specify model
 
