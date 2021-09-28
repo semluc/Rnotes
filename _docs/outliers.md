@@ -16,10 +16,9 @@ nav_order: 2
 {:toc}
 </details>
 
-Load required packages:
+Load lavaan
 
 ``` r
-#import libraries
 library(lavaan)
 ```
 
@@ -46,11 +45,9 @@ dat.extra <- na.omit(dat[,extra.labels])
 Test for outliers (Leverage) using Mahalanobis distances default is a thershold of
 1-0.025 Maybe choose more strict threshold of .001
 
-``` r
-library(performance)
-```
 
 ``` r
+library(performance)
 md <- check_outliers(dat.extra, threshold  = stats::qchisq(p = 1 - 0.001, df = ncol(dat.extra)))
 print(md)
 ```
@@ -143,9 +140,6 @@ model <- '
 
 ``` r
 library(faoutlier)
-```
-
-``` r
 gCDresult2 <- gCD(dat, model, orthogonal=TRUE)
 print(gCDresult2)
 ```
@@ -201,9 +195,6 @@ Alternatively “rmsea”, “tli…”
 
 ``` r
 library(influence.SEM)
-```
-
-``` r
 FI <- fitinfluence("cfi",model,dat)
 ```
 
