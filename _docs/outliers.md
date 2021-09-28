@@ -141,9 +141,8 @@ model <- '
   ne =~ Neuro_1 + Neuro_2 + Neuro_3 + Neuro_4'
 ```
 
-# Case influence
 
-# General Cook's distance
+detect case influence with General Cook's distance
 
 ``` r
 library(faoutlier)
