@@ -207,12 +207,6 @@ library(influence.SEM)
 FI <- fitinfluence("cfi",model,dat)
 ```
 
-``` r
-plot(FI$Dind,pch=19)
-```
-
-![](/assets/images/Outliers/figure-markdown_github/unnamed-chunk-8-1.png) 
-
 Print highest influential cases on cfi
 
 ``` r
