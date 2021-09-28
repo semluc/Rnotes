@@ -40,6 +40,14 @@ dat <- read.table("uk_ipip300_data1.csv", sep = ";", header = TRUE)
 dat1 <- read.table("stepd.csv", sep = ";", header = TRUE) 
 ```
 
+# Rename variables
+weird quirk when importing .dat first variable is named "ï.."
+
+``` r
+library(tidyverse)
+dat2 <- rename(dat, DyadTime = ï..DyadTime)
+```
+
 # Screening
 
 Screen the dataset: Stats, Freq, Graph, Cases, Missing
