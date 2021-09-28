@@ -234,7 +234,7 @@ freq(dat1$age_c)
     ##        <NA>      0                               0.00         100.00
     ##       Total    150    100.00         100.00    100.00         100.00
 
-# Select cases using subset function
+# Select cases using subset
 
 select all cases between age 21 and 28
 
