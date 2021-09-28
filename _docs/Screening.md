@@ -96,23 +96,7 @@ dfSummary(cor.mat)
 
 ## Frequency table
 
-``` r
-freq(dat1$gender, order = "freq")
-```
-
-    ## Frequencies  
-    ## dat1$gender  
-    ## Type: Integer  
-    ## 
-    ##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
-    ## ----------- ------ --------- -------------- --------- --------------
-    ##           1    100     66.67          66.67     66.67          66.67
-    ##           0     50     33.33         100.00     33.33         100.00
-    ##        <NA>      0                               0.00         100.00
-    ##       Total    150    100.00         100.00    100.00         100.00
-
-
-Alternatively freq default is order by varbiable
+Freq default is order by varbiable
 
 ``` r
 freq(dat2$age)
@@ -131,6 +115,23 @@ freq(dat2$age)
     ##          14     19     54.29         100.00     54.29         100.00
     ##        <NA>      0                               0.00         100.00
     ##       Total     35    100.00         100.00    100.00         100.00
+
+Freq  ordered by highest frequency first
+
+``` r
+freq(dat1$gender, order = "freq")
+```
+
+    ## Frequencies  
+    ## dat1$gender  
+    ## Type: Integer  
+    ## 
+    ##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+    ## ----------- ------ --------- -------------- --------- --------------
+    ##           1    100     66.67          66.67     66.67          66.67
+    ##           0     50     33.33         100.00     33.33         100.00
+    ##        <NA>      0                               0.00         100.00
+    ##       Total    150    100.00         100.00    100.00         100.00
 
 
 ## Omit missings
