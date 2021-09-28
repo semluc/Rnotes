@@ -207,6 +207,14 @@ library(influence.SEM)
 FI <- fitinfluence("cfi",model,dat)
 ```
 
+Graphical exploration of fit influential cases
+
+``` r
+explore.influence(FI$Dind$cfi)
+```
+
+![](/assets/images/Outliers/figure-markdown_github/unnamed-chunk-10-1.png)
+
 Print highest influential cases on cfi
 
 ``` r
@@ -225,34 +233,6 @@ head(FI$Dind[order(FI$Dind$cfi, decreasing=F),],10)
     ## 182  182 -0.003179929
     ## 23    23 -0.003021831
 
-Graphical exploration of fit influential cases
-
-``` r
-explore.influence(FI$Dind$cfi)
-```
-
-![](/assets/images/Outliers/figure-markdown_github/unnamed-chunk-10-1.png)
-
-    ## $n
-    ## [1] 600
-    ## 
-    ## $cook
-    ## [1] FALSE
-    ## 
-    ## $cut.low
-    ## [1] -0.002270686
-    ## 
-    ## $cut.upp
-    ## [1] 0.002360227
-    ## 
-    ## $not.allowed
-    ## integer(0)
-    ## 
-    ## $less.cut.low
-    ##  [1]  23  46 106 121 126 150 162 182 228 298 364 466 502 529 596 597
-    ## 
-    ## $greater.cut.upp
-    ## [1]   5 181 231 270 407 460 594
 
 Potentially remove case no. 543 as it has highest neg impact on cfi
 
