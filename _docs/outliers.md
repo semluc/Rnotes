@@ -103,7 +103,7 @@ head(mdf[order(mdf$Distance_Mahalanobis, decreasing=T),],15)
     ## 482             30.00463                   0       0
     ## 201             29.29412                   0       0
 
-# Robost Mahalanobis distances
+## Robost Mahalanobis distances
 Alternatively use robust md (Leverage)
 
 ``` r
