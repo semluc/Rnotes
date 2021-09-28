@@ -78,7 +78,7 @@ plot(md)
     ##   summary.parameters_kurtosis      datawizard
     ##   summary.parameters_skewness      datawizard
 
-![](outliers_files/figure-markdown_github/unnamed-chunk-15-1.png) Show
+![](/assets/images/Outliers/figure-markdown_github/unnamed-chunk-15-1.png) Show
 outliers
 
 ``` r
@@ -128,7 +128,7 @@ print(md)
 plot(md)
 ```
 
-![](outliers_files/figure-markdown_github/unnamed-chunk-18-1.png)
+![](/assets/images/Outliers/figure-markdown_github/unnamed-chunk-18-1.png)
 
 # CFA Influence detection
 
@@ -185,7 +185,7 @@ print(gCDresult2)
 plot(gCDresult2)
 ```
 
-![](outliers_files/figure-markdown_github/unnamed-chunk-4-1.png)
+![](/assets/images/Outliers/figure-markdown_github/unnamed-chunk-4-1.png)
 
 ## Influence on goodness of fit
 
@@ -212,7 +212,7 @@ print(go)
 plot(go)
 ```
 
-![](outliers_files/figure-markdown_github/unnamed-chunk-6-1.png)
+![](/assets/images/Outliers/figure-markdown_github/unnamed-chunk-6-1.png)
 
 ## Influence on model fit: cfi
 
@@ -257,7 +257,7 @@ graphical exploration of fit influential cases
 explore.influence(FI$Dind$cfi)
 ```
 
-![](outliers_files/figure-markdown_github/unnamed-chunk-10-1.png)
+![](/assets/images/Outliers/figure-markdown_github/unnamed-chunk-10-1.png)
 
     ## $n
     ## [1] 600
