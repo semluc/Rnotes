@@ -310,7 +310,7 @@ alpha(subset(dat, select = c(Extra_1,Extra_2,Extra_3,Extra_4)), check.keys =TRUE
 
 # Correlation-Table
 
-call function
+Call function
 
 ``` r
 library(devtools)
