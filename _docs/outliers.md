@@ -31,7 +31,7 @@ dat <- read.table("uk_ipip300_data1.csv", sep = ";", header = TRUE)
 ```
 
 
-# Multivariate outliers
+# Multivariate outliers: Leverage
 
 use small df
 ``` r
@@ -129,7 +129,7 @@ plot(md)
 
 ![](/assets/images/Outliers/figure-markdown_github/unnamed-chunk-18-1.png)
 
-# CFA Influence detection
+# Multivariate outliers: Influence
 
 define a basic lavaan cfa model with 3 facets
 
@@ -141,7 +141,7 @@ model <- '
 ```
 
 
-detect case influence with General Cook's distance
+## General Cook's distance
 
 ``` r
 library(faoutlier)
