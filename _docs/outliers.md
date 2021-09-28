@@ -16,14 +16,12 @@ nav_order: 2
 {:toc}
 </details>
 
-
 Import our datasets
 
 ``` r
 #import data
 dat <- read.table("uk_ipip300_data1.csv", sep = ";", header = TRUE) 
 ```
-
 
 # Multivariate outliers: Leverage
 
@@ -115,7 +113,6 @@ model <- '
   ag =~ Agree_1 + Agree_2 + Agree_3 + Agree_4
   ne =~ Neuro_1 + Neuro_2 + Neuro_3 + Neuro_4'
 ```
-
 
 ## General Cook's distance
 
