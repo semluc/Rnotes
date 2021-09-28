@@ -105,6 +105,28 @@ freq(dat1$gender, order = "freq")
     ##        <NA>      0                               0.00         100.00
     ##       Total    150    100.00         100.00    100.00         100.00
 
+
+Alternatively freq default is order by varbiable
+
+``` r
+freq(dat2$age)
+```
+
+    ## Frequencies  
+    ## dat2$age  
+    ## Type: Integer  
+    ## 
+    ##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+    ## ----------- ------ --------- -------------- --------- --------------
+    ##          10      1      2.86           2.86      2.86           2.86
+    ##          11      1      2.86           5.71      2.86           5.71
+    ##          12      6     17.14          22.86     17.14          22.86
+    ##          13      8     22.86          45.71     22.86          45.71
+    ##          14     19     54.29         100.00     54.29         100.00
+    ##        <NA>      0                               0.00         100.00
+    ##       Total     35    100.00         100.00    100.00         100.00
+
+
 ## Omit missings
 
 ``` r
@@ -211,6 +233,20 @@ freq(dat1$age_c)
     ##           3     52     34.67         100.00     34.67         100.00
     ##        <NA>      0                               0.00         100.00
     ##       Total    150    100.00         100.00    100.00         100.00
+
+# Select cases using subset function
+
+select all cases between age 21 and 28
+
+``` r
+dat.t <- subset(dat, age>=21 & age <= 28)
+```
+
+select all cases who are either 18 or 60
+
+``` r
+dat.t <- subset(dat, age== 18 | age == 60)
+```
 
 # Save dataset
 
