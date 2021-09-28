@@ -28,8 +28,6 @@ library(psychTools)
 library(clipr)
 library(car)
 library(haven)
-#load corr-table function from file
-source("correlation.R")
 ```
 
 Import our datasets
@@ -311,6 +309,13 @@ alpha(subset(dat, select = c(Extra_1,Extra_2,Extra_3,Extra_4)), check.keys =TRUE
     ## Extra_4 0.01 0.02 0.13 0.14 0.46 0.24    0
 
 # Correlation-Table
+
+call function
+
+``` r
+library(devtools)
+source_url("https://rnts.netlify.app/download/correlation.R")
+```
 
 Use the definied subset Subset for the table
 
