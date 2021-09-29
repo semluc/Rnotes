@@ -96,7 +96,7 @@ dfSummary(cor.mat)
 
 ## Frequency table
 
-Freq default is order by varbiable
+By default Freq is ordered by varbiable
 
 ``` r
 library(summarytools)
