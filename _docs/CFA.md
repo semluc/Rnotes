@@ -249,7 +249,7 @@ semTools::clipboard(fit.cfa.pers,what = "fit")
 
 ## Modification indices
 
-Print highest modification indices
+Print highest modification indices.
 Maybe covary residuals which highly covary. This is sometimes justified.
 According to Brown (2015) some of the nonrandom measurement error that should be correlated can be a result of questionnaires, particularly with similar item wordings.
 
