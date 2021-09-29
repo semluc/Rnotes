@@ -18,12 +18,11 @@ nav_order: 1
 
 # Prerequisites
 
-Load required packages:
+I use these libraries here
 
 ``` r
 #import libraries
 library(psych)
-library(summarytools)
 library(psychTools)
 library(clipr)
 library(car)
@@ -51,6 +50,7 @@ dat2 <- rename(dat, DyadTime = ï..DyadTime)
 Screen the dataset: Stats, Freq, Graph, Cases, Missing
 
 ``` r
+library(summarytools)
 cor.mat <- subset(dat1, select =c(iip_acc, iip_cold, iip_dom, iip_sac, iip_int))
 dfSummary(cor.mat)
 ```
@@ -99,6 +99,7 @@ dfSummary(cor.mat)
 Freq default is order by varbiable
 
 ``` r
+library(summarytools)
 freq(dat2$age)
 ```
 
@@ -147,6 +148,7 @@ dat.o <- na.omit(dat)
 How many have A and B?
 
 ``` r
+library(summarytools)
 ctable(dat1$episode,dat1$partner)
 ```
 
@@ -165,7 +167,8 @@ ctable(dat1$episode,dat1$partner)
 ## Descriptive statistics
 
 ``` r
-psych::describe(dat1$iip_acc)
+library(psych)
+describe(dat1$iip_acc)
 ```
 
     ##    vars   n  mean   sd median trimmed  mad min max range skew kurtosis   se
@@ -179,12 +182,22 @@ Recode items:
 …
 
 ``` r
+library(car)
 dat1$exp_content_r <- recode(dat1$exp_content, "1=0; 2=1; 3=2; 4=2")
+```
+
+More logic is available here e.g.:
+1 and 2 -\> a 
+rest -\> b
+
+``` r
+recode(x, "c(1,2)='A'; else='B'")
 ```
 
 # Add var label per factor
 
 ``` r
+library(heaven)
 #Change values from 0 to no exp
 dat1$exp_content_r[dat1$exp_content_r =="0"] <- "no exp"
 dat1$exp_content_r[dat1$exp_content_r =="1"] <- "med exp"
@@ -274,6 +287,7 @@ write_sav(dat1, "dat2.sav")
 Calculate cronbach’s alpha of a defined subset
 
 ``` r
+library(psych)
 alpha(subset(dat, select = c(Extra_1,Extra_2,Extra_3,Extra_4)), check.keys =TRUE)
 ```
 
@@ -344,5 +358,6 @@ print(c)
 Copy corr-table to clipboard
 
 ``` r
+library(clipr)
 write_clip(c)
 ```
