@@ -84,11 +84,21 @@ See [here](/docs/outliers) how to check for outliers (Leverage / Influence).
 
 ## Specify model
 
-We fit a second order model with three first order factors
+We specify a second order model with three first order factors
 
 ``` r
 pers <- '
   pers =~ op + ag + ne
+  op =~ Opene_1 + Opene_2 + Opene_3 + Opene_4
+  ag =~ Agree_1 + Agree_2 + Agree_3 + Agree_4
+  ne =~ Neuro_1 + Neuro_2 + Neuro_3 + Neuro_4'
+```
+
+And we specify a first order model just for fun. Lavaan will automatically
+estimate covariances
+
+``` r
+pers1 <- '
   op =~ Opene_1 + Opene_2 + Opene_3 + Opene_4
   ag =~ Agree_1 + Agree_2 + Agree_3 + Agree_4
   ne =~ Neuro_1 + Neuro_2 + Neuro_3 + Neuro_4'
@@ -100,6 +110,12 @@ Use MLM or MLR with missings
 
 ``` r
 fit.cfa.pers <- cfa(pers, data=dat, estimator ="MLM", std.lv=TRUE)
+```
+
+Fit first order cfa
+
+``` r
+fit.cfa.pers1 <- cfa(pers1, data=dat, estimator ="MLM", std.lv=TRUE)
 ```
 
 ## Plot the model
@@ -230,6 +246,77 @@ I use [this](/other/Modelfit from R) how to use it. Excel-file to quickly interp
 ``` r
 semTools::clipboard(fit.cfa.pers,what = "fit")
 ```
+
+## Modification indices
+
+Print highest modification indices
+
+``` r
+library(lavaan)
+fit.cfa.pers.mi <- modificationindices(fit.cfa.pers)
+head(fit.cfa.pers.mi[order(fit.cfa.pers.mi$mi, decreasing=TRUE),],25) 
+```
+
+    ##         lhs op     rhs     mi    epc sepc.lv sepc.all sepc.nox
+    ## 128 Neuro_1 ~~ Neuro_2 45.160  0.384   0.384    0.371    0.371
+    ## 58       ag =~ Neuro_3 28.517 -0.312  -0.316   -0.244   -0.244
+    ## 131 Neuro_2 ~~ Neuro_3 27.691 -0.372  -0.372   -0.392   -0.392
+    ## 133 Neuro_3 ~~ Neuro_4 22.575  0.464   0.464    0.519    0.519
+    ## 130 Neuro_1 ~~ Neuro_4 19.939 -0.317  -0.317   -0.326   -0.326
+    ## 57       ag =~ Neuro_2 19.906  0.245   0.248    0.205    0.205
+    ## 36     pers =~ Agree_1 19.801  0.224   0.224    0.237    0.237
+    ## 64       ne =~ Agree_1 19.766 -0.094  -0.196   -0.207   -0.207
+    ## 42     pers =~ Neuro_3 16.908 -5.644  -5.644   -4.364   -4.364
+    ## 55       ag =~ Opene_4 16.296 -0.316  -0.319   -0.196   -0.196
+    ## 89  Opene_3 ~~ Opene_4 14.688 -0.353  -0.353   -0.216   -0.216
+    ## 111 Agree_1 ~~ Neuro_3 13.598 -0.144  -0.144   -0.193   -0.193
+    ## 56       ag =~ Neuro_1 13.562  0.195   0.197    0.164    0.164
+    ## 100 Opene_4 ~~ Agree_3 13.547 -0.174  -0.174   -0.206   -0.206
+    ## 68  Opene_1 ~~ Opene_2 12.968 -0.509  -0.509   -0.380   -0.380
+    ## 117 Agree_2 ~~ Neuro_3 11.474 -0.126  -0.126   -0.184   -0.184
+    ## 40     pers =~ Neuro_1 11.311  4.177   4.177    3.477    3.477
+    ## 41     pers =~ Neuro_2 10.377  4.144   4.144    3.434    3.434
+    ## 67       ne =~ Agree_4 10.369  0.060   0.126    0.142    0.142
+    ## 54       ag =~ Opene_3 10.225  0.186   0.188    0.153    0.153
+    ## 39     pers =~ Agree_4 10.086 -0.142  -0.142   -0.160   -0.160
+    ## 93  Opene_3 ~~ Agree_4  9.392  0.113   0.113    0.146    0.146
+    ## 37     pers =~ Agree_2  8.300  0.139   0.139    0.148    0.148
+    ## 65       ne =~ Agree_2  8.100 -0.058  -0.121   -0.128   -0.128
+    ## 70  Opene_1 ~~ Opene_4  6.044  0.320   0.320    0.186    0.186
+
+## Reliability
+
+Cronbach’s alpha Bollen (1980), also Raykov (2001) Omega (omega1)
+Bentler (1972, 2009) Omega (omega2) McDonald Omega (omega3)
+
+Convergent validity: AVE Should be greater than 0.500
+
+Discriminant validity: Square root of the AVE should be greater than any
+inter-factor correlations!
+
+``` r
+library(semTools)
+semTools::reliability(fit.cfa.pers1)
+```
+
+    ##               op        ag        ne
+    ## alpha  0.5318028 0.6891802 0.6874082
+    ## omega  0.5449025 0.6975986 0.6914090
+    ## omega2 0.5449025 0.6975986 0.6914090
+    ## omega3 0.5459778 0.6993370 0.6868325
+    ## avevar 0.2414591 0.3724992 0.3672161
+
+Second order reliability 
+Reliability values at Levels 1 and 2 of the second-order factor, as well as the partial reliability value at Level 1
+the “pers” describes the second order factor
+
+``` r
+semTools::reliabilityL2(fit.cfa.pers, "pers")
+```
+
+    ##        omegaL1        omegaL2 partialOmegaL1 
+    ##      0.1226844      0.4455660      0.2313858
+
 
 # CFA: Bifactor model
 
