@@ -18,7 +18,7 @@ nav_order: 1
 
 # Prerequisites
 
-I use these libraries here
+I use these libraries:
 
 ``` r
 #import libraries
@@ -29,7 +29,7 @@ library(car)
 library(haven)
 ```
 
-Import our datasets
+Import our datasets:
 
 ``` r
 #import data
@@ -38,7 +38,8 @@ dat1 <- read.table("stepd.csv", sep = ";", header = TRUE)
 ```
 
 # Rename variables
-Weird quirk when importing .dat first variable is named "ï.."
+Weird quirk when importing .dat first variable is named "ï..".
+Example renames this var:
 
 ``` r
 library(tidyverse)
@@ -47,7 +48,7 @@ dat2 <- rename(dat, DyadTime = ï..DyadTime)
 
 # Screening
 
-Screen the dataset: Stats, Freq, Graph, Cases, Missing
+Screen the dataset for Stats, Freq, Graph, Cases, Missing:
 
 ``` r
 library(summarytools)
@@ -96,7 +97,7 @@ dfSummary(cor.mat)
 
 ## Frequency table
 
-By default Freq is ordered by varbiable
+By default Freq is ordered by varbiable.
 
 ``` r
 library(summarytools)
@@ -117,7 +118,7 @@ freq(dat2$age)
     ##        <NA>      0                               0.00         100.00
     ##       Total     35    100.00         100.00    100.00         100.00
 
-Freq  ordered by highest frequency first
+Freq  ordered by highest frequency first:
 
 ``` r
 freq(dat1$gender, order = "freq")
@@ -197,7 +198,7 @@ recode(x, "c(1,2)='A'; else='B'")
 # Add var label per factor
 
 ``` r
-library(heaven)
+library(haven)
 #Change values from 0 to no exp
 dat1$exp_content_r[dat1$exp_content_r =="0"] <- "no exp"
 dat1$exp_content_r[dat1$exp_content_r =="1"] <- "med exp"
@@ -224,7 +225,7 @@ freq(dat1$exp_content_r)
 
 # Aggregate variables
 
-Aggregate variables per mean (or: median, sum, min, max)
+Aggregate variables per mean (or: median, sum, min, max):
 
 ``` r
 dat$Extra_total <- apply(dat[,c("Extra_1", "Extra_2", "Extra_3", "Extra_4")], 1, mean, na.rm = TRUE)
@@ -232,7 +233,7 @@ dat$Extra_total <- apply(dat[,c("Extra_1", "Extra_2", "Extra_3", "Extra_4")], 1,
 
 # Calculate classes
 
-We want to divide age in 3 similar sized classes by 33% and 66%
+We want to divide age in 3 similar sized classes by 33% and 66%:
 
 ``` r
 dat1$age_c <- dat1$age
@@ -256,13 +257,13 @@ freq(dat1$age_c)
 
 # Select cases using subset
 
-Select all cases between age 21 and 28
+Select all cases between age 21 and 28:
 
 ``` r
 dat.t <- subset(dat, age>=21 & age <= 28)
 ```
 
-Select all cases who are either 18 or 60
+Select all cases who are either 18 or 60:
 
 ``` r
 dat.t <- subset(dat, age== 18 | age == 60)
@@ -270,21 +271,23 @@ dat.t <- subset(dat, age== 18 | age == 60)
 
 # Save dataset
 
-Save R dataframe “dat1” to filename dat2.csv
+Save R dataframe “dat1” to filename dat2.csv:
 
 ``` r
 write.table(dat1, file="dat2.csv", sep=";", dec = ".")
 ```
 
-Save R dataframe “dat1” to filename dat2.sav
+Save R dataframe “dat1” to filename dat2.sav:
 
 ``` r
+library(haven)
 write_sav(dat1, "dat2.sav")
 ```
 
 # Cronbach’s alpha
 
-Calculate cronbach’s alpha of a defined subset
+Calculate cronbach’s alpha of a defined subset:
+Alternatively, use CFA See [reliabilities](/docs/CFA/#reliability).
 
 ``` r
 library(psych)
@@ -325,21 +328,21 @@ alpha(subset(dat, select = c(Extra_1,Extra_2,Extra_3,Extra_4)), check.keys =TRUE
 
 # Correlation-Table
 
-Call function
+Call function:
 
 ``` r
 library(devtools)
 source_url("https://rnts.netlify.app/download/correlation.R")
 ```
 
-Use the definied subset Subset for the table
+Use the definied subset Subset for the table:
 
 ``` r
 cor.mat <- subset(dat1, select =c(iip_acc, iip_cold, iip_dom, iip_sac, iip_int))
 ```
 
-Calculate corr table from subset and insert mean and SD  
-\*\* p\<.01, \*p\<.05
+Calculate corr table from subset and insert mean and SD:
+\*\* p\<.01, \*p\<.05.
 
 ``` r
 c <- correlation_matrix(cor.mat, digits=2, use='lower', replace_diagonal=T, type = "pearson",) 
@@ -355,7 +358,7 @@ print(c)
     ## iip_sac  14.41 5.92  0.73**   0.23**  0.21*                 
     ## iip_int   6.86 4.43  0.34**   0.14    0.48**  0.41**
 
-Copy corr-table to clipboard
+Copy corr-table to clipboard:
 
 ``` r
 library(clipr)

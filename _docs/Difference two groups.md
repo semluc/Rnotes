@@ -29,7 +29,7 @@ library(effsize)
 library(car)
 ```
 
-Import our dataset
+Import our dataset:
 
 ``` r
 #import data
@@ -39,7 +39,7 @@ dat <- read.table("stepd.csv", sep = ";", header = TRUE, na = -99)
 # Data screening
 
 We are interested in the difference between interpersonal problems and
-gender
+gender:
 
 Frequency table
 
@@ -59,7 +59,7 @@ freq(dat$gender, order = "freq")
     ##        <NA>      0                               0.00         100.00
     ##       Total    150    100.00         100.00    100.00         100.00
 
-Descriptive statistics
+Descriptive statistics:
 
 ``` r
 describe(dat$iip_tot)
@@ -68,7 +68,7 @@ describe(dat$iip_tot)
     ##    vars   n  mean    sd median trimmed   mad min max range skew kurtosis   se
     ## X1    1 150 86.43 29.71   88.5    86.2 33.36  16 164   148 0.08    -0.39 2.43
 
-Descriptive statistics by group
+Descriptive statistics by group:
 
 ``` r
 describeBy(dat$iip_tot, dat$gender)
@@ -84,7 +84,7 @@ describeBy(dat$iip_tot, dat$gender)
     ##    vars   n  mean    sd median trimmed   mad min max range skew kurtosis   se
     ## X1    1 100 88.95 29.62     90   87.78 31.13  34 164   130 0.29    -0.47 2.96
 
-Plot difference with boxplot
+Plot difference with boxplot:
 
 ``` r
 boxplot(iip_tot ~ gender, data=dat,names=c("male","female"))
@@ -94,8 +94,8 @@ boxplot(iip_tot ~ gender, data=dat,names=c("male","female"))
 
 # Assumption testing
 
-Normalty test with Shaprio-Wilk test  
-Shapiro wilk ns= normal distribution
+Normalty test with Shaprio-Wilk test:  
+Shapiro wilk ns= normal distribution.
 
 ``` r
 shapiro.test(dat$iip_tot)
@@ -107,7 +107,7 @@ shapiro.test(dat$iip_tot)
     ## data:  dat$iip_tot
     ## W = 0.9907, p-value = 0.4291
 
-Normalty test with histogram
+Normalty test with histogram:
 
 ``` r
 hist(dat$iip_tot)
@@ -115,7 +115,7 @@ hist(dat$iip_tot)
 
 ![](/assets/images/Differencetwogroups/figure-markdown_github/unnamed-chunk-7-1.png)
 
-Normalty test with QQ-Plot
+Normalty test with QQ-Plot:
 
 ``` r
 PlotQQ(dat$iip_tot) 
@@ -123,9 +123,9 @@ PlotQQ(dat$iip_tot)
 
 ![](/assets/images/Differencetwogroups/figure-markdown_github/unnamed-chunk-8-1.png)
 
-Homogeneity of variance test with lavene test  
-Levene test ns= homogeneity  
-Later t-test: var.equal = TRUE
+Homogeneity of variance test with lavene test:  
+Levene test ns= homogeneity.  
+Later t-test: var.equal = TRUE.
 
 ``` r
 leveneTest(dat$iip_tot, dat$gender)
@@ -138,7 +138,7 @@ leveneTest(dat$iip_tot, dat$gender)
 
 # T-test
 
-Two sided t-test with homogeneity of variance
+Two sided t-test with homogeneity of variance:
 
 ``` r
 t.test(dat$iip_tot ~ dat$gender, var.equal = TRUE, alternative="two.sided")
@@ -156,7 +156,7 @@ t.test(dat$iip_tot ~ dat$gender, var.equal = TRUE, alternative="two.sided")
     ## mean in group 0 mean in group 1 
     ##           81.40           88.95
 
-One sided t-test: group 0 \> 1
+One sided t-test: group 0 \> 1.
 
 ``` r
 t.test(dat$iip_tot ~ dat$gender, var.equal = TRUE, alternative="greater")
@@ -174,7 +174,7 @@ t.test(dat$iip_tot ~ dat$gender, var.equal = TRUE, alternative="greater")
     ## mean in group 0 mean in group 1 
     ##           81.40           88.95
 
-One sided t-test: group 0 \< 1
+One sided t-test: group 0 \< 1.
 
 ``` r
 t.test(dat$iip_tot ~ dat$gender, var.equal = TRUE, alternative="less")
@@ -192,7 +192,7 @@ t.test(dat$iip_tot ~ dat$gender, var.equal = TRUE, alternative="less")
     ## mean in group 0 mean in group 1 
     ##           81.40           88.95
 
-Effect size: cohen’s d  
+Effect size: cohen’s d:  
 Cohen 1992  
 \<0.2 negligible  
 \<0.5 small  
@@ -213,7 +213,7 @@ effsize::cohen.d(dat$iip_tot ~ dat$gender, paired = FALSE, na.rm = TRUE)
 
 # Welch test
 
-Use if variances are not homogenous
+Use if variances are not homogenous:
 
 ``` r
 t.test(dat$iip_tot ~ dat$gender, var.equal = F, alternative="two.sided")
@@ -231,7 +231,7 @@ t.test(dat$iip_tot ~ dat$gender, var.equal = F, alternative="two.sided")
     ## mean in group 0 mean in group 1 
     ##           81.40           88.95
 
-Effect size: cohen’s d  
+Effect size: cohen’s d:  
 Cohen 1992  
 \<0.2 negligible  
 \<0.5 small  
@@ -252,8 +252,8 @@ cohen.d(dat$iip_tot ~ dat$gender, paired = FALSE, na.rm = TRUE)
 
 # Mann-Whitney-U test
 
-Use if data is non-normal distributed  
-if n\<30 exact=T
+Use if data is non-normal distributed:  
+if n\<30 exact=T.
 
 ``` r
 wilcox.test(iip_tot~gender, data=dat, exact=FALSE, correct=FALSE, conf.int=FALSE)

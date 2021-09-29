@@ -16,7 +16,7 @@ nav_order: 2
 {:toc}
 </details>
 
-Import our datasets
+Import our datasets:
 
 ``` r
 #import data
@@ -25,7 +25,7 @@ dat <- read.table("uk_ipip300_data1.csv", sep = ";", header = TRUE)
 
 # Multivariate outliers: Leverage
 
-Use smaller df to evaluate MD of all variables
+Use smaller df to evaluate MD of all variables:
 ``` r
 extra.labels <- c("Opene_1", "Opene_2", "Opene_3", "Opene_4", 
                   "Agree_1", "Agree_2", "Agree_3", "Agree_4", 
@@ -36,7 +36,7 @@ dat.extra <- na.omit(dat[,extra.labels])
 ## Mahalanobis distances
 
 Test for outliers (Leverage) using Mahalanobis distances default is a thershold of
-1-0.025 Maybe choose more strict threshold of .001
+1-0.025 Maybe choose more strict threshold of .001:
 
 
 ``` r
@@ -52,7 +52,7 @@ plot(md)
 ```
 
 ![](/assets/images/Outliers/figure-markdown_github/unnamed-chunk-15-1.png)  
-Show outliers
+Show outliers:
 
 ``` r
 mdf <- as.data.frame(md)
@@ -77,7 +77,7 @@ head(mdf[order(mdf$Distance_Mahalanobis, decreasing=T),],15)
     ## 201             29.29412                   0       0
 
 ## Robost Mahalanobis distances
-Alternatively, use robust md (Leverage)
+Alternatively, use robust md (Leverage):
 
 ``` r
 library(faoutlier)
@@ -105,7 +105,7 @@ plot(md)
 
 # Multivariate outliers: Influence
 
-Define a basic lavaan cfa model with 3 facets
+Define a basic lavaan cfa model with 3 facets:
 
 ``` r
 model <- '
@@ -115,6 +115,7 @@ model <- '
 ```
 
 ## General Cook's distance
+Screen for case influentials using general Cooks distance:
 
 ``` r
 library(faoutlier)
@@ -169,14 +170,14 @@ plot(go)
 
 ## Influence on model fit: cfi
 
-Alternatively “rmsea”, “tli…”
+Alternatively “rmsea”, “tli…”.
 
 ``` r
 library(influence.SEM)
 FI <- fitinfluence("cfi",model,dat)
 ```
 
-Graphical exploration of fit influential cases
+Graphical exploration of fit influential cases:
 
 ``` r
 explore.influence(FI$Dind$cfi)
@@ -184,7 +185,7 @@ explore.influence(FI$Dind$cfi)
 
 ![](/assets/images/Outliers/figure-markdown_github/unnamed-chunk-10-1.png)
 
-Print highest influential cases on cfi
+Print highest influential cases on cfi:
 
 ``` r
 head(FI$Dind[order(FI$Dind$cfi, decreasing=F),],10)
@@ -203,13 +204,13 @@ head(FI$Dind[order(FI$Dind$cfi, decreasing=F),],10)
     ## 23    23 -0.003021831
 
 
-Potentially remove case no. 543 as it has highest neg impact on cfi
+Potentially remove case no. 543 as it has highest neg impact on cfi:
 
 ``` r
 FI.d <- dat[-c(543), ]
 ```
 
-We see cfi has improved
+We see cfi has improved:
 
 ``` r
 #New Case influence indicates improved fit regarding cfi

@@ -29,7 +29,7 @@ library(DescTools)
 library(rstatix)
 ```
 
-Import our dataset
+Import our dataset:
 
 ``` r
 #import data
@@ -39,9 +39,9 @@ dat <- read.table("stepd2.csv", sep = ";", header = TRUE)
 # Data screening
 
 We are interested in the difference between problems and experience
-groups
+groups.
 
-Descriptive statistics of variables by Group
+Descriptive statistics of variables by Group:
 
 ``` r
 describeBy(dat$iip_tot, dat$exp_content_r)
@@ -61,7 +61,7 @@ describeBy(dat$iip_tot, dat$exp_content_r)
     ##    vars  n  mean    sd median trimmed   mad min max range skew kurtosis   se
     ## X1    1 59 87.32 32.91     88   86.55 35.58  16 164   148 0.16    -0.61 4.28
 
-Plot difference
+Plot difference:
 
 ``` r
 boxplot(iip_tot ~ exp_content_r, data=dat,names=c("low","mid","high"))
@@ -71,7 +71,7 @@ boxplot(iip_tot ~ exp_content_r, data=dat,names=c("low","mid","high"))
 
 # Assumption testing
 
-Normalty test with histogram
+Normalty test with histogram:
 
 ``` r
 a1 <- aov(dat$iip_tot ~ dat$exp_content_r)
@@ -80,7 +80,7 @@ hist(rstandard(a1))
 
 ![](/assets/images/Differencemoregroups/figure-markdown_github/unnamed-chunk-4-1.png)
 
-Normalty test with QQ-Plot
+Normalty test with QQ-Plot:
 
 ``` r
 a1 <- aov(dat$iip_tot ~ dat$exp_content_r)
@@ -91,8 +91,8 @@ qqPlot(a1)
 
     ## [1] 109 141
 
-Homogeneity of variance test with lavene test  
-Levene test ns= homogeneity -\> ANOVA
+Homogeneity of variance test with lavene test:
+Levene test ns= homogeneity -\> ANOVA.
 
 ``` r
 leveneTest(dat$iip_tot, dat$exp_content_r)
@@ -105,7 +105,7 @@ leveneTest(dat$iip_tot, dat$exp_content_r)
 
 # ANOVA
 
-If assumptions are OK -\> ANOVA
+If assumptions are OK -\> ANOVA.
 
 ``` r
 a1 <- aov(dat$iip_tot ~ dat$exp_content_r)
@@ -116,7 +116,7 @@ summary(a1)
     ## dat$exp_content_r   1    761   761.3   0.862  0.355
     ## Residuals         148 130722   883.3
 
-Post-hoc analysis
+Post-hoc analysis:
 
 ``` r
 pairwise.t.test(dat$iip_tot, dat$exp_content_r, p.adjust="bonferroni")
@@ -133,7 +133,7 @@ pairwise.t.test(dat$iip_tot, dat$exp_content_r, p.adjust="bonferroni")
     ## 
     ## P value adjustment method: bonferroni
 
-Effect size  
+Effect size:  
 eta.sq (preferred)  
 Cohen (1988)  
 .01 small  
@@ -148,7 +148,7 @@ e
     ##                       eta.sq eta.sq.part
     ## dat$exp_content_r 0.00578996  0.00578996
 
-Effect size f  
+Effect size f:  
 Cohen (1988)  
 .10 small  
 .25 medium  
@@ -162,7 +162,7 @@ sqrt(e[1,"eta.sq"]/(1-e[1,"eta.sq"]))
 
 # Kruskal-Wallis Test
 
-Use if variances are not homogenous / non normal distributed
+Use if variances are not homogenous / non normal distributed:
 
 ``` r
 kruskal.test(dat$iip_tot ~ dat$exp_content_r)
@@ -174,7 +174,7 @@ kruskal.test(dat$iip_tot ~ dat$exp_content_r)
     ## data:  dat$iip_tot by dat$exp_content_r
     ## Kruskal-Wallis chi-squared = 2.5004, df = 2, p-value = 0.2865
 
-Post-hoc analysis
+Post-hoc analysis:
 
 ``` r
 pairwise.wilcox.test(dat$iip_tot, dat$exp_content_r, paired=F, p.adjust="bonferroni")
@@ -191,7 +191,7 @@ pairwise.wilcox.test(dat$iip_tot, dat$exp_content_r, paired=F, p.adjust="bonferr
     ## 
     ## P value adjustment method: bonferroni
 
-Effect size eta.sq  
+Effect size eta.sq:  
 Cohen (1988)  
 .01 small  
 .06 medium  
