@@ -31,7 +31,7 @@ library(semTools)
 library(apaTables)
 ```
 
-Import our dataset
+Import our dataset:
 
 ``` r
 #import data
@@ -42,7 +42,7 @@ dat <- read.table("uk_ipip300_data1.csv", sep = ";", header = TRUE)
 
 ## Assumption testing
 
-Test for multivariate normality 
+Test for multivariate normality:
 ``` r
 #First: new dataset with variables of interest
 extra.labels <- c("Opene_1", "Opene_2", "Opene_3", "Opene_4", 
@@ -84,7 +84,7 @@ See [here](/docs/outliers) how to check for outliers (Leverage / Influence).
 
 ## Specify model
 
-We specify a second order model with three first order factors
+We specify a second order model with three first order factors:
 
 ``` r
 pers <- '
@@ -94,8 +94,7 @@ pers <- '
   ne =~ Neuro_1 + Neuro_2 + Neuro_3 + Neuro_4'
 ```
 
-And we specify a first order model just for fun. Lavaan will automatically
-estimate covariances
+And we specify a first order model just for fun:
 
 ``` r
 pers1 <- '
@@ -106,13 +105,13 @@ pers1 <- '
 
 ## Fit the model
 
-Use MLM or MLR with missings
+Use MLM or MLR with missings.
 
 ``` r
 fit.cfa.pers <- cfa(pers, data=dat, estimator ="MLM", std.lv=TRUE)
 ```
 
-Fit first order cfa
+Fit first order cfa:
 
 ``` r
 fit.cfa.pers1 <- cfa(pers1, data=dat, estimator ="MLM", std.lv=TRUE)
@@ -249,7 +248,7 @@ semTools::clipboard(fit.cfa.pers,what = "fit")
 
 ## Modification indices
 
-Print highest modification indices.
+Print highest modification indices:
 Maybe covary residuals which highly covary. This is sometimes justified.
 According to Brown (2015) some of the nonrandom measurement error that should be correlated can be a result of questionnaires, particularly with similar item wordings.
 
@@ -289,9 +288,10 @@ head(fit.cfa.pers.mi[order(fit.cfa.pers.mi$mi, decreasing=TRUE),],25)
 ## Reliability
 
 Cronbach’s alpha Bollen (1980), also Raykov (2001) Omega (omega1)
-Bentler (1972, 2009) Omega (omega2) McDonald Omega (omega3)
+Bentler (1972, 2009) Omega (omega2) 
+McDonald Omega (omega3)
 
-Convergent validity: AVE Should be greater than 0.500
+Convergent validity: AVE Should be greater than 0.500.
 
 Discriminant validity: Square root of the AVE should be greater than any
 inter-factor correlations!
@@ -308,9 +308,9 @@ semTools::reliability(fit.cfa.pers1)
     ## omega3 0.5459778 0.6993370 0.6868325
     ## avevar 0.2414591 0.3724992 0.3672161
 
-Second order reliability 
+Second order reliability:
 Reliability values at Levels 1 and 2 of the second-order factor, as well as the partial reliability value at Level 1
-the “pers” describes the second order factor
+the “pers” describes the second order factor.
 
 ``` r
 semTools::reliabilityL2(fit.cfa.pers, "pers")
@@ -322,10 +322,10 @@ semTools::reliabilityL2(fit.cfa.pers, "pers")
 
 # CFA: Bifactor model
 
-The bifactor model hypothesizes a general factor, onto which all items load, and a series of orthogonal (uncorrelated) skill-specific grouping factors. The model is particularly valuable for evaluating the empirical plausibility of subscales and the practical impact of dimensionality assumptions on test scores (Dunn & McCray,2020)
+The bifactor model hypothesizes a general factor, onto which all items load, and a series of orthogonal (uncorrelated) skill-specific grouping factors. The model is particularly valuable for evaluating the empirical plausibility of subscales and the practical impact of dimensionality assumptions on test scores (Dunn & McCray,2020).
 
 
-Same assumptions like above
+Same assumptions like above.
 
 ## Specify model
 
@@ -363,6 +363,8 @@ semPaths(fit.cfa.pers.bi, layout=ly, whatLabels="std", style="lisrel", nCharNode
 ![](/assets/images/CFA/figure-markdown_github/unnamed-chunk-10-1.png)
 
 ## Output
+
+Maybe check modification indicies again after this.
 
 ``` r
 summary(fit.cfa.pers.bi, standardized= TRUE, fit.measures=TRUE)
