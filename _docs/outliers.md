@@ -51,8 +51,8 @@ print(md)
 plot(md)
 ```
 
-![](/assets/images/Outliers/figure-markdown_github/unnamed-chunk-15-1.png) Show
-outliers
+![](/assets/images/Outliers/figure-markdown_github/unnamed-chunk-15-1.png)  
+Show outliers
 
 ``` r
 mdf <- as.data.frame(md)
