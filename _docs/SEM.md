@@ -463,8 +463,12 @@ dat2 <- indProd(dat, var1 = c("t1", "t2", "t3", "t4"),
 ## Specify the model
 
 First latent factors; 0\* covariances with interaction; regression
-paths; residual covariances.Do them horizontally and vertically. Use
-Notepad replace function to speed up.
+paths; residual covariances.
+Do them in blocks horizontally and then vertically.
+
+![](/assets/images/SEM/figure-markdown_github/unnamed-chunk-12-1.png)
+
+Use Notepad replace function to speed up the writing.
 
 ``` r
 model <- '
