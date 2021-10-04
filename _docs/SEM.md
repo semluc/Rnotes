@@ -257,6 +257,7 @@ semPaths(fit, style = "lisrel", whatLabels= "std", nCharNodes = 0, edge.label.ce
 
 Mediation testing is quite simple in lavaan. Just define the paths you
 are interested in.  
+Use the same Assumption testing as before  
 I use the same model as before “ne -\> ag -\> op”.  
 I give variables a label.
 
@@ -463,8 +464,8 @@ dat2 <- indProd(dat, var1 = c("t1", "t2", "t3", "t4"),
 ## Specify the model
 
 First latent factors; 0\* covariances with interaction; regression
-paths; residual covariances.
-Do them in blocks horizontally and then vertically.
+paths; residual covariances.  
+Do covariances in blocks first horizontally and then vertically.
 
 ![](/assets/images/SEM/figure-markdown_github/unnamed-chunk-12-1.png)
 
