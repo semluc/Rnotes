@@ -1,0 +1,923 @@
+---
+layout: default
+title: SEM
+nav_order: 6
+---
+
+# Navigation Structure
+{: .no_toc }
+
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+1. TOC
+{:toc}
+</details>
+
+
+Load dataset:
+
+``` r
+dat <- read.table("uk_ipip300_data1.csv", sep = ";", header = TRUE) 
+```
+
+Library
+
+``` r
+library(lavaan)
+```
+
+    ## This is lavaan 0.6-9
+    ## lavaan is FREE software! Please report any bugs.
+
+# Assumption testing
+
+Test for multivariate normality and outliers using Mahalanobis distance:
+
+First: new dataset with variables of interest.
+
+``` r
+library(MVN)
+extra.labels <- c("Opene_1", "Opene_2", "Opene_3", "Opene_4", 
+                  "Agree_1", "Agree_2", "Agree_3", "Agree_4", 
+                  "Neuro_1", "Neuro_2", "Neuro_3", "Neuro_4")
+dat.extra <- na.omit(dat[,extra.labels])
+# MVN command for QQ-Plot, Normality tests 
+mvn(dat.extra, mvnTest = c("mardia"), multivariatePlot = "qq", desc = F, showOutliers=T, showNewData=F)
+```
+
+![](/assets/images/SEM/figure-markdown_github/unnamed-chunk-3-1.png)
+
+    ## $multivariateNormality
+    ##              Test        Statistic              p value Result
+    ## 1 Mardia Skewness 1244.98550356253 9.57858038202079e-97     NO
+    ## 2 Mardia Kurtosis 12.7621671073881                    0     NO
+    ## 3             MVN             <NA>                 <NA>     NO
+    ## 
+    ## $univariateNormality
+    ##                Test  Variable Statistic   p value Normality
+    ## 1  Anderson-Darling  Opene_1    21.1669  <0.001      NO    
+    ## 2  Anderson-Darling  Opene_2    23.5159  <0.001      NO    
+    ## 3  Anderson-Darling  Opene_3    18.9456  <0.001      NO    
+    ## 4  Anderson-Darling  Opene_4    44.2574  <0.001      NO    
+    ## 5  Anderson-Darling  Agree_1    43.6023  <0.001      NO    
+    ## 6  Anderson-Darling  Agree_2    39.9714  <0.001      NO    
+    ## 7  Anderson-Darling  Agree_3    39.9981  <0.001      NO    
+    ## 8  Anderson-Darling  Agree_4    47.9344  <0.001      NO    
+    ## 9  Anderson-Darling  Neuro_1    19.3713  <0.001      NO    
+    ## 10 Anderson-Darling  Neuro_2    25.3773  <0.001      NO    
+    ## 11 Anderson-Darling  Neuro_3    20.8063  <0.001      NO    
+    ## 12 Anderson-Darling  Neuro_4    21.7073  <0.001      NO    
+    ## 
+    ## $multivariateOutliers
+    ## NULL
+
+Second: Check outliers.  
+See [here](/docs/outliers) how to check for outliers (Leverage / Influence).
+
+# Simple SEM model
+
+## Specify model
+
+\~ regressed on  
+=\~ is measured by for latent construct  
+\~\~ covariance
+
+Regress some simple paths in the example:
+
+``` r
+model <- '
+#constructs
+  op =~ Opene_1 + Opene_2 + Opene_3 + Opene_4
+  ag =~ Agree_1 + Agree_2 + Agree_3 + Agree_4
+  ne =~ Neuro_1 + Neuro_2 + Neuro_3 + Neuro_4
+#paths
+  ag ~ ne
+  op ~ ne + ag'
+```
+
+Can use different se. For example, se = “robust” or se=“bootstrap”,
+bootstrap=5000.  
+Can use different estimators, default is estimator = “ML”, alternately
+use estimator = MLM or MLR for incomplete datasets.  
+MLM –\> maximum likelihood estimation with robust standard errors and a
+Satorra-Bentler scaled test statistic. For complete data only.  
+MLR –\> maximum likelihood estimation with robust (Huber-White) standard
+errors and a scaled test statistic that is (asymptotically) equal to the
+Yuan-Bentler test statistic. For both complete and incomplete data.
+
+## Fit and summary
+
+``` r
+fit <- cfa(model, data=dat, estimator="MLM", std.lv=TRUE)
+summary(fit, fit.measures=T, standardized=T, rsquare=T)
+```
+
+    ## lavaan 0.6-9 ended normally after 29 iterations
+    ## 
+    ##   Estimator                                         ML
+    ##   Optimization method                           NLMINB
+    ##   Number of model parameters                        27
+    ##                                                       
+    ##                                                   Used       Total
+    ##   Number of observations                           583         600
+    ##                                                                   
+    ## Model Test User Model:
+    ##                                               Standard      Robust
+    ##   Test Statistic                               201.116     184.729
+    ##   Degrees of freedom                                51          51
+    ##   P-value (Chi-square)                           0.000       0.000
+    ##   Scaling correction factor                                  1.089
+    ##        Satorra-Bentler correction                                 
+    ## 
+    ## Model Test Baseline Model:
+    ## 
+    ##   Test statistic                              1111.634    1002.792
+    ##   Degrees of freedom                                66          66
+    ##   P-value                                        0.000       0.000
+    ##   Scaling correction factor                                  1.109
+    ## 
+    ## User Model versus Baseline Model:
+    ## 
+    ##   Comparative Fit Index (CFI)                    0.856       0.857
+    ##   Tucker-Lewis Index (TLI)                       0.814       0.815
+    ##                                                                   
+    ##   Robust Comparative Fit Index (CFI)                         0.860
+    ##   Robust Tucker-Lewis Index (TLI)                            0.819
+    ## 
+    ## Loglikelihood and Information Criteria:
+    ## 
+    ##   Loglikelihood user model (H0)             -10550.161  -10550.161
+    ##   Loglikelihood unrestricted model (H1)     -10449.603  -10449.603
+    ##                                                                   
+    ##   Akaike (AIC)                               21154.322   21154.322
+    ##   Bayesian (BIC)                             21272.263   21272.263
+    ##   Sample-size adjusted Bayesian (BIC)        21186.548   21186.548
+    ## 
+    ## Root Mean Square Error of Approximation:
+    ## 
+    ##   RMSEA                                          0.071       0.067
+    ##   90 Percent confidence interval - lower         0.061       0.057
+    ##   90 Percent confidence interval - upper         0.082       0.077
+    ##   P-value RMSEA <= 0.05                          0.000       0.003
+    ##                                                                   
+    ##   Robust RMSEA                                               0.070
+    ##   90 Percent confidence interval - lower                     0.059
+    ##   90 Percent confidence interval - upper                     0.081
+    ## 
+    ## Standardized Root Mean Square Residual:
+    ## 
+    ##   SRMR                                           0.066       0.066
+    ## 
+    ## Parameter Estimates:
+    ## 
+    ##   Standard errors                           Robust.sem
+    ##   Information                                 Expected
+    ##   Information saturated (h1) model          Structured
+    ## 
+    ## Latent Variables:
+    ##                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+    ##   op =~                                                                 
+    ##     Opene_1           0.621    0.075    8.229    0.000    0.626    0.458
+    ##     Opene_2           0.837    0.083   10.037    0.000    0.843    0.607
+    ##     Opene_3           0.412    0.064    6.447    0.000    0.415    0.339
+    ##     Opene_4           0.798    0.090    8.860    0.000    0.804    0.493
+    ##   ag =~                                                                 
+    ##     Agree_1           0.415    0.049    8.415    0.000    0.418    0.443
+    ##     Agree_2           0.535    0.049   10.887    0.000    0.539    0.571
+    ##     Agree_3           0.678    0.046   14.868    0.000    0.684    0.755
+    ##     Agree_4           0.569    0.049   11.534    0.000    0.574    0.648
+    ##   ne =~                                                                 
+    ##     Neuro_1           0.718    0.055   13.118    0.000    0.718    0.598
+    ##     Neuro_2           0.551    0.055    9.989    0.000    0.551    0.456
+    ##     Neuro_3           0.945    0.056   16.749    0.000    0.945    0.731
+    ##     Neuro_4           0.735    0.057   12.863    0.000    0.735    0.588
+    ## 
+    ## Regressions:
+    ##                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+    ##   ag ~                                                                  
+    ##     ne               -0.126    0.060   -2.097    0.036   -0.125   -0.125
+    ##   op ~                                                                  
+    ##     ne               -0.122    0.068   -1.783    0.075   -0.121   -0.121
+    ##     ag                0.005    0.064    0.071    0.943    0.005    0.005
+    ## 
+    ## Variances:
+    ##                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+    ##    .Opene_1           1.478    0.105   14.082    0.000    1.478    0.791
+    ##    .Opene_2           1.215    0.134    9.043    0.000    1.215    0.631
+    ##    .Opene_3           1.328    0.074   17.994    0.000    1.328    0.885
+    ##    .Opene_4           2.012    0.147   13.716    0.000    2.012    0.757
+    ##    .Agree_1           0.717    0.081    8.825    0.000    0.717    0.804
+    ##    .Agree_2           0.601    0.066    9.170    0.000    0.601    0.674
+    ##    .Agree_3           0.353    0.052    6.730    0.000    0.353    0.430
+    ##    .Agree_4           0.456    0.069    6.583    0.000    0.456    0.581
+    ##    .Neuro_1           0.927    0.076   12.258    0.000    0.927    0.642
+    ##    .Neuro_2           1.153    0.075   15.312    0.000    1.153    0.792
+    ##    .Neuro_3           0.779    0.095    8.194    0.000    0.779    0.466
+    ##    .Neuro_4           1.024    0.080   12.881    0.000    1.024    0.655
+    ##    .op                1.000                               0.985    0.985
+    ##    .ag                1.000                               0.984    0.984
+    ##     ne                1.000                               1.000    1.000
+    ## 
+    ## R-Square:
+    ##                    Estimate
+    ##     Opene_1           0.209
+    ##     Opene_2           0.369
+    ##     Opene_3           0.115
+    ##     Opene_4           0.243
+    ##     Agree_1           0.196
+    ##     Agree_2           0.326
+    ##     Agree_3           0.570
+    ##     Agree_4           0.419
+    ##     Neuro_1           0.358
+    ##     Neuro_2           0.208
+    ##     Neuro_3           0.534
+    ##     Neuro_4           0.345
+    ##     op                0.015
+    ##     ag                0.016
+
+## Plot the model
+
+Can use sempaths to plot a model but it’s a mess by deault and usually
+needs a lot of tweaking to work.  
+For simple models it works quite well and gives a good overview if
+everything “works” as expected.
+
+``` r
+library(semPlot)
+semPaths(fit, style = "lisrel", whatLabels= "std", nCharNodes = 0, edge.label.cex= 0.6,
+         rotation= 2, layout = "tree", label.cex=1, sizeMan = 5, sizeLat = 8)
+```
+
+![](/assets/images/SEM/figure-markdown_github/unnamed-chunk-6-1.png)
+
+# Indirect effects: Mediation
+
+Mediation testing is quite simple in lavaan. Just define the paths you
+are interested in.  
+I use the same model as before “ne -\> ag -\> op”.  
+I give variables a label.
+
+``` r
+model2 <- '
+#constructs
+  op =~ Opene_1 + Opene_2 + Opene_3 + Opene_4
+  ag =~ Agree_1 + Agree_2 + Agree_3 + Agree_4
+  ne =~ Neuro_1 + Neuro_2 + Neuro_3 + Neuro_4
+#regression
+  ag ~ c*ne
+  op ~a*ne + b*ag
+#indirect
+  indirect := a*b
+#direct effect
+  direct := c
+#total effect
+  total := c + (a*b)'
+```
+
+## Fit and summary
+
+Fit the model with same parameters as for cfa works and show summary:
+
+``` r
+fit2 <- cfa(model2, data=dat, estimator="MLM", std.lv=TRUE)
+summary(fit2, fit.measures=T, standardized=T, rsquare=T)
+```
+
+    ## lavaan 0.6-9 ended normally after 29 iterations
+    ## 
+    ##   Estimator                                         ML
+    ##   Optimization method                           NLMINB
+    ##   Number of model parameters                        27
+    ##                                                       
+    ##                                                   Used       Total
+    ##   Number of observations                           583         600
+    ##                                                                   
+    ## Model Test User Model:
+    ##                                               Standard      Robust
+    ##   Test Statistic                               201.116     184.729
+    ##   Degrees of freedom                                51          51
+    ##   P-value (Chi-square)                           0.000       0.000
+    ##   Scaling correction factor                                  1.089
+    ##        Satorra-Bentler correction                                 
+    ## 
+    ## Model Test Baseline Model:
+    ## 
+    ##   Test statistic                              1111.634    1002.792
+    ##   Degrees of freedom                                66          66
+    ##   P-value                                        0.000       0.000
+    ##   Scaling correction factor                                  1.109
+    ## 
+    ## User Model versus Baseline Model:
+    ## 
+    ##   Comparative Fit Index (CFI)                    0.856       0.857
+    ##   Tucker-Lewis Index (TLI)                       0.814       0.815
+    ##                                                                   
+    ##   Robust Comparative Fit Index (CFI)                         0.860
+    ##   Robust Tucker-Lewis Index (TLI)                            0.819
+    ## 
+    ## Loglikelihood and Information Criteria:
+    ## 
+    ##   Loglikelihood user model (H0)             -10550.161  -10550.161
+    ##   Loglikelihood unrestricted model (H1)     -10449.603  -10449.603
+    ##                                                                   
+    ##   Akaike (AIC)                               21154.322   21154.322
+    ##   Bayesian (BIC)                             21272.263   21272.263
+    ##   Sample-size adjusted Bayesian (BIC)        21186.548   21186.548
+    ## 
+    ## Root Mean Square Error of Approximation:
+    ## 
+    ##   RMSEA                                          0.071       0.067
+    ##   90 Percent confidence interval - lower         0.061       0.057
+    ##   90 Percent confidence interval - upper         0.082       0.077
+    ##   P-value RMSEA <= 0.05                          0.000       0.003
+    ##                                                                   
+    ##   Robust RMSEA                                               0.070
+    ##   90 Percent confidence interval - lower                     0.059
+    ##   90 Percent confidence interval - upper                     0.081
+    ## 
+    ## Standardized Root Mean Square Residual:
+    ## 
+    ##   SRMR                                           0.066       0.066
+    ## 
+    ## Parameter Estimates:
+    ## 
+    ##   Standard errors                           Robust.sem
+    ##   Information                                 Expected
+    ##   Information saturated (h1) model          Structured
+    ## 
+    ## Latent Variables:
+    ##                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+    ##   op =~                                                                 
+    ##     Opene_1           0.621    0.075    8.229    0.000    0.626    0.458
+    ##     Opene_2           0.837    0.083   10.037    0.000    0.843    0.607
+    ##     Opene_3           0.412    0.064    6.447    0.000    0.415    0.339
+    ##     Opene_4           0.798    0.090    8.860    0.000    0.804    0.493
+    ##   ag =~                                                                 
+    ##     Agree_1           0.415    0.049    8.415    0.000    0.418    0.443
+    ##     Agree_2           0.535    0.049   10.887    0.000    0.539    0.571
+    ##     Agree_3           0.678    0.046   14.868    0.000    0.684    0.755
+    ##     Agree_4           0.569    0.049   11.534    0.000    0.574    0.648
+    ##   ne =~                                                                 
+    ##     Neuro_1           0.718    0.055   13.118    0.000    0.718    0.598
+    ##     Neuro_2           0.551    0.055    9.989    0.000    0.551    0.456
+    ##     Neuro_3           0.945    0.056   16.749    0.000    0.945    0.731
+    ##     Neuro_4           0.735    0.057   12.863    0.000    0.735    0.588
+    ## 
+    ## Regressions:
+    ##                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+    ##   ag ~                                                                  
+    ##     ne         (c)   -0.126    0.060   -2.097    0.036   -0.125   -0.125
+    ##   op ~                                                                  
+    ##     ne         (a)   -0.122    0.068   -1.783    0.075   -0.121   -0.121
+    ##     ag         (b)    0.005    0.064    0.071    0.943    0.005    0.005
+    ## 
+    ## Variances:
+    ##                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+    ##    .Opene_1           1.478    0.105   14.082    0.000    1.478    0.791
+    ##    .Opene_2           1.215    0.134    9.043    0.000    1.215    0.631
+    ##    .Opene_3           1.328    0.074   17.994    0.000    1.328    0.885
+    ##    .Opene_4           2.012    0.147   13.716    0.000    2.012    0.757
+    ##    .Agree_1           0.717    0.081    8.825    0.000    0.717    0.804
+    ##    .Agree_2           0.601    0.066    9.170    0.000    0.601    0.674
+    ##    .Agree_3           0.353    0.052    6.730    0.000    0.353    0.430
+    ##    .Agree_4           0.456    0.069    6.583    0.000    0.456    0.581
+    ##    .Neuro_1           0.927    0.076   12.258    0.000    0.927    0.642
+    ##    .Neuro_2           1.153    0.075   15.312    0.000    1.153    0.792
+    ##    .Neuro_3           0.779    0.095    8.194    0.000    0.779    0.466
+    ##    .Neuro_4           1.024    0.080   12.881    0.000    1.024    0.655
+    ##    .op                1.000                               0.985    0.985
+    ##    .ag                1.000                               0.984    0.984
+    ##     ne                1.000                               1.000    1.000
+    ## 
+    ## R-Square:
+    ##                    Estimate
+    ##     Opene_1           0.209
+    ##     Opene_2           0.369
+    ##     Opene_3           0.115
+    ##     Opene_4           0.243
+    ##     Agree_1           0.196
+    ##     Agree_2           0.326
+    ##     Agree_3           0.570
+    ##     Agree_4           0.419
+    ##     Neuro_1           0.358
+    ##     Neuro_2           0.208
+    ##     Neuro_3           0.534
+    ##     Neuro_4           0.345
+    ##     op                0.015
+    ##     ag                0.016
+    ## 
+    ## Defined Parameters:
+    ##                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+    ##     indirect         -0.001    0.008   -0.071    0.943   -0.001   -0.001
+    ##     direct           -0.126    0.060   -2.097    0.036   -0.125   -0.125
+    ##     total            -0.126    0.061   -2.076    0.038   -0.125   -0.125
+
+# Interaction effects: Moderation
+
+Basic interaction term with “:” in lavaan. But it only works with
+manifest variables.  
+When an observed moderator is categorical, use a multigroup SEM
+group=“experience”).
+
+When using latent variables it’s more complicated.  
+I will follow product-indicator approach for latent
+interaction.Demonstarted by Schoemann & Jorgensen (2021)
+<https://doi.org/10.3390/> Caveat: Croduct indicators are assumed to be
+continuous if categorial use grouping.
+
+## Optional: Rename
+
+Rename vars to be more easy 1 char + int (i.e., a1, a2, a3, b1, b2,
+b3..).Use the rename function
+
+``` r
+library(tidyverse)
+dat2 <- rename(dat, a1 = ali1)
+```
+
+## Import example dataset
+
+``` r
+dat <- read.csv("exampleMod.csv")
+```
+
+## Libraries
+
+``` r
+library(lavaan)
+library(semTools)
+```
+
+## Main effects
+
+first step is to check for a main effect:
+
+``` r
+mMe <- '
+tvalue =~ t1 + t2 + t3 + t4
+sources =~ s1 + s2 + s3 + s4 + s5
+tip =~ tip1 + tip2 + tip3
+tip ~ tvalue + sources'
+```
+
+## Fit and summary
+
+``` r
+fitME <- sem(mMe, data = dat, std.lv = TRUE, estimator = "mlr")
+summary(fitME, fit.measure = F, standardized=T)
+```
+
+    ## lavaan 0.6-9 ended normally after 22 iterations
+    ## 
+    ##   Estimator                                         ML
+    ##   Optimization method                           NLMINB
+    ##   Number of model parameters                        27
+    ##                                                       
+    ##                                                   Used       Total
+    ##   Number of observations                          7037        7314
+    ##                                                                   
+    ## Model Test User Model:
+    ##                                                Standard      Robust
+    ##   Test Statistic                               1261.996    1121.253
+    ##   Degrees of freedom                                 51          51
+    ##   P-value (Chi-square)                            0.000       0.000
+    ##   Scaling correction factor                                   1.126
+    ##        Yuan-Bentler correction (Mplus variant)                     
+    ## 
+    ## Parameter Estimates:
+    ## 
+    ##   Standard errors                             Sandwich
+    ##   Information bread                           Observed
+    ##   Observed information based on                Hessian
+    ## 
+    ## Latent Variables:
+    ##                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+    ##   tvalue =~                                                             
+    ##     t1                0.866    0.010   85.682    0.000    0.866    0.849
+    ##     t2                0.856    0.010   85.422    0.000    0.856    0.890
+    ##     t3                0.700    0.011   63.669    0.000    0.700    0.769
+    ##     t4                0.565    0.013   44.164    0.000    0.565    0.516
+    ##   sources =~                                                            
+    ##     s1                0.757    0.015   50.069    0.000    0.757    0.687
+    ##     s2                0.881    0.013   65.982    0.000    0.881    0.719
+    ##     s3                0.651    0.014   45.536    0.000    0.651    0.545
+    ##     s4                0.732    0.016   45.877    0.000    0.732    0.674
+    ##     s5                0.969    0.013   72.537    0.000    0.969    0.795
+    ##   tip =~                                                                
+    ##     tip1              0.585    0.018   32.832    0.000    0.733    0.649
+    ##     tip2              0.174    0.013   13.531    0.000    0.218    0.215
+    ##     tip3              0.573    0.017   33.179    0.000    0.718    0.631
+    ## 
+    ## Regressions:
+    ##                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+    ##   tip ~                                                                 
+    ##     tvalue           -0.118    0.022   -5.315    0.000   -0.094   -0.094
+    ##     sources           0.724    0.030   23.933    0.000    0.578    0.578
+    ## 
+    ## Covariances:
+    ##                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+    ##   tvalue ~~                                                             
+    ##     sources          -0.191    0.015  -12.819    0.000   -0.191   -0.191
+    ## 
+    ## Variances:
+    ##                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+    ##    .t1                0.290    0.013   23.094    0.000    0.290    0.278
+    ##    .t2                0.193    0.010   20.045    0.000    0.193    0.208
+    ##    .t3                0.339    0.012   28.106    0.000    0.339    0.408
+    ##    .t4                0.879    0.015   58.128    0.000    0.879    0.733
+    ##    .s1                0.642    0.017   37.733    0.000    0.642    0.529
+    ##    .s2                0.724    0.019   38.501    0.000    0.724    0.482
+    ##    .s3                1.000    0.018   56.449    0.000    1.000    0.703
+    ##    .s4                0.643    0.017   38.083    0.000    0.643    0.545
+    ##    .s5                0.546    0.018   29.833    0.000    0.546    0.368
+    ##    .tip1              0.736    0.025   29.554    0.000    0.736    0.578
+    ##    .tip2              0.985    0.017   57.811    0.000    0.985    0.954
+    ##    .tip3              0.777    0.024   32.877    0.000    0.777    0.601
+    ##     tvalue            1.000                               1.000    1.000
+    ##     sources           1.000                               1.000    1.000
+    ##    .tip               1.000                               0.636    0.636
+
+Both main effects are significant.  
+Higher test value -\> lower fear appeal. More sources of teacher stress
+-\> higher fear appeal.
+
+## Data prep
+
+Use the indProd() function in the semTools to create new dataset with
+multiplied x and z vars. var1 = indicators  
+var2 = moderator vars  
+var3 = optional vars for three way interaction  
+Can use meanC, residualC, and doubleMC centering approach. Schoemann &
+Jorgensen use DMC or residual.  
+This will create a new dataset with multiplied variables named t1.s1,
+t1.s2…
+
+``` r
+dat2 <- indProd(dat, var1 = c("t1", "t2", "t3", "t4"),
+                var2 = c("s1", "s2", "s3", "s4", "s5"),
+                match = F, meanC = F, residualC = T)
+```
+
+## Specify the model
+
+First latent factors; 0\* covariances with interaction; regression
+paths; residual covariances.Do them horizontally and vertically. Use
+Notepad replace function to speed up.
+
+``` r
+model <- '
+tvalue  =~ t1 + t2 + t3 + t4
+sources =~ s1 + s2 + s3 + s4 + s5
+tip =~ tip1 + tip2 + tip3
+int =~ t1.s1 + t1.s2 + t1.s3 + t1.s4 + t1.s5 +
+       t2.s1 + t2.s2 + t2.s3 + t2.s4 + t2.s5 +
+       t3.s1 + t3.s2 + t3.s3 + t3.s4 + t3.s5 +
+       t4.s1 + t4.s2 + t4.s3 + t4.s4 + t4.s5
+
+#Fix covariances between interaction and predictors to 0
+tvalue ~~ 0*int
+sources ~~ 0*int
+
+#regression paths
+tip ~ tvalue + sources + int
+
+#Residual covariances between terms from the same indicator 
+#Do covariances horizontally -> and vertically I
+
+#horizontally
+t1.s1 ~~ th1*t1.s2 + th1*t1.s3 + th1*t1.s4 + th1*t1.s5
+t1.s2 ~~ th1*t1.s3 + th1*t1.s4 + th1*t1.s5
+t1.s3 ~~ th1*t1.s4 + th1*t1.s5 
+t1.s4 ~~ th1*t1.s5 
+
+t2.s1 ~~ th2*t2.s2 + th2*t2.s3 + th2*t2.s4 + th2*t2.s5
+t2.s2 ~~ th2*t2.s3 + th2*t2.s4 + th2*t2.s5
+t2.s3 ~~ th2*t2.s4 + th2*t2.s5 
+t2.s4 ~~ th2*t2.s5 
+
+t3.s1 ~~ th3*t3.s2 + th3*t3.s3 + th3*t3.s4 + th3*t3.s5
+t3.s2 ~~ th3*t3.s3 + th3*t3.s4 + th3*t3.s5
+t3.s3 ~~ th3*t3.s4 + th3*t3.s5 
+t3.s4 ~~ th3*t3.s5
+
+t4.s1 ~~ th4*t4.s2 + th4*t4.s3 + th4*t4.s4 + th4*t4.s5
+t4.s2 ~~ th4*t4.s3 + th4*t4.s4 + th4*t4.s5
+t4.s3 ~~ th4*t4.s4 + th4*t4.s5 
+t4.s4 ~~ th4*t4.s5
+
+#vertically
+t1.s1 ~~ th5*t2.s1 + th5*t3.s1 + th5*t4.s1
+t2.s1 ~~ th5*t3.s1 + th5*t4.s1
+t3.s1 ~~ th5*t4.s1
+
+t1.s2 ~~ th6*t2.s2 + th6*t3.s2 + th6*t4.s2
+t2.s2 ~~ th6*t3.s2 + th6*t4.s2
+t3.s2 ~~ th6*t4.s2
+
+t1.s3 ~~ th7*t2.s3 + th7*t3.s3 + th7*t4.s3
+t2.s3 ~~ th7*t3.s3 + th7*t4.s3
+t3.s3 ~~ th7*t4.s3
+
+t1.s4 ~~ th8*t2.s4 + th8*t3.s4 + th8*t4.s4
+t2.s4 ~~ th8*t3.s4 + th8*t4.s4
+t3.s4 ~~ th8*t4.s4
+
+t1.s5 ~~ th9*t2.s5 + th9*t3.s5 + th9*t4.s5
+t2.s5 ~~ th9*t3.s5 + th9*t4.s5
+t3.s5 ~~ th9*t4.s5
+'
+```
+
+## Fit and summary
+
+``` r
+fit <- sem(model, data = dat2, std.lv = TRUE, meanstructure = TRUE)
+summary(fit, fit.measure = F, standardized = TRUE)
+```
+
+    ## lavaan 0.6-9 ended normally after 51 iterations
+    ## 
+    ##   Estimator                                         ML
+    ##   Optimization method                           NLMINB
+    ##   Number of model parameters                       170
+    ##   Number of equality constraints                    61
+    ##                                                       
+    ##                                                   Used       Total
+    ##   Number of observations                          7037        7314
+    ##                                                                   
+    ## Latent Variables:
+    ##                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+    ##   tvalue =~                                                             
+    ##     t1                0.866    0.010   83.934    0.000    0.866    0.849
+    ##     t2                0.856    0.010   89.777    0.000    0.856    0.890
+    ##     t3                0.700    0.010   73.141    0.000    0.700    0.769
+    ##     t4                0.565    0.013   44.117    0.000    0.565    0.516
+    ##   sources =~                                                            
+    ##     s1                0.757    0.012   60.565    0.000    0.757    0.687
+    ##     s2                0.881    0.014   64.360    0.000    0.881    0.719
+    ##     s3                0.651    0.014   45.599    0.000    0.651    0.545
+    ##     s4                0.732    0.012   59.161    0.000    0.732    0.674
+    ##     s5                0.969    0.013   73.532    0.000    0.969    0.795
+    ##   tip =~                                                                
+    ##     tip1              0.582    0.016   36.641    0.000    0.731    0.648
+    ##     tip2              0.173    0.012   14.434    0.000    0.218    0.214
+    ##     tip3              0.572    0.016   36.646    0.000    0.719    0.633
+    ##   int =~                                                                
+    ##     t1.s1             0.669    0.014   46.845    0.000    0.669    0.578
+    ##     t1.s2             0.873    0.015   58.513    0.000    0.873    0.688
+    ##     t1.s3             0.591    0.015   38.633    0.000    0.591    0.491
+    ##     t1.s4             0.686    0.014   48.809    0.000    0.686    0.598
+    ##     t1.s5             0.961    0.015   65.346    0.000    0.961    0.748
+    ##     t2.s1             0.663    0.014   48.642    0.000    0.663    0.598
+    ##     t2.s2             0.848    0.014   60.113    0.000    0.848    0.704
+    ##     t2.s3             0.587    0.015   40.434    0.000    0.587    0.512
+    ##     t2.s4             0.677    0.014   50.017    0.000    0.677    0.611
+    ##     t2.s5             0.938    0.014   67.637    0.000    0.938    0.768
+    ##     t3.s1             0.537    0.014   38.354    0.000    0.537    0.484
+    ##     t3.s2             0.664    0.014   46.262    0.000    0.664    0.572
+    ##     t3.s3             0.483    0.015   32.158    0.000    0.483    0.413
+    ##     t3.s4             0.554    0.014   40.398    0.000    0.554    0.507
+    ##     t3.s5             0.745    0.014   52.698    0.000    0.745    0.641
+    ##     t4.s1             0.413    0.018   23.517    0.000    0.413    0.309
+    ##     t4.s2             0.501    0.019   27.030    0.000    0.501    0.355
+    ##     t4.s3             0.374    0.020   18.941    0.000    0.374    0.251
+    ##     t4.s4             0.444    0.017   25.668    0.000    0.444    0.336
+    ##     t4.s5             0.569    0.018   32.100    0.000    0.569    0.420
+    ## 
+    ## Regressions:
+    ##                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+    ##   tip ~                                                                 
+    ##     tvalue           -0.117    0.019   -6.070    0.000   -0.094   -0.094
+    ##     sources           0.726    0.027   27.293    0.000    0.578    0.578
+    ##     int              -0.069    0.020   -3.442    0.001   -0.055   -0.055
+    ## 
+    ## Covariances:
+    ##                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+    ##   tvalue ~~                                                             
+    ##     int               0.000                               0.000    0.000
+    ##   sources ~~                                                            
+    ##     int               0.000                               0.000    0.000
+    ##  .t1.s1 ~~                                                              
+    ##    .t1.s2    (th1)    0.200    0.007   29.799    0.000    0.200    0.230
+    ##    .t1.s3    (th1)    0.200    0.007   29.799    0.000    0.200    0.201
+    ##    .t1.s4    (th1)    0.200    0.007   29.799    0.000    0.200    0.229
+    ##    .t1.s5    (th1)    0.200    0.007   29.799    0.000    0.200    0.248
+    ##  .t1.s2 ~~                                                              
+    ##    .t1.s3    (th1)    0.200    0.007   29.799    0.000    0.200    0.207
+    ##    .t1.s4    (th1)    0.200    0.007   29.799    0.000    0.200    0.236
+    ##    .t1.s5    (th1)    0.200    0.007   29.799    0.000    0.200    0.255
+    ##  .t1.s3 ~~                                                              
+    ##    .t1.s4    (th1)    0.200    0.007   29.799    0.000    0.200    0.207
+    ##    .t1.s5    (th1)    0.200    0.007   29.799    0.000    0.200    0.224
+    ##  .t1.s4 ~~                                                              
+    ##    .t1.s5    (th1)    0.200    0.007   29.799    0.000    0.200    0.255
+    ##  .t2.s1 ~~                                                              
+    ##    .t2.s2    (th2)    0.138    0.006   23.672    0.000    0.138    0.181
+    ##    .t2.s3    (th2)    0.138    0.006   23.672    0.000    0.138    0.157
+    ##    .t2.s4    (th2)    0.138    0.006   23.672    0.000    0.138    0.177
+    ##    .t2.s5    (th2)    0.138    0.006   23.672    0.000    0.138    0.198
+    ##  .t2.s2 ~~                                                              
+    ##    .t2.s3    (th2)    0.138    0.006   23.672    0.000    0.138    0.164
+    ##    .t2.s4    (th2)    0.138    0.006   23.672    0.000    0.138    0.184
+    ##    .t2.s5    (th2)    0.138    0.006   23.672    0.000    0.138    0.206
+    ##  .t2.s3 ~~                                                              
+    ##    .t2.s4    (th2)    0.138    0.006   23.672    0.000    0.138    0.160
+    ##    .t2.s5    (th2)    0.138    0.006   23.672    0.000    0.138    0.179
+    ##  .t2.s4 ~~                                                              
+    ##    .t2.s5    (th2)    0.138    0.006   23.672    0.000    0.138    0.201
+    ##  .t3.s1 ~~                                                              
+    ##    .t3.s2    (th3)    0.254    0.006   40.662    0.000    0.254    0.275
+    ##    .t3.s3    (th3)    0.254    0.006   40.662    0.000    0.254    0.246
+    ##    .t3.s4    (th3)    0.254    0.006   40.662    0.000    0.254    0.278
+    ##    .t3.s5    (th3)    0.254    0.006   40.662    0.000    0.254    0.293
+    ##  .t3.s2 ~~                                                              
+    ##    .t3.s3    (th3)    0.254    0.006   40.662    0.000    0.254    0.251
+    ##    .t3.s4    (th3)    0.254    0.006   40.662    0.000    0.254    0.283
+    ##    .t3.s5    (th3)    0.254    0.006   40.662    0.000    0.254    0.299
+    ##  .t3.s3 ~~                                                              
+    ##    .t3.s4    (th3)    0.254    0.006   40.662    0.000    0.254    0.253
+    ##    .t3.s5    (th3)    0.254    0.006   40.662    0.000    0.254    0.267
+    ##  .t3.s4 ~~                                                              
+    ##    .t3.s5    (th3)    0.254    0.006   40.662    0.000    0.254    0.302
+    ##  .t4.s1 ~~                                                              
+    ##    .t4.s2    (th4)    0.593    0.013   45.851    0.000    0.593    0.354
+    ##    .t4.s3    (th4)    0.593    0.013   45.851    0.000    0.593    0.324
+    ##    .t4.s4    (th4)    0.593    0.013   45.851    0.000    0.593    0.375
+    ##    .t4.s5    (th4)    0.593    0.013   45.851    0.000    0.593    0.380
+    ##  .t4.s2 ~~                                                              
+    ##    .t4.s3    (th4)    0.593    0.013   45.851    0.000    0.593    0.311
+    ##    .t4.s4    (th4)    0.593    0.013   45.851    0.000    0.593    0.360
+    ##    .t4.s5    (th4)    0.593    0.013   45.851    0.000    0.593    0.365
+    ##  .t4.s3 ~~                                                              
+    ##    .t4.s4    (th4)    0.593    0.013   45.851    0.000    0.593    0.330
+    ##    .t4.s5    (th4)    0.593    0.013   45.851    0.000    0.593    0.334
+    ##  .t4.s4 ~~                                                              
+    ##    .t4.s5    (th4)    0.593    0.013   45.851    0.000    0.593    0.387
+    ##  .t1.s1 ~~                                                              
+    ##    .t2.s1    (th5)    0.479    0.011   45.560    0.000    0.479    0.569
+    ##    .t3.s1    (th5)    0.479    0.011   45.560    0.000    0.479    0.522
+    ##    .t4.s1    (th5)    0.479    0.011   45.560    0.000    0.479    0.399
+    ##  .t2.s1 ~~                                                              
+    ##    .t3.s1    (th5)    0.479    0.011   45.560    0.000    0.479    0.556
+    ##    .t4.s1    (th5)    0.479    0.011   45.560    0.000    0.479    0.425
+    ##  .t3.s1 ~~                                                              
+    ##    .t4.s1    (th5)    0.479    0.011   45.560    0.000    0.479    0.390
+    ##  .t1.s2 ~~                                                              
+    ##    .t2.s2    (th6)    0.396    0.011   37.487    0.000    0.396    0.503
+    ##    .t3.s2    (th6)    0.396    0.011   37.487    0.000    0.396    0.452
+    ##    .t4.s2    (th6)    0.396    0.011   37.487    0.000    0.396    0.326
+    ##  .t2.s2 ~~                                                              
+    ##    .t3.s2    (th6)    0.396    0.011   37.487    0.000    0.396    0.486
+    ##    .t4.s2    (th6)    0.396    0.011   37.487    0.000    0.396    0.351
+    ##  .t3.s2 ~~                                                              
+    ##    .t4.s2    (th6)    0.396    0.011   37.487    0.000    0.396    0.315
+    ##  .t1.s3 ~~                                                              
+    ##    .t2.s3    (th7)    0.574    0.012   46.586    0.000    0.574    0.556
+    ##    .t3.s3    (th7)    0.574    0.012   46.586    0.000    0.574    0.514
+    ##    .t4.s3    (th7)    0.574    0.012   46.586    0.000    0.574    0.380
+    ##  .t2.s3 ~~                                                              
+    ##    .t3.s3    (th7)    0.574    0.012   46.586    0.000    0.574    0.549
+    ##    .t4.s3    (th7)    0.574    0.012   46.586    0.000    0.574    0.405
+    ##  .t3.s3 ~~                                                              
+    ##    .t4.s3    (th7)    0.574    0.012   46.586    0.000    0.574    0.375
+    ##  .t1.s4 ~~                                                              
+    ##    .t2.s4    (th8)    0.445    0.010   44.382    0.000    0.445    0.551
+    ##    .t3.s4    (th8)    0.445    0.010   44.382    0.000    0.445    0.513
+    ##    .t4.s4    (th8)    0.445    0.010   44.382    0.000    0.445    0.388
+    ##  .t2.s4 ~~                                                              
+    ##    .t3.s4    (th8)    0.445    0.010   44.382    0.000    0.445    0.539
+    ##    .t4.s4    (th8)    0.445    0.010   44.382    0.000    0.445    0.408
+    ##  .t3.s4 ~~                                                              
+    ##    .t4.s4    (th8)    0.445    0.010   44.382    0.000    0.445    0.379
+    ##  .t1.s5 ~~                                                              
+    ##    .t2.s5    (th9)    0.310    0.010   30.186    0.000    0.310    0.465
+    ##    .t3.s5    (th9)    0.310    0.010   30.186    0.000    0.310    0.407
+    ##    .t4.s5    (th9)    0.310    0.010   30.186    0.000    0.310    0.295
+    ##  .t2.s5 ~~                                                              
+    ##    .t3.s5    (th9)    0.310    0.010   30.186    0.000    0.310    0.443
+    ##    .t4.s5    (th9)    0.310    0.010   30.186    0.000    0.310    0.322
+    ##  .t3.s5 ~~                                                              
+    ##    .t4.s5    (th9)    0.310    0.010   30.186    0.000    0.310    0.282
+    ##   tvalue ~~                                                             
+    ##     sources          -0.191    0.013  -14.223    0.000   -0.191   -0.191
+    ## 
+    ## Intercepts:
+    ##                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+    ##    .t1                2.137    0.012  175.782    0.000    2.137    2.095
+    ##    .t2                1.995    0.011  174.038    0.000    1.995    2.075
+    ##    .t3                1.987    0.011  183.098    0.000    1.987    2.183
+    ##    .t4                2.535    0.013  194.217    0.000    2.535    2.315
+    ##    .s1                3.917    0.013  298.071    0.000    3.917    3.553
+    ##    .s2                3.104    0.015  212.563    0.000    3.104    2.534
+    ##    .s3                2.947    0.014  207.222    0.000    2.947    2.470
+    ##    .s4                3.986    0.013  308.100    0.000    3.986    3.673
+    ##    .s5                3.433    0.015  236.370    0.000    3.433    2.818
+    ##    .tip1              3.661    0.013  272.189    0.000    3.661    3.245
+    ##    .tip2              3.631    0.012  299.769    0.000    3.631    3.573
+    ##    .tip3              3.060    0.014  225.814    0.000    3.060    2.692
+    ##    .t1.s1            -0.202    0.014  -14.589    0.000   -0.202   -0.174
+    ##    .t1.s2            -0.133    0.015   -8.814    0.000   -0.133   -0.105
+    ##    .t1.s3            -0.138    0.014   -9.635    0.000   -0.138   -0.115
+    ##    .t1.s4            -0.195    0.014  -14.247    0.000   -0.195   -0.170
+    ##    .t1.s5            -0.154    0.015  -10.037    0.000   -0.154   -0.120
+    ##    .t2.s1            -0.188    0.013  -14.234    0.000   -0.188   -0.170
+    ##    .t2.s2            -0.124    0.014   -8.607    0.000   -0.124   -0.103
+    ##    .t2.s3            -0.123    0.014   -9.034    0.000   -0.123   -0.108
+    ##    .t2.s4            -0.176    0.013  -13.317    0.000   -0.176   -0.159
+    ##    .t2.s5            -0.140    0.015   -9.621    0.000   -0.140   -0.115
+    ##    .t3.s1            -0.183    0.013  -13.867    0.000   -0.183   -0.165
+    ##    .t3.s2            -0.115    0.014   -8.322    0.000   -0.115   -0.099
+    ##    .t3.s3            -0.123    0.014   -8.840    0.000   -0.123   -0.105
+    ##    .t3.s4            -0.174    0.013  -13.323    0.000   -0.174   -0.159
+    ##    .t3.s5            -0.136    0.014   -9.800    0.000   -0.136   -0.117
+    ##    .t4.s1            -0.225    0.016  -14.145    0.000   -0.225   -0.169
+    ##    .t4.s2            -0.152    0.017   -9.057    0.000   -0.152   -0.108
+    ##    .t4.s3            -0.158    0.018   -8.883    0.000   -0.158   -0.106
+    ##    .t4.s4            -0.219    0.016  -13.876    0.000   -0.219   -0.165
+    ##    .t4.s5            -0.171    0.016  -10.569    0.000   -0.171   -0.126
+    ##     tvalue            0.000                               0.000    0.000
+    ##     sources           0.000                               0.000    0.000
+    ##    .tip               0.000                               0.000    0.000
+    ##     int               0.000                               0.000    0.000
+    ## 
+    ## Variances:
+    ##                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+    ##    .t1                0.290    0.008   37.400    0.000    0.290    0.278
+    ##    .t2                0.193    0.007   29.027    0.000    0.193    0.208
+    ##    .t3                0.339    0.007   48.057    0.000    0.339    0.408
+    ##    .t4                0.879    0.016   56.656    0.000    0.879    0.733
+    ##    .s1                0.642    0.013   48.879    0.000    0.642    0.529
+    ##    .s2                0.724    0.016   46.681    0.000    0.724    0.482
+    ##    .s3                1.000    0.018   54.446    0.000    1.000    0.703
+    ##    .s4                0.642    0.013   49.585    0.000    0.642    0.545
+    ##    .s5                0.546    0.014   39.132    0.000    0.546    0.368
+    ##    .tip1              0.738    0.022   33.969    0.000    0.738    0.580
+    ##    .tip2              0.985    0.017   57.794    0.000    0.985    0.954
+    ##    .tip3              0.775    0.022   35.795    0.000    0.775    0.600
+    ##    .t1.s1             0.894    0.014   66.114    0.000    0.894    0.666
+    ##    .t1.s2             0.847    0.014   60.203    0.000    0.847    0.526
+    ##    .t1.s3             1.102    0.016   69.204    0.000    1.102    0.759
+    ##    .t1.s4             0.848    0.013   64.952    0.000    0.848    0.643
+    ##    .t1.s5             0.725    0.014   53.462    0.000    0.725    0.440
+    ##    .t2.s1             0.791    0.013   61.800    0.000    0.791    0.643
+    ##    .t2.s2             0.732    0.013   55.519    0.000    0.732    0.504
+    ##    .t2.s3             0.968    0.015   64.837    0.000    0.968    0.738
+    ##    .t2.s4             0.769    0.012   61.673    0.000    0.769    0.626
+    ##    .t2.s5             0.612    0.013   48.175    0.000    0.612    0.410
+    ##    .t3.s1             0.940    0.013   70.776    0.000    0.940    0.766
+    ##    .t3.s2             0.907    0.014   66.430    0.000    0.907    0.673
+    ##    .t3.s3             1.130    0.016   72.458    0.000    1.130    0.829
+    ##    .t3.s4             0.889    0.013   69.621    0.000    0.889    0.743
+    ##    .t3.s5             0.796    0.013   60.542    0.000    0.796    0.589
+    ##    .t4.s1             1.608    0.020   78.905    0.000    1.608    0.904
+    ##    .t4.s2             1.743    0.023   76.602    0.000    1.743    0.874
+    ##    .t4.s3             2.076    0.026   80.686    0.000    2.076    0.937
+    ##    .t4.s4             1.551    0.020   77.961    0.000    1.551    0.887
+    ##    .t4.s5             1.514    0.021   72.587    0.000    1.514    0.824
+    ##     tvalue            1.000                               1.000    1.000
+    ##     sources           1.000                               1.000    1.000
+    ##    .tip               1.000                               0.633    0.633
+    ##     int               1.000                               1.000    1.000
+
+# Plot the model
+
+``` r
+library(semPlot)
+semPaths(fit, style = "lisrel", whatLabels= "std", nCharNodes = 0, edge.label.cex= 0.6,
+         rotation= 2, layout = "tree", label.cex=0.9, sizeMan = 4, sizeLat = 5, residuals=F)
+```
+
+![](/assets/images/SEM/figure-markdown_github/unnamed-chunk-17-1.png)
+
+# Plot the interaction
+
+Find slopes for plot interaction via probe function.  
+USE differnt probe functions for two and tree way moderation, and
+different centering techniques!!  
+You can do more interaction values valProbe = c(-3,0,3…)). Sufficient to
+do 3 simple slopes at the 1 SD below the mean of var (−1), the mean of
+var (0), and 1 SD above the mean of var (1).
+
+``` r
+pRC <- probe2WayRC(fit, nameX = c("tvalue", "sources", "int"), 
+                       nameY = "tip", modVar = "tvalue",
+                       valProbe = c(-2,-1,0,1,2))
+```
+
+``` r
+#plot the interaction graph
+plotProbe(pRC, xlim = c(-2,2), xlab = "Sources of teacher stress", ylab = "Fear Appeals",
+          legendArgs = list(title = "Test Value"))
+```
+
+![](/assets/images/SEM/figure-markdown_github/unnamed-chunk-19-1.png)
+
+## Interpretation
+
+Main and interaction effects are significant. Higher test value -\>
+lower fear appeal; More sources of teacher stress -\> higher fear
+appeal; Interaction: test value reduces the negative positive effect of
+sources on fear.
