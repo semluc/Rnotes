@@ -49,9 +49,7 @@ extra.labels <- c("Opene_1", "Opene_2", "Opene_3", "Opene_4",
                   "Agree_1", "Agree_2", "Agree_3", "Agree_4", 
                   "Neuro_1", "Neuro_2", "Neuro_3", "Neuro_4")
 dat.extra <- na.omit(dat[,extra.labels])
-# MVN command for QQ-Plot, Normality tests and outlier detection
-# showNewData would make new dataset without outliers
-mvn(dat.extra, mvnTest = c("mardia"), multivariatePlot = "qq", desc = F, showOutliers=T, showNewData=F)
+# MVN command for QQ-Plot, Normality tests 
 ```
 
 ![](/assets/images/CFA/figure-markdown_github/unnamed-chunk-2-1.png)
@@ -80,6 +78,7 @@ mvn(dat.extra, mvnTest = c("mardia"), multivariatePlot = "qq", desc = F, showOut
     ## $multivariateOutliers
     ## NULL
 
+Next check for multivariate outliers:
 See [here](/docs/outliers) how to check for outliers (Leverage / Influence).
 
 ## Specify model
