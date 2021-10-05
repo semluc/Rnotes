@@ -34,7 +34,7 @@ library(lavaan)
 
 # Assumption testing
 
-Test for multivariate normality and outliers using Mahalanobis distance:
+Test for multivariate normality 
 
 First: new dataset with variables of interest.
 
