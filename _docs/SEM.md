@@ -370,7 +370,7 @@ library(semTools)
 
 ## Main effects
 
-first step is to check for a main effect:
+First step is to check for a main effect:
 
 ``` r
 mMe <- '
@@ -447,13 +447,11 @@ Higher test value -\> lower fear appeal. More sources of teacher stress
 ## Data prep
 
 Use the indProd() function in the semTools to create new dataset with
-multiplied x and z vars. var1 = indicators  
+multiplied x and z vars. var1 = indicators...  
 var2 = moderator vars  
 var3 = optional vars for three way interaction  
-Can use meanC, residualC, and doubleMC centering approach. Schoemann &
-Jorgensen use DMC or residual.  
-This will create a new dataset with multiplied variables named t1.s1,
-t1.s2…
+Can use meanC, residualC, and doubleMC centering approach. Schoemann & Jorgensen use DMC or residual.  
+This will create a new dataset with multiplied variables named t1.s1, t1.s2...
 
 ``` r
 dat2 <- indProd(dat, var1 = c("t1", "t2", "t3", "t4"),
@@ -463,8 +461,7 @@ dat2 <- indProd(dat, var1 = c("t1", "t2", "t3", "t4"),
 
 ## Specify the model
 
-First latent factors; 0\* covariances with interaction; regression
-paths; residual covariances.  
+First latent factors; 0\* covariances with interaction; regression paths; residual covariances.  
 Do covariances in blocks first horizontally and then vertically.
 
 ![](/assets/images/SEM/figure-markdown_github/unnamed-chunk-12-1.png)
@@ -613,11 +610,8 @@ semPaths(fit, style = "lisrel", whatLabels= "std", nCharNodes = 0, edge.label.ce
 ## Plot the interaction
 
 Find slopes for plot interaction via probe function.  
-USE differnt probe functions for two and tree way moderation, and
-different centering techniques!!  
-You can do more interaction values valProbe = c(-3,0,3…)). Sufficient to
-do 3 simple slopes at the 1 SD below the mean of var (−1), the mean of
-var (0), and 1 SD above the mean of var (1).
+USE differnt probe functions for two and tree way moderation, and different centering techniques!!  
+You can do more interaction values valProbe = c(-3,0,3…)). Sufficient to do 3 simple slopes at the 1 SD below the mean of var (−1), the mean of var (0), and 1 SD above the mean of var (1).
 
 ``` r
 pRC <- probe2WayRC(fit, nameX = c("tvalue", "sources", "int"), 
