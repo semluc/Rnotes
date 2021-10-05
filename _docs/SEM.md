@@ -342,7 +342,7 @@ group=“experience”).
 When using latent variables it’s more complicated.  
 I will follow product-indicator approach for latent
 interaction.Demonstarted by Schoemann & Jorgensen (2021)
-<https://doi.org/10.3390/> Caveat: Croduct indicators are assumed to be
+<https://doi.org/10.3390/psych3030024> Caveat: Croduct indicators are assumed to be
 continuous if categorial use grouping.
 
 ## Optional: Rename
