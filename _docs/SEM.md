@@ -335,9 +335,10 @@ summary(fit2, fit.measures=T, standardized=T, rsquare=T)
 # Interaction effects: Moderation
 
 Basic interaction term with “:” in lavaan. But it only works with
-manifest variables.  
-When an observed moderator is categorical, use a multigroup SEM
-group=“experience”).
+manifest variables. You could also do a quick lm model with m <- lm(y ~ r * s, data=d)
+
+Be carefull not to interpret the main effect of the interaction term in the the model with the interaction present. Here, the baseline of the second IV is dependent on the intercept of the first IV.  
+When an observed moderator is categorical, maybe use a multigroup in lavaan or just use lm: group=“experience”.
 
 When using latent variables it’s more complicated.  
 I will follow product-indicator approach for latent
