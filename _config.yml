@@ -24,7 +24,7 @@ collections:
 
 just_the_docs:
   collections:
-    docs:
+    me:
       name: About me
     docs:
       name: Documentation
