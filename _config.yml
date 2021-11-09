@@ -12,6 +12,9 @@ color_scheme: light
 
 # Define Jekyll collections
 collections:
+  me:
+    permalink: "/:collection/:path/"
+    output: true
   docs:
     permalink: "/:collection/:path/"
     output: true
@@ -21,6 +24,8 @@ collections:
 
 just_the_docs:
   collections:
+    docs:
+      name: About me
     docs:
       name: Documentation
     other:
