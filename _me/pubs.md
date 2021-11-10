@@ -17,6 +17,14 @@ nav_order: 1
 </details>
 
 
-# 1.2 test
+# Peer reviewd journal articles
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+TBD (hopefully) :sweat_smile: :eyes:
+
+
+
+# Conferences
+- EAWOP 2022: "The Influence of Authenticity on Self-Actualization: Examining Combined Effects of Authentic Leadership, Job Resources and Authenticity at Work"
+- ÖGP 2022. "Der Einfluss von Arbeitsressourcen auf Authentizität und berufliche Selbstverwirklichung"
+- ICP 2021: "Occupational self-actualization through authenticity"
+
