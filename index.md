@@ -38,7 +38,7 @@ title: Home
 <tr>
 <td rowspan="4">
     <h1>Welcome to my blog</h1>
-    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+    My name is Lucas and I'm a research assistant and PhD candidate at the Department of Psychology (Applied Psychology) at the University of Innsbruck, Austria. My Phd project focuses on self-actualization and authenticity in occupational settings—a topic that I explore empirically via quantitative and qualitative data analysis. I am particularly interested in work-related predictors and outcomes of self-actualization and its link to authenticity. In addition, I am interested in current theoretical understandings and applications of these concepts. I am a strong proponent of open and collaborative science. Next to applied psychology I very much interested in quantitative data analysis and data science in general. In my free time I like to tinker with hardware, software, and coding; like to ride my road bike and play the piano.
     <br><br>
     <div class="row">
     <div class="column">
@@ -55,12 +55,9 @@ title: Home
     <div class="column">
         <h3>Education</h3>
         <ul>
-            <li>Coffee</li>
-            <li>Tea</li>
-            <li>Milk</li>
-            <li>Coffee</li>
-            <li>Tea</li>
-            <li>Milk</li>
+            <li>PhD in Psychology, 2020–current</li> <br>
+                University of Innsbruck
+            <li>BSc. and MSc. in Psychology, 2012 – 2020, University of Innsbruck</li>
         </ul>
     </div>
     </div> 
