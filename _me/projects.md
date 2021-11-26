@@ -18,7 +18,7 @@ nav_order: 2
 
 # Ongoing
 
-- Systemaic Review on Self-Actualization
+- Systemaic Review on Self-Actualization at work
 - The Effects of Authentic Leader- and Followership on Self-Actualization
 - Being Authentic and Becoming Self-Actualized at Work (sumbmitted) :snail:
 - Behaviour Change  Techniques in Physical Activity Interventions for Substance Use Disorders: A Systematic Review
