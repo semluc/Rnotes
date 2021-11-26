@@ -24,7 +24,7 @@ TBD (hopefully) :sweat_smile: :eyes:
 
 
 # Conferences
-- EAWOP 2022: "The Influence of Authenticity on Self-Actualization: Examining Combined Effects of Authentic Leadership, Job Resources and Authenticity at Work"
-- ÖGP 2022. "Der Einfluss von Arbeitsressourcen auf Authentizität und berufliche Selbstverwirklichung"
+- [tbd] EAWOP 2022: "The Influence of Authenticity on Self-Actualization: Examining Combined Effects of Authentic Leadership, Job Resources and Authenticity at Work"
+- [tbd] ÖGP 2022. "Der Einfluss von Arbeitsressourcen auf Authentizität und berufliche Selbstverwirklichung"
 - ICP 2021: "Occupational self-actualization through authenticity"
 
