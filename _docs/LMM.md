@@ -1,7 +1,7 @@
 ---
 layout: default
 title: LMM
-nav_order: 2
+nav_order: 7
 ---
 
 # Navigation Structure
