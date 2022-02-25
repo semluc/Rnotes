@@ -176,7 +176,7 @@ the dataset is already in the desired format: “unaggregated long format”
 each of the first six rows corresponds to a different word (stim)
 presented to the same participant (PID)
 
-# H1 X on Y
+# H1: X on Y
 
 Modality affects response time.
 
@@ -722,7 +722,7 @@ I will copy the results section from Brown(2021)
 > > ms slower in the audiovisual relative to the audio-only condition(β
 > > = 83.18, SE = 12.58, t = 6.62).
 
-# H2 Interaction
+# H2: Interaction
 
 ## Define and run model
 
