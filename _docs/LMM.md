@@ -41,11 +41,11 @@ participants were presented 553 isolated words.
 
 ## Conditions:
 
-(1´0) The auditory modality alone (audio-only condition) OR (1) with an
-accompanying video of the talker (audiovisual condition).  
+The auditory modality alone (0; audio-only condition) OR with an
+accompanying video of the talker (1; audiovisual condition).  
 Participants listened to and repeated these isolated words aloud while
 simultaneously performing an unrelated response time task in the tactile
-modality. <br> Participants identified speech in both an easy ( 0) and a
+modality. <br> Participants identified speech in both an easy (0) and a
 hard (1) level of background noise.
 
 # Describe hypotheses
