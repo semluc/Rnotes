@@ -23,7 +23,7 @@ library(lme4)
 library(tidyverse)
 library(afex)
 library(summarytools)
-library (ggplot2)
+library(ggplot2)
 library(performance)
 library(MASS)
 library(DescTools)
@@ -216,8 +216,6 @@ Too many samples instead use Anderson-Darling
 #install.packages('nortest')
 library(nortest)
 ```
-
-    ## Warning: Paket 'nortest' wurde unter R Version 4.1.1 erstellt
 
 ``` r
 ad.test(dat$RT)
@@ -564,19 +562,6 @@ sanity check
 library(psych)
 ```
 
-    ## Warning: Paket 'psych' wurde unter R Version 4.1.2 erstellt
-
-    ## 
-    ## Attache Paket: 'psych'
-
-    ## Die folgenden Objekte sind maskiert von 'package:DescTools':
-    ## 
-    ##     AUC, ICC, SD
-
-    ## Die folgenden Objekte sind maskiert von 'package:ggplot2':
-    ## 
-    ##     %+%, alpha
-
 ``` r
 describeBy(dat$RT, dat$modality)
 ```
@@ -749,29 +734,6 @@ library(psych)
 library(summarytools)
 library(car)
 ```
-
-    ## Warning: Paket 'car' wurde unter R Version 4.1.1 erstellt
-
-    ## Lade nötiges Paket: carData
-
-    ## 
-    ## Attache Paket: 'car'
-
-    ## Das folgende Objekt ist maskiert 'package:psych':
-    ## 
-    ##     logit
-
-    ## Das folgende Objekt ist maskiert 'package:DescTools':
-    ## 
-    ##     Recode
-
-    ## Das folgende Objekt ist maskiert 'package:dplyr':
-    ## 
-    ##     recode
-
-    ## Das folgende Objekt ist maskiert 'package:purrr':
-    ## 
-    ##     some
 
 ``` r
 dat$stiml <- str_length(dat$stim)
