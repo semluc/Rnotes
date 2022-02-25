@@ -20,111 +20,16 @@ nav_order: 7
 
 ``` r
 library(lme4)
-```
-
-    ## Warning: Paket 'lme4' wurde unter R Version 4.1.1 erstellt
-
-    ## Lade nötiges Paket: Matrix
-
-``` r
 library(tidyverse)
-```
-
-    ## Warning: Paket 'tidyverse' wurde unter R Version 4.1.1 erstellt
-
-    ## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
-
-    ## v ggplot2 3.3.5     v purrr   0.3.4
-    ## v tibble  3.1.5     v dplyr   1.0.7
-    ## v tidyr   1.1.3     v stringr 1.4.0
-    ## v readr   2.0.1     v forcats 0.5.1
-
-    ## Warning: Paket 'ggplot2' wurde unter R Version 4.1.1 erstellt
-
-    ## Warning: Paket 'tibble' wurde unter R Version 4.1.1 erstellt
-
-    ## Warning: Paket 'readr' wurde unter R Version 4.1.1 erstellt
-
-    ## Warning: Paket 'purrr' wurde unter R Version 4.1.1 erstellt
-
-    ## Warning: Paket 'dplyr' wurde unter R Version 4.1.1 erstellt
-
-    ## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
-    ## x tidyr::expand() masks Matrix::expand()
-    ## x dplyr::filter() masks stats::filter()
-    ## x dplyr::lag()    masks stats::lag()
-    ## x tidyr::pack()   masks Matrix::pack()
-    ## x tidyr::unpack() masks Matrix::unpack()
-
-``` r
 library(afex)
-```
-
-    ## Warning: Paket 'afex' wurde unter R Version 4.1.1 erstellt
-
-    ## ************
-    ## Welcome to afex. For support visit: http://afex.singmann.science/
-
-    ## - Functions for ANOVAs: aov_car(), aov_ez(), and aov_4()
-    ## - Methods for calculating p-values with mixed(): 'S', 'KR', 'LRT', and 'PB'
-    ## - 'afex_aov' and 'mixed' objects can be passed to emmeans() for follow-up tests
-    ## - NEWS: emmeans() for ANOVA models now uses model = 'multivariate' as default.
-    ## - Get and set global package options with: afex_options()
-    ## - Set orthogonal sum-to-zero contrasts globally: set_sum_contrasts()
-    ## - For example analyses see: browseVignettes("afex")
-    ## ************
-
-    ## 
-    ## Attache Paket: 'afex'
-
-    ## Das folgende Objekt ist maskiert 'package:lme4':
-    ## 
-    ##     lmer
-
-``` r
 library(summarytools)
-```
-
-    ## Warning: Paket 'summarytools' wurde unter R Version 4.1.1 erstellt
-
-    ## 
-    ## Attache Paket: 'summarytools'
-
-    ## Das folgende Objekt ist maskiert 'package:tibble':
-    ## 
-    ##     view
-
-``` r
 library (ggplot2)
 library(performance)
-```
-
-    ## Warning: Paket 'performance' wurde unter R Version 4.1.2 erstellt
-
-``` r
 library(MASS)
-```
-
-    ## Warning: Paket 'MASS' wurde unter R Version 4.1.1 erstellt
-
-    ## 
-    ## Attache Paket: 'MASS'
-
-    ## Das folgende Objekt ist maskiert 'package:dplyr':
-    ## 
-    ##     select
-
-``` r
 library(DescTools)
-```
-
-    ## Warning: Paket 'DescTools' wurde unter R Version 4.1.1 erstellt
-
-``` r
 library(sjPlot)
 ```
 
-    ## Warning: Paket 'sjPlot' wurde unter R Version 4.1.2 erstellt
 
 # Study design
 
