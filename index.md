@@ -40,7 +40,7 @@ title: Home
 <td>
 
     Hi, my name is Lucas, <div style="margin-bottom:0.5em;"></div>
-    I'm a research assistant and PhD candidate at the Department of Psychology (Applied Psychology) at the University of Innsbruck, Austria. My Phd project focuses on self-actualization and authenticity in occupational settings—a topic that I explore empirically via quantitative data analysis. I am particularly interested in work-related predictors and outcomes of self-actualization and its link to authenticity. In addition, I am interested in current theoretical understandings and applications of these concepts. 
+    I'm a research assistant and PhD student at the Department of Psychology, Applied Psychology at the University of Innsbruck, Austria. My Phd project focuses on self-actualization and authenticity in occupational settings—a topic that I explore empirically via quantitative and qualitative data. I am particularly interested in work-related predictors and outcomes of self-actualization and its link to authenticity. In addition, I am interested in current theoretical understandings and applications of these concepts. 
     <div style="margin-bottom:0.5em;"></div>
     I am a strong proponent of open and collaborative science. Next to applied psychology I very much interested in quantitative data analysis and data science in general. In my free time I like to tinker with hardware, software, and coding; I like to ride my road bike and play the piano.
     <br><br>
