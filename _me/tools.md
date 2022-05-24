@@ -13,10 +13,10 @@ nav_order: 4
 - I am quite comfortable using the Adobe Suite: Photoshop, Illustrator, Lightroom (however, I am not a professional)
 
 ## Stats and Programming
-- I try to mostly use [R Statistical Computing](https://www.r-project.org/) to analyze my data. On this blog I post regularly about my best practice for analyzing data in R
+- I mostly use [R Statistical Computing](https://www.r-project.org/) to analyze my data. On this blog I post about my best practice for analyzing data in R
 - If necessary, I’m also comfortable using SPSS and AMOS
 - For coding I use Visual Studio Code and the Arduino IDE
-- Before I made the change to [Jekyll](https://jekyllrb.com/) I used [Wordpress]( https://wordpress.com/) for webdev
+- Before I made the change to [Jekyll](https://jekyllrb.com/) I used [Wordpress]( https://wordpress.com/)
 
 ## Homebrew
-- I run two home servers: a debian server running OMW and a rasperry pi 3b running raspbian OS. I use it mostly to "self-host" webapps in docker containers like grafana, node red, homeassistant, pihole, openVPN and many more...
+- I run two home servers: a debian server running OMW and a rasperry pi 3b running raspbian OS. I use it mostly to self-host webapps in docker containers, like grafana, node red, homeassistant, pihole, openVPN and many more...
