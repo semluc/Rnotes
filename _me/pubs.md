@@ -19,8 +19,8 @@ nav_order: 1
 
 # Peer reviewd journal articles
 
-- Maunz, L. A., & Glaser, J. (2022). Does Being Authentic Promote Self-actualization at Work? Examining the Links Between Work-Related Resources, Authenticity at Work, and Occupational Self-actualization. Journal of Business and Psychology. (https://doi.org/10.1007/s10869-022-09815-1
-)[https://doi.org/10.1007/s10869-022-09815-1]
+- Maunz, L. A., & Glaser, J. (2022). Does Being Authentic Promote Self-actualization at Work? Examining the Links Between Work-Related Resources, Authenticity at Work, and Occupational Self-actualization. Journal of Business and Psychology. [https://doi.org/10.1007/s10869-022-09815-1]
+(https://doi.org/10.1007/s10869-022-09815-1)
 
 
 
