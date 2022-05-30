@@ -35,6 +35,9 @@ Import our datasets:
 #import data
 dat <- read.table("uk_ipip300_data1.csv", sep = ";", header = TRUE) 
 dat1 <- read.table("stepd.csv", sep = ";", header = TRUE) 
+#import xlsx directly
+library(readxl)
+dat <- read_excel("my_file.xls")
 ```
 
 # Rename variables
