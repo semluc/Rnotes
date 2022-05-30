@@ -12,7 +12,7 @@ Basic R function to call:
   
 ``` r
 library(devtools)
-source_url("https://rnts.netlify.app/download/correlation.R")
+source_url("https://lucasmaunz.netlify.app/download/correlation.R")
 ```
 
 Alternatively: [Download](/download/correlation.R) this script. 
