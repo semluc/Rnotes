@@ -208,6 +208,8 @@ Potentially remove case no. 543 as it has highest neg impact on cfi:
 
 ``` r
 FI.d <- dat[-c(543), ]
+# better use subset command
+# dat <- subset(dat, id!= 6)
 ```
 
 We see cfi has improved:
