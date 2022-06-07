@@ -377,6 +377,8 @@ Create a correlation table with Cronbach's alpha on the diagonal
 ``` r
 # library(devtools)
 # source_url("https://lucasmaunz.netlify.app/download/correlation.R")
+# library(psych)
+# library(dplyr)
 # Correlation table with alpha coef on diagonal
 # create subset of vars for cor table
 cor.mat <- select(dat1, O,C,E,A,N)
