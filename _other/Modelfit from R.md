@@ -15,7 +15,7 @@ Basic R function to call:
   
 ``` r
 library(devtools)
-source_url("https://lucasmaunz.netlify.app/download/meval.R")
+source_url("https://lucasmaunz.org/download/meval.R")
 ```
 
 Alternatively: [Download](/download/meval.R) this script. 
