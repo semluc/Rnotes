@@ -339,7 +339,7 @@ Call function:
 
 ``` r
 library(devtools)
-source_url("https://lucasmaunz.netlify.app/download/correlation.R")
+source_url("https://lucasmaunz.org/download/correlation.R")
 ```
 
 Use the definied subset Subset for the table:
@@ -376,7 +376,7 @@ write_clip(c)
 Create a correlation table with Cronbach's alpha on the diagonal
 ``` r
 # library(devtools)
-# source_url("https://lucasmaunz.netlify.app/download/correlation.R")
+# source_url("https://lucasmaunz.org/download/correlation.R")
 # library(psych)
 # library(dplyr)
 # Correlation table with alpha coef on diagonal

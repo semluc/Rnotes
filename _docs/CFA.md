@@ -546,7 +546,7 @@ meval(fit.cfa.pers.bi)
     ## srmr_bentler      0.05      excellent
 
 ## Easy table of model fits
-With this meval.table function you can easily create model fit tables. As input define two vectors, one with models (fitted lavaan objects) and one with n
+With this meval.table function you can easily create model fit tables. As input define two vectors, one with models (fitted lavaan objects) and one with names. Specify scaled = T or F. By default regular fits are put out.
 
 ``` r
 # easy table of model fits
