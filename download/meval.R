@@ -3,7 +3,9 @@
 meval <- function(fit) {
 #packages
 if (!require("lavaan")) install.packages("lavaan")
+if (!require("dplyr")) install.packages("dplyr")
 require(lavaan)
+require(dplyr)
   
 #column regular fit estimate
 r1 <- rbind(
@@ -77,6 +79,12 @@ meval.table <- function(models, names, scaled=FALSE){
 #option if scaled or regular
 is.logical(scaled)
 
+#packages
+if (!require("lavaan")) install.packages("lavaan")
+if (!require("dplyr")) install.packages("dplyr")
+require(lavaan)
+require(dplyr)
+  
 if (scaled) {
   lapply(models, meval) %>%
     sapply(., function(x)x["scaled"])  %>%
@@ -99,6 +107,7 @@ if (scaled) {
     select(, -pvalue, -tli)
   }
 }
+
 
 
 

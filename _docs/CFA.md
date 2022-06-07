@@ -50,6 +50,7 @@ extra.labels <- c("Opene_1", "Opene_2", "Opene_3", "Opene_4",
                   "Neuro_1", "Neuro_2", "Neuro_3", "Neuro_4")
 dat.extra <- na.omit(dat[,extra.labels])
 # MVN command for QQ-Plot, Normality tests 
+mvn(dat.extra, mvnTest = c("mardia"), multivariatePlot = "qq", desc = F)
 ```
 
 ![](/assets/images/CFA/figure-markdown_github/unnamed-chunk-2-1.png)
@@ -234,16 +235,37 @@ summary(fit.cfa.pers, standardized= TRUE, fit.measures=TRUE)
     ##    .ag                1.000                               0.980    0.980
     ##    .ne                1.000                               0.229    0.229
 
-## Copy modelfit to Clipboard
+## Interpret model fit quickly
 
-this command will copy the model fit indices to our clipboard. Just
-paste it into the excel file, which you can download here. The model
-indices will be interpreted on the right.
-I use [this](/other/Modelfit from R) how to use it. Excel-file to quickly interpret modelfit.
-
+With my meval function you can interpret lavaan objects quickly
 ``` r
-semTools::clipboard(fit.cfa.pers,what = "fit")
+library(devtools)
+source_url("https://lucasmaunz.org/download/meval.R")
+meval(fit.cfa.pers)
 ```
+
+    ## $regular
+    ##         estimate interpretation
+    ## chisq     201.12              –
+    ## df         51.00              –
+    ## pvalue      0.00              –
+    ## cmin/df     3.94     acceptable
+    ## cfi         0.86       terrible
+    ## tli         0.81       terrible
+    ## rmsea       0.07     acceptable
+    ## srmr        0.07      excellent
+    ## 
+    ## $scaled
+    ##               estimate interpretation
+    ## chisq.scaled    184.73              –
+    ## df.scaled        51.00              –
+    ## pvalue.scaled     0.00              –
+    ## cmin/df           3.62     acceptable
+    ## cfi.scaled        0.86       terrible
+    ## tli.scaled        0.82       terrible
+    ## rmsea.scaled      0.07     acceptable
+    ## srmr_bentler      0.07      excellent
+
 
 ## Modification indices
 
@@ -493,9 +515,57 @@ summary(fit.cfa.pers.bi, standardized= TRUE, fit.measures=TRUE)
     ##     ag                1.000                               1.000    1.000
     ##     ne                1.000                               1.000    1.000
 
-## Copy modelfit to Clipboard
-I use [this](/other/Modelfit from R) Excel-file to quickly interpret modelfit.
+## Interpret model fit quickly
+With my meval function you can interpret lavaan objects quickly
+``` r
+library(devtools)
+source_url("https://lucasmaunz.org/download/meval.R")
+meval(fit.cfa.pers.bi)
+```
+
+    ## $regular
+    ##         estimate interpretation
+    ## chisq      99.25              –
+    ## df         42.00              –
+    ## pvalue      0.00              –
+    ## cmin/df     2.36      excellent
+    ## cfi         0.95      excellent
+    ## tli         0.91     acceptable
+    ## rmsea       0.05      excellent
+    ## srmr        0.05      excellent
+    ## 
+    ## $scaled
+    ##               estimate interpretation
+    ## chisq.scaled     93.89              –
+    ## df.scaled        42.00              –
+    ## pvalue.scaled     0.00              –
+    ## cmin/df           2.24      excellent
+    ## cfi.scaled        0.94     acceptable
+    ## tli.scaled        0.91     acceptable
+    ## rmsea.scaled      0.05      excellent
+    ## srmr_bentler      0.05      excellent
+
+## Easy table of model fits
+With this meval.table function you can easily create model fit tables. As input define two vectors, one with models (fitted lavaan objects) and one with names.
 
 ``` r
-semTools::clipboard(fit.cfa.pers.bi,what = "fit") 
+# easy table of model fits
+# meval.table(models, names)
+
+ms <- c(fit.cfa.pers, fit.cfa.pers.bi)
+ns <- c("second order", "bicactor")
+
+mvl <- meval.table(ms, ns, scaled=T)
+mvl
+
+#copy table to clipboad and paste into excel
+#library(mvl)
+#write_clip(mvl)
 ```
+
+    ##              chisq.scaled df.scaled cmin/df cfi.scaled rmsea.scaled
+    ## second order       184.73        51    3.62       0.86         0.07
+    ## bicactor            93.89        42    2.24       0.94         0.05
+    ##              srmr_bentler
+    ## second order         0.07
+    ## bicactor             0.05
