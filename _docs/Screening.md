@@ -402,3 +402,9 @@ c <- data.frame(M = format(round(colMeans(cor.mat),2),nsmall=2), c)
 #library(clipr)
 write_clip(c)
 ```
+You get something linke this
+``` r
+library(DT)
+datatable(c)
+```
+![](/assets/images/cortab.png)
