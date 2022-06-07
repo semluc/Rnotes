@@ -20,8 +20,8 @@ source_url("https://lucasmaunz.org/download/meval.R")
 
 Alternatively: [Download](/download/meval.R) this script. 
   
-See [here](/docs/Screening/#correlation-table) how to use meval()  
-See [here](/docs/Screening/#correlation-table) how to use meval.table()
+See [here](/docs/CFA/#interpret-model-fit-quickly) how to use meval()  
+See [here](/docs/cfa/#easy-table-of-model-fits) how to use meval.table()
 
 
 

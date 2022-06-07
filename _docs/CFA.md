@@ -546,7 +546,7 @@ meval(fit.cfa.pers.bi)
     ## srmr_bentler      0.05      excellent
 
 ## Easy table of model fits
-With this meval.table function you can easily create model fit tables. As input define two vectors, one with models (fitted lavaan objects) and one with names.
+With this meval.table function you can easily create model fit tables. As input define two vectors, one with models (fitted lavaan objects) and one with n
 
 ``` r
 # easy table of model fits
@@ -559,13 +559,10 @@ mvl <- meval.table(ms, ns, scaled=T)
 mvl
 
 #copy table to clipboad and paste into excel
-#library(mvl)
+#library(clipr)
 #write_clip(mvl)
 ```
 
-    ##              chisq.scaled df.scaled cmin/df cfi.scaled rmsea.scaled
-    ## second order       184.73        51    3.62       0.86         0.07
-    ## bicactor            93.89        42    2.24       0.94         0.05
-    ##              srmr_bentler
-    ## second order         0.07
-    ## bicactor             0.05
+    ##              chisq.scaled df.scaled cmin/df cfi.scaled rmsea.scaled srmr_bentler
+    ## second order       184.73        51    3.62       0.86         0.07         0.07
+    ## bicactor            93.89        42    2.24       0.94         0.05         0.05
