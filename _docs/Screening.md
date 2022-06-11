@@ -187,7 +187,7 @@ Recode items:
 
 ``` r
 library(car)
-dat1$exp_content_r <- recode(dat1$exp_content, "1=0; 2=1; 3=2; 4=2")
+dat1$exp_content_r <- car::recode(dat1$exp_content, "1=0; 2=1; 3=2; 4=2")
 ```
 
 More logic is available here e.g.:
