@@ -389,11 +389,11 @@ c <- correlation_matrix(cor.mat, digits=2, use='lower', replace_diagonal=T, type
 # add alpha values on diagonal
 # order sensitive! o -> c -> e -> a -> n
   diag(c) <- c(
-    round(alpha(select(dat1,c("O1","O2","O3","O4","O5")),check.keys=TRUE)$total$std.alpha, 2),
-    round(alpha(select(dat1,c("C1","C2","C3","C4","C5")),check.keys=TRUE)$total$std.alpha, 2),
-    round(alpha(select(dat1,c("E1","E2","E3","E4","E5")),check.keys=TRUE)$total$std.alpha, 2),
-    round(alpha(select(dat1,c("A1","A2","A3","A4","A5")),check.keys=TRUE)$total$std.alpha, 2),
-    round(alpha(select(dat1,c("N1","N2","N3","N4","N5")),check.keys=TRUE)$total$std.alpha, 2)
+    round(psych::alpha(select(dat1,c("O1","O2","O3","O4","O5")),check.keys=TRUE)$total$std.alpha, 2),
+    round(psych::alpha(select(dat1,c("C1","C2","C3","C4","C5")),check.keys=TRUE)$total$std.alpha, 2),
+    round(psych::alpha(select(dat1,c("E1","E2","E3","E4","E5")),check.keys=TRUE)$total$std.alpha, 2),
+    round(psych::alpha(select(dat1,c("A1","A2","A3","A4","A5")),check.keys=TRUE)$total$std.alpha, 2),
+    round(psych::alpha(select(dat1,c("N1","N2","N3","N4","N5")),check.keys=TRUE)$total$std.alpha, 2)
   )
 #insert SD and M
 c <- data.frame(SD = format(round(sapply(cor.mat, sd, na.rm = TRUE),2),nsmall=2), c)
