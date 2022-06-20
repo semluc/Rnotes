@@ -25,7 +25,6 @@ nav_order: 1
 
 
 # Conferences
-- [tbd] EAWOP 2023: "The Influence of Authenticity on Self-Actualization: Examining Combined Effects of Authentic Leadership, Job Resources and Authenticity at Work"
-- [tbd] ÖGP 2022. "Der Einfluss von Arbeitsressourcen auf Authentizität und berufliche Selbstverwirklichung"
-- ICP 2021: "Occupational self-actualization through authenticity"
+- Maunz, L. & Glaser, J. (2021). Occupational self-actualization through authenticity. Oral presentation at the 32nd International Congress of Psychology (ICP), Prag, Czech Republic online (18th-23th July).
+- Maunz, L. A. & Glaser, J. (2022). Selbstverwirklichung durch Arbeit? Ein systematisches Review mit Meta-Analyse über 50 Jahre Forschung \[Self-actualization through work? A 50-Year Systematic Review and Meta-Analysis\]. Vortrag beim 15. DoktorandInnenworkshop der österreichischen Plattform für Arbeits-, Organisations- und Wirtschaftspsychologie, Linz, Österreich (09.–10. Juni)
 
