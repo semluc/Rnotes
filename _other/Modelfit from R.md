@@ -44,7 +44,7 @@ data.frame(estimate = lavaan::fitMeasures(fit)) %>%
 r1[,"estimate"] <- round(r1[,"estimate"], 2)
 #add second column with interpretation
 r1 <- cbind(r1,interpretation =
-  c("–","–","–",
+  c("/","/","/",
     if (r1["cmin/df",] <= 3){"excellent"
        } else if(r1["cmin/df",] > 3 & r1["cmin/df",] <= 5){"acceptable"
        } else if(r1["cmin/df",] > 5){"terrible"},
@@ -74,7 +74,7 @@ r2 <- rbind(
 r2[,"estimate"] <- round(r2[,"estimate"], 2)
 #add second column with interpretation
 r2 <- cbind(r2,interpretation =
-              c("–","–","–",
+              c("/","/","/",
                 if (r2["cmin/df",] <= 3){"excellent"
                 } else if(r2["cmin/df",] > 3 & r2["cmin/df",] <= 5){"acceptable"
                 } else if(r2["cmin/df",] > 5){"terrible"},
