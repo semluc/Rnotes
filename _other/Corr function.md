@@ -8,6 +8,9 @@ nav_order: 1
 
 ## correlation.R
 
+This function creates a publication-ready correlation table. If used correctly, the output displays a diagonally formatted correlation table with cronbachs alpha values, if desired. See [here](/docs/Screening/#correlation-table) how to use it.
+
+
 Basic R function to call:
   
 ``` r
@@ -17,9 +20,6 @@ source_url("https://lucasmaunz.org/download/correlation.R")
 
 Alternatively: [Download](/download/correlation.R) this script. 
   
-See [here](/docs/Screening/#correlation-table) how to use it.
-
-
 
 
 
