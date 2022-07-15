@@ -8,7 +8,7 @@ nav_order: 1
 
 ## correlation.R
 
-This function creates a publication-ready correlation table. If used correctly, the output displays a diagonally formatted correlation table with cronbachs alpha values, if desired. See [here](/docs/Screening/#correlation-table) how to use it.
+This function creates a publication-ready correlation table. If used correctly, the output displays a diagonally formatted correlation table with mean and standard deviation as the first rows and the cronbachs alpha values on the diagonal, if desired. See [here](/docs/Screening/#correlation-table) how to use it.
 
 
 Basic R function to call:
