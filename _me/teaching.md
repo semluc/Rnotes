@@ -5,6 +5,7 @@ nav_order: 3
 ---
 
 # Teaching
-  
-- Spring Term 2022: Seminar: Variations of positive leadership and their impact
-- Spring Term 2021: Seminar: Variations of positive leadership and their impact
+
+- Winter semester 2022/23: Human-oriented work, organizational, and personnel development [seminar]
+- Summer semester 2022: Variations of positive leadership and their impact [seminar]
+- Summer semester 2021: Variations of positive leadership and their impact [seminar]
