@@ -7,15 +7,14 @@ nav_order: 4
 # Tools
 
 ## Productivity
-- To take notes, I use [Obsidian](https://obsidian.md/). I also use obsidian for project management.
-- Recently, I made the switch from [Citavi]( https://www.citavi.com/) to [Zotero](https://www.zotero.org/).
-- For office tasks, I mostly use Microsoft office
-- I am quite comfortable using the Adobe Suite: Photoshop, Illustrator, Lightroom (however, I am not a professional)
+- [Obsidian](https://obsidian.md/) to take notes and project management
+- [Zotero](https://www.zotero.org/) to read an annotate papers
+- Microsoft office for office tasks
 
 ## Stats and Programming
-- I mostly use [R Statistical Computing](https://www.r-project.org/) to analyze my data. On this blog I post about my best practice for analyzing data in R
-- If necessary, I’m also comfortable using SPSS and AMOS
-- For coding I use Visual Studio Code and the Arduino IDE
+- [R Statistical Computing](https://www.r-project.org/) to analyze my data. On this blog I post about my best practice for analyzing data in R
+- I’m also comfortable using SPSS and AMOS but don't use them regularly
+- For coding I sometimes use Visual Studio Code and the Arduino IDE
 - Before I made the change to [Jekyll](https://jekyllrb.com/) I used [Wordpress]( https://wordpress.com/)
 
 ## Homebrew
