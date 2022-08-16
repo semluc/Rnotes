@@ -48,9 +48,9 @@ title: Home
     <div class="column">
         <h3>Interests</h3>
         <ul>
-            <li>Well-being</li>
-            <li>Motivation</li>
-            <li>Methods</li>
+            <li>Occupational well-being and motivation</li>
+            <li>Authenticity and self-actualization at work</li>
+            <li>All sorts of research methods</li>
         </ul> 
     </div>
     <div class="column">
