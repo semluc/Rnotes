@@ -42,15 +42,15 @@ title: Home
     Hi, my name is Lucas! <div style="margin-bottom:0.5em;"></div>
     I'm a research assistant and PhD student at the Department of Psychology at the University of Innsbruck, Austria. My Phd project focuses on self-actualization and authenticity in occupational settings—a topic that I explore empirically via quantitative and qualitative data. I am particularly interested in work-related predictors and outcomes of self-actualization and am currently working on a more modern conceptualization of self-actualization that can be applied to the workplace. 
     <div style="margin-bottom:0.5em;"></div>
-    I am a strong proponent of open and collaborative science. Next to applied psychology I very much interested in quantitative data analysis and data science in general. In my free time I like to tinker with hardware, software, and coding; I like to ride my road bike and play the piano.
+    I am a strong proponent of open and collaborative science. Next to applied psychology I very much interested in research methods. In my free time I like to tinker with hardware, software, and coding; I like to ride my road bike and play the piano.
     <br><br>
     <div class="row">
     <div class="column">
         <h3>Interests</h3>
         <ul>
-            <li>Occupational Health and Well-Being</li>
-            <li>Positive and Applied Psychology</li>
-            <li>Quantitative Data Analysis</li>
+            <li>Well-being</li>
+            <li>Motivation</li>
+            <li>Methods</li>
         </ul> 
     </div>
     <div class="column">
@@ -64,7 +64,7 @@ title: Home
 </td>
 <td style="background-color:#f7f7f7"> 
     <img src="/assets/images/profile/me.png" width="1000" height="1000" /> <br> <center><h2 style="font-size:100px;"> Lucas Maunz</h2> 
-    Research Assistant / PhD Candidate at University of Innsbruck <br>
+    Research Assistant and PhD Student at University of Innsbruck <br>
   <a href="https://www.researchgate.net/profile/Lucas-Maunz/" class="fab fa-researchgate fa-2x"></a>
   <a href="https://github.com/semluc/" class="fab fa-github fa-2x"></a>
   <a href="mailto:lucas.maunz@uibk.ac.at" class="fas fa-envelope fa-2x"></a>
