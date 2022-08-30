@@ -49,6 +49,13 @@ library(tidyverse)
 dat2 <- rename(dat, DyadTime = ï..DyadTime)
 ```
 
+# Replace in strings
+Sometimes people use "," instead of "." as decimal sign. We can use the sub function to change this and then change the str to numeric.
+``` r
+dat$dauers <- sub(',', '.', dat$dauers, fixed = TRUE)
+dat$dauers <- as.numeric(dat$dauers)
+```
+
 # Screening
 
 Screen the dataset for Stats, Freq, Graph, Cases, Missing:
