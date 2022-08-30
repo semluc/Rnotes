@@ -241,6 +241,14 @@ Aggregate variables per mean (or: median, sum, min, max):
 dat$Extra_total <- apply(dat[,c("Extra_1", "Extra_2", "Extra_3", "Extra_4")], 1, mean, na.rm = TRUE)
 ```
 
+Do the same thing with dplyr. This is better imo because you can do multiple vars at once
+``` r
+dat %>%
+  rowwise() %>%
+  mutate(Extra_total = mean(c(Extra_1, Extra_2, Extra_3, Extra_4))) %>%
+  mutate(Neuro_total = mean(c(Neuro_1, Neuro_2, Neuro_3, Neuro_4)))
+```
+
 # Calculate classes
 
 We want to divide age in 3 similar sized classes by 33% and 66%:
