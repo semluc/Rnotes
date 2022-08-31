@@ -50,7 +50,7 @@ title: Home
         <ul>
             <li>Occupational well-being and motivation</li>
             <li>Authenticity and self-actualization at work</li>
-            <li>All sorts of research methods</li>
+            <li>Research methods</li>
         </ul> 
     </div>
     <div class="column">
