@@ -151,6 +151,8 @@ freq(dat1$gender, order = "freq")
 ``` r
 #copy dataset with no missings
 dat.o <- na.omit(dat)
+#omit missing per var
+#df2 <- df[!is.na(df$x),]
 ```
 
 
