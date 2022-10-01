@@ -94,7 +94,7 @@ if (scaled) {
     t() %>%
     as.data.frame() %>%
     setNames(c("chisq.scaled", "df.scaled", "pvalue.scaled", "cmin/df" ,"cfi.scaled", "tli.scaled", "rmsea.scaled", "srmr_bentler")) %>%
-    select(, -pvalue.scaled, -tli.scaled)
+    dplyr::select(, -pvalue.scaled, -tli.scaled)
 }else {
   lapply(models, meval) %>%
     sapply(., function(x)x["regular"])  %>%
@@ -104,7 +104,7 @@ if (scaled) {
     t() %>%
     as.data.frame() %>%
     setNames(c("chisq", "df", "pvalue", "cmin/df" ,"cfi", "tli", "rmsea", "srmr")) %>%
-    select(, -pvalue, -tli)
+    dplyr::select(, -pvalue, -tli)
   }
 }
 
