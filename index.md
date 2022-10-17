@@ -63,7 +63,7 @@ title: Home
     </div> 
 </td>
 <td style="background-color:#f7f7f7"> 
-    <img src="/assets/images/profile/me.png" width="1000" height="1000" /> <br> <center><h2 style="font-size:100px;"> Lucas Maunz</h2> 
+    <img src="/assets/images/profile/me2.png" width="1000" height="1000" /> <br> <center><h2 style="font-size:100px;"> Lucas Maunz</h2> 
     Research Assistant and PhD Student at University of Innsbruck <br>
   <a href="https://www.researchgate.net/profile/Lucas-Maunz/" class="fab fa-researchgate fa-2x"></a>
   <a href="https://github.com/semluc/" class="fab fa-github fa-2x"></a>
