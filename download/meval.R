@@ -103,9 +103,8 @@ return(list("regular" = r1, "scaled" = r2))}
                     } else if(r1["srmr",] > .08 & r1["srmr",] <= .1){"acceptable"
                     } else if(r1["srmr",] > .1){"terrible"}))
     
-    return(list("regular" = r1))}
-  }
-}
+    return(list("regular" = r1))}}
+
    
 #------------------    
 #function to output models to talbe
