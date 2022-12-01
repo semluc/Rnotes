@@ -56,6 +56,29 @@ dat$dauers <- sub(',', '.', dat$dauers, fixed = TRUE)
 dat$dauers <- as.numeric(dat$dauers)
 ```
 
+# Create long format variables
+I regularly need to create some sort of id variables. 
+``` r
+#some basic long format stuff
+d <- d %>%
+  group_by(ID) %>%
+  mutate(time = row_number())
+```
+
+Or count how many cases per group or id.
+``` r
+#how many timepoints on average per participant?
+#library(psych)
+groupsize <- d %>%
+  group_by(ID)%>% 
+  count(ID)
+```
+
+If you have one object with baseline scores and want to match it to the long format df
+``` r
+d2 <- left_join(d, t, by = "ID")
+```
+
 # Screening
 
 Screen the dataset for Stats, Freq, Graph, Cases, Missing:
