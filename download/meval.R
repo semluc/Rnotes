@@ -1,12 +1,17 @@
 
 #function to evaluate model fit from lavaan object with easy interpretation
-meval <- function(fit) {
+#fit is a lavaan fit object
+#scaled requires MLM or MLR scaled estimators
+#if standard estimators are used, define scaled=FALSE
+meval <- function(fit, scaled=TRUE) {
 #packages
 if (!require("lavaan")) install.packages("lavaan")
 if (!require("dplyr")) install.packages("dplyr")
 require(lavaan)
 require(dplyr)
+is.logical(scaled)
   
+if (scaled) {
 #column regular fit estimate
 r1 <- rbind(
 data.frame(estimate = lavaan::fitMeasures(fit)) %>%
@@ -67,7 +72,39 @@ r2 <- cbind(r2,interpretation =
                 } else if(r2["srmr_bentler",] > .1){"terrible"}))
 
 #output
-return(list("regular" = r1, "scaled" = r2))
+return(list("regular" = r1, "scaled" = r2))}
+
+  else{
+    r1 <- rbind(
+      data.frame(estimate = lavaan::fitMeasures(fit)) %>%
+        subset(., rownames(.) %in% c("chisq","df", "pvalue")) %>%
+        rbind(., "cmin/df" = .["chisq",]/.["df",]), 
+      data.frame(estimate = lavaan::fitMeasures(fit)) %>%
+        subset(., rownames(.) %in% c("cfi","tli", "rmsea", "srmr"))
+    )
+    #round
+    r1[,"estimate"] <- round(r1[,"estimate"], 2)
+    #add second column with interpretation
+    r1 <- cbind(r1,interpretation =
+                  c("/","/","/",
+                    if (r1["cmin/df",] <= 3){"excellent"
+                    } else if(r1["cmin/df",] > 3 & r1["cmin/df",] <= 5){"acceptable"
+                    } else if(r1["cmin/df",] > 5){"terrible"},
+                    if (r1["cfi",] >= .95){"excellent"
+                    } else if(r1["cfi",] < .95 & r1["cfi",] >= .90){"acceptable"
+                    } else if(r1["cfi",] < .90){"terrible"},
+                    if (r1["tli",] >= .95){"excellent"
+                    } else if(r1["tli",] < .95 & r1["tli",] >= .90){"acceptable"
+                    } else if(r1["tli",] < .90){"terrible"},
+                    if (r1["rmsea",] <= .06){"excellent"
+                    } else if(r1["rmsea",] > .06 & r1["rmsea",] <= .08){"acceptable"
+                    } else if(r1["rmsea",] > .08){"terrible"}, 
+                    if (r1["srmr",] <= .08){"excellent"
+                    } else if(r1["srmr",] > .08 & r1["srmr",] <= .1){"acceptable"
+                    } else if(r1["srmr",] > .1){"terrible"}))
+    
+    return(list("regular" = r1))}
+  }
 }
    
 #------------------    
