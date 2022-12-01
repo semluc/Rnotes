@@ -566,3 +566,33 @@ mvl
     ##              chisq.scaled df.scaled cmin/df cfi.scaled rmsea.scaled srmr_bentler
     ## second order       184.73        51    3.62       0.86         0.07         0.07
     ## bicactor            93.89        42    2.24       0.94         0.05         0.05
+
+# Multilevel CFA (MCFA)
+This is basically the same as a normal CFA but we define levels in lavaan. Here is a quick example:
+
+``` r
+#define the model
+mcfa <- '
+level: 1
+  fx =~ x1 + x2 + x3
+  fy =~ y1 + y2 + y3
+level: 2
+  fx2 =~ x1 + x2 + x3
+  fy2 =~ y1 + y2 + y3
+'
+fit <- cfa(mcfa, data = Demo.twolevel, cluster = "cluster")
+meval(fit, scaled=F)
+```
+
+    ## $regular
+    ##         estimate interpretation
+    ## chisq       3.22              /
+    ## df         16.00              /
+    ## pvalue      1.00              /
+    ## cmin/df     0.20      excellent
+    ## cfi         1.00      excellent
+    ## tli         1.01      excellent
+    ## rmsea       0.00      excellent
+    ## srmr        0.19       terrible
+
+![](/assets/images/CFA/figure-markdown_github/mcfa.png)
