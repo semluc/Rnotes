@@ -155,6 +155,13 @@ dat.o <- na.omit(dat)
 #df2 <- df[!is.na(df$x),]
 ```
 
+``` r
+#a more detailed solution. 
+#filters out missings in x AND y
+#can use !if_any for x OR y
+df <- df %>% 
+  filter(!if_all(c(x, y), is.na))
+```
 
 ## Cross-Table
 
