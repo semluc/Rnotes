@@ -30,7 +30,7 @@ See [here](/docs/cfa/#easy-table-of-model-fits) how to use meval.table()
 #fit is a lavaan fit object
 #scaled requires MLM or MLR scaled estimators
 #if standard estimators are used, define scaled=FALSE
-meval <- function(fit, scaled=TRUE) {
+meval <- function(fit, scaled=FALSE) {
 #packages
 if (!require("lavaan")) install.packages("lavaan")
 if (!require("dplyr")) install.packages("dplyr")
