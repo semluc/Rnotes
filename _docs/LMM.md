@@ -23,15 +23,156 @@ library(lme4)
 library(tidyverse)
 library(afex)
 library(summarytools)
-library(ggplot2)
 library(performance)
 library(MASS)
 library(DescTools)
 library(sjPlot)
 ```
 
+# Basic example
+## Intercept-Only Model
+This is a df with students nested within classrooms
+Intercept only model estimates the grand mean of the response across all
+occasions and individuals. This is the baseline / null model.
 
-# Study design
+``` {r}
+m0 <- lmer(popular ~ 1 + (1 | l2id), data=df)
+summary(m0)
+```
+
+    ## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+    ## lmerModLmerTest]
+    ## Formula: popular ~ 1 + (1 | l2id)
+    ##    Data: df
+    ## 
+    ## REML criterion at convergence: 6330.5
+    ## 
+    ## Scaled residuals: 
+    ##     Min      1Q  Median      3Q     Max 
+    ## -3.5655 -0.6975  0.0020  0.6758  3.3175 
+    ## 
+    ## Random effects:
+    ##  Groups   Name        Variance Std.Dev.
+    ##  l2id     (Intercept) 0.7021   0.8379  
+    ##  Residual             1.2218   1.1053  
+    ## Number of obs: 2000, groups:  l2id, 100
+    ## 
+    ## Fixed effects:
+    ##             Estimate Std. Error       df t value Pr(>|t|)    
+    ## (Intercept)  5.07786    0.08739 98.90973    58.1   <2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+5.07786\*\*\* sig. random intercept.  
+This refers to the expected value (i.e., average) popularity in students
+in all classrooms (classroom grand mean for popularity).  
+0.7021 is the classroom variation in popularity.  
+1.2218 is the individual level variation in popularity.  
+<br> Note. I am using lmeTest which uses denominator degrees of freedom.
+P values in multi level modeling is questionable. Other p values are
+possible. e.g., with the “KR” Kenward-Roger approximation for degrees of
+freedom. This can be done with the library(afex)
+
+## ICC
+``` {r}
+performance::icc(m0)
+```
+
+    ## # Intraclass Correlation Coefficient
+    ## 
+    ##     Adjusted ICC: 0.365
+    ##   Unadjusted ICC: 0.365
+
+We can also calculate icc by hand:
+``` {r}
+0.7021 /(1.2218 + 0.7021)
+```
+
+    ## [1] 0.3649358
+
+This icc justifies investigating multi-level modeling. This means that
+36% of the variation in the popularity comes from the variation of
+classrooms.  
+<br> This means that 64% is due to individual characteristics of
+students.  
+Another way to think about this is that if you randomly select two
+students from the same classroom the expected correlation in their
+popularity rating is 36%!  
+<br> A different way is to look at ranova from the lmerTest package and
+see if p is significant.  
+Here p is sig. indicating sig. variation of intercepts, justifying
+clustering with mlm.  
+The intercepts are unconditional classroom means here
+
+``` {r}
+ranova(m0)
+```
+
+    ## ANOVA-like table for random-effects: Single term deletions
+    ## 
+    ## Model:
+    ## popular ~ (1 | l2id)
+    ##            npar  logLik    AIC LRT Df Pr(>Chisq)    
+    ## <none>        3 -3165.3 6336.5                      
+    ## (1 | l2id)    2 -3487.8 6979.5 645  1  < 2.2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+# Add some predictors
+
+``` {r}
+m1 <- lmer(popular ~ 1 + texp + sex + (1 | l2id), data=df)
+summary(m1)
+```
+
+    ## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+    ## lmerModLmerTest]
+    ## Formula: popular ~ 1 + texp + sex + (1 | l2id)
+    ##    Data: df
+    ## 
+    ## REML criterion at convergence: 5544
+    ## 
+    ## Scaled residuals: 
+    ##     Min      1Q  Median      3Q     Max 
+    ## -3.6546 -0.6520  0.0012  0.6721  3.1327 
+    ## 
+    ## Random effects:
+    ##  Groups   Name        Variance Std.Dev.
+    ##  l2id     (Intercept) 0.3606   0.6005  
+    ##  Residual             0.8307   0.9114  
+    ## Number of obs: 2000, groups:  l2id, 100
+    ## 
+    ## Fixed effects:
+    ##              Estimate Std. Error        df t value Pr(>|t|)    
+    ## (Intercept) 3.621e+00  1.530e-01 1.004e+02  23.666  < 2e-16 ***
+    ## texp        5.406e-02  9.655e-03 9.774e+01   5.599 1.98e-07 ***
+    ## sex         1.351e+00  4.395e-02 1.957e+03  30.732  < 2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Correlation of Fixed Effects:
+    ##      (Intr) texp  
+    ## texp -0.898       
+    ## sex  -0.122 -0.026
+
+``` {r}
+anova(m0,m1)
+```
+
+    ## refitting model(s) with ML (instead of REML)
+
+    ## Data: df
+    ## Models:
+    ## m0: popular ~ 1 + (1 | l2id)
+    ## m1: popular ~ 1 + texp + sex + (1 | l2id)
+    ##    npar    AIC    BIC  logLik deviance  Chisq Df Pr(>Chisq)    
+    ## m0    3 6333.5 6350.3 -3163.7   6327.5                         
+    ## m1    5 5538.5 5566.5 -2764.2   5528.5 799.01  2  < 2.2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+# Second example
+## Study design
 
 The example data is from (Brown & Strand, 2019) and I heavily follow
 instructions form Schad (2019) and Brown (2021).  
@@ -48,19 +189,19 @@ simultaneously performing an unrelated response time task in the tactile
 modality. <br> Participants identified speech in both an easy (0) and a
 hard (1) level of background noise.
 
-# Describe hypotheses
+### Describe hypotheses
 
 h1: Modality affects response time. h2: the effect of modality on
 response time depends on (i.e., interacts with) the level of the
 background noise
 
-# Import dataset
+## Import dataset
 
 ``` r
 dat <- read_csv("rt_dummy_data_interaction.csv")
 ```
 
-# Screening
+## Screening
 
 ``` r
 head(dat)
@@ -81,11 +222,11 @@ the dataset is already in the desired format: “unaggregated long format”
 each of the first six rows corresponds to a different word (stim)
 presented to the same participant (PID)
 
-# H1: X on Y
+## H1: X on Y
 
 Modality affects response time.
 
-## Outlier detection
+### Outlier detection
 
 ``` r
 plot(density(dat$RT))
@@ -133,7 +274,7 @@ check_outliers(m1)
 
 -\>no outliers
 
-## Descriptive stats
+### Descriptive stats
 
 ``` r
 ggplot(data=dat, aes(x=modality, y=RT)) + geom_boxplot()
@@ -186,7 +327,7 @@ dfSummary(dat)
 
 -\>no missings, we already see RT might not be non-normaly distributed
 
-## Normality test
+### Normality test
 
 ``` r
 boxcox(m1)
@@ -232,14 +373,14 @@ is quite robust to violations of the normality assumption (Brown 2021),
 so I will continue without transformation.. Still, an argument can be
 made that this is incorrect
 
-## Define contrasts
+### Define contrasts
 
 treatment-coding / dummy coding will be used. the *audio-only condition*
 is the *reference level*; coded as 0, and the audiovisual condition is
 coded as 1. This has an effect on the intercept of the regression
 models.
 
-## What does this mean for later interpretations?
+### What does this mean for later interpretations?
 
 The regressions intercept of the LMM later represents the estimated mean
 response time in the audio-only condition (when modality = 0). <br> The
@@ -248,7 +389,7 @@ mean response time changes in the audiovisual condition (when modality =
 1). <br> Other contrasts will not change the fit of the model but i
 change the interpretation of the regression coefficients.
 
-## Visualise between participant
+### Visualise between participant
 
 ``` r
 t_dat <- plyr::ddply(dat, c("modality","PID"), summarize, RT=mean(RT))
@@ -262,7 +403,7 @@ ggplot(data=t_dat, aes(x=modality, y=RT, group=1)) +
 
 ![](/assets/images/LMM/unnamed-chunk-11-1.png)
 
-## Define & run LMM models
+### Define & run LMM models
 
 Following Brown I calculate by-participant and by-item random intercepts
 and slopes! The reason is that both participants and words might differ
@@ -283,7 +424,7 @@ in the model specification.
 dat$modality <- ifelse(dat$modality == "Audio-only", 0, 1)
 ```
 
-## Build full model
+### Build full model
 
 ``` r
 m2 <- lmer(RT ~ 1 + modality + (1 + modality|PID) + (1 + modality|stim), data = dat)
@@ -294,7 +435,7 @@ m2 <- lmer(RT ~ 1 + modality + (1 + modality|PID) + (1 + modality|stim), data = 
 
 model failed to converge
 
-## Deal with non converging models
+### Deal with non converging models
 
 now I could calculate reduced “maximal models” use Principal Component
 Analysis etc. One option e.g, is to force the correlations among random
@@ -424,7 +565,7 @@ requiring any derivatives of the objective.
 
 lets try with optimizer = “bobyqa”
 
-## Compare full model with nested model
+### Compare full model with nested model
 
 ``` r
 m3 <- lmer(RT ~ 1 + modality + 
@@ -445,7 +586,7 @@ m3_re <- lmer(RT ~ 1 + (1 + modality|stim) + (1 + modality|PID),
                        control = lmerControl(optimizer = "bobyqa"))
 ```
 
-## Compare nested models
+### Compare nested models
 
 ``` r
 anova(m3_re, m3)
@@ -468,7 +609,7 @@ The small p value in the Pr(\>Chisq) column indicates that the model
 including the modality effect provides a better fit for the data than
 the model without it; thus, the modality effect is significant.
 
-## Bonus: to speed up likelihood-ratio tests
+### Bonus: to speed up likelihood-ratio tests
 
 These log likelihood-ratio tests are tedious with multiple fixed
 effects.  
@@ -511,7 +652,7 @@ it automatically fits multiple lmer models and compares them with
 likelihood-ratio tests you get the same results as before X2=32.385 df=1
 p=1.264e-08
 
-## Investigate efects
+### Investigate efects
 
 ``` r
 summary(m3)
@@ -580,7 +721,7 @@ describeBy(dat$RT, dat$modality)
     ##      se
     ## X1 3.01
 
-## Plot effects H1
+### Plot effects H1
 
 I only have 1 fixed effect so…
 
@@ -601,7 +742,7 @@ sjPlot:: tab_model(m3)
 ->this will give a nice table
 
 
-## Describe results
+### Describe results
 
 I will copy the results section from Brown(2021)
 
@@ -612,9 +753,9 @@ I will copy the results section from Brown(2021)
 > > ms slower in the audiovisual relative to the audio-only condition(β
 > > = 83.18, SE = 12.58, t = 6.62).
 
-# H2: Interaction
+## H2: Interaction
 
-## Define and run model
+### Define and run model
 
 condition easy (coded 0) and a hard (coded 1) level of background noise
 
@@ -676,7 +817,7 @@ intercept represents the estimated response time when all other
 predictors are set to 0. participants have 998.824 responsetime in easy
 condition, audio only <br>
 
-## Simple effects
+### Simple effects
 
 modality coeff = response times are on average 98.510 ms slower in the
 audio-visual relative to the audio-only condition in the easy listening
@@ -717,14 +858,14 @@ tab_model(m4, pred.labels=labels,
 <br> <br> <br> Diagramme kann man auch recht anschaulich und einfach in
 Excel erstellen ![](/assets/images/LMM/interaction.png)
 
-## Interpretation
+### Interpretation
 
 There is a significant interaction between modality and background
 noise. The negative interaction term (β = -29.53, SE = 6.755, t =
 -4.372, p \< .001) shows that the modality slope is 29.53 ms lower (less
 steep) when the SNR is hard.
 
-# Three way interaction
+## Three way interaction
 
 I created a new variable that counts word length.
 
@@ -753,11 +894,11 @@ freq(dat$stiml)
     ##        <NA>       0                               0.00         100.00
     ##       Total   21679    100.00         100.00    100.00         100.00
 
-## Hypothesis
+### Hypothesis
 
 There is a three way interaction between modality, stimgrp, and SNR
 
-## Build lm first
+### Build lm first
 
 ``` r
 m5 <- lm(RT ~ modality * stiml * SNR, data = dat)
@@ -798,7 +939,7 @@ summary(m5)
 -\>no sig. interaction modality:stiml; stiml:SNR, no simple effect of
 stiml
 
-## Random effect PID
+### Random effect PID
 
 ``` r
 m6 <- lmer(RT ~ 1 + modality * SNR * stiml + (1 | PID), data=dat)
