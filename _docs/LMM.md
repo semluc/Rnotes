@@ -35,10 +35,11 @@ This is a df with students nested within classrooms
 Intercept only model estimates the grand mean of the response across all
 occasions and individuals. This is the baseline / null model.
 
-``` {r}
+``` r
 m0 <- lmer(popular ~ 1 + (1 | l2id), data=df)
 summary(m0)
 ```
+
 
     ## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
     ## lmerModLmerTest]
@@ -74,7 +75,7 @@ possible. e.g., with the “KR” Kenward-Roger approximation for degrees of
 freedom. This can be done with the library(afex)
 
 ## ICC
-``` {r}
+``` r
 performance::icc(m0)
 ```
 
@@ -84,7 +85,7 @@ performance::icc(m0)
     ##   Unadjusted ICC: 0.365
 
 We can also calculate icc by hand:
-``` {r}
+``` r
 0.7021 /(1.2218 + 0.7021)
 ```
 
@@ -104,7 +105,7 @@ Here p is sig. indicating sig. variation of intercepts, justifying
 clustering with mlm.  
 The intercepts are unconditional classroom means here
 
-``` {r}
+``` r
 ranova(m0)
 ```
 
@@ -120,7 +121,7 @@ ranova(m0)
 
 ## Add some predictors
 
-``` {r}
+``` r
 m1 <- lmer(popular ~ 1 + texp + sex + (1 | l2id), data=df)
 summary(m1)
 ```
@@ -155,7 +156,7 @@ summary(m1)
     ## texp -0.898       
     ## sex  -0.122 -0.026
 
-``` {r}
+``` r
 anova(m0,m1)
 ```
 
