@@ -142,7 +142,7 @@ meval.table <- function(models, names, scaled=FALSE){
 is.logical(scaled)
 
 if (scaled) {
-  lapply(models, meval) %>%
+  lapply(models, meval, scaled=T) %>%
     sapply(., function(x)x["scaled"])  %>%
     sapply(., function(x)x["estimate"]) %>%
     data.frame(.) %>%

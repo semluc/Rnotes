@@ -122,7 +122,7 @@ require(lavaan)
 require(dplyr)
   
 if (scaled) {
-  lapply(models, meval) %>%
+  lapply(models, meval, scaled=T) %>%
     sapply(., function(x)x["scaled"])  %>%
     sapply(., function(x)x["estimate"]) %>%
     data.frame(.) %>%
