@@ -40,5 +40,5 @@ University of Innsbruck Early Stage Funding: 4.518,00 EUR
 - PI: L. A. Maunz
 
 # Just a test
-Maunz, L. A. & Glaser, J. (2022, July 11–13). *Rethinking self-actualization*
-<p style="padding-left: 2em; text-indent: -2em;">(a) in relation to an exempt payment service provider mentioned in subsection (1)(a), means any of the following payment services:</p>
+<p style="padding-left: 2em; text-indent: -2em;">Maunz, L. A. & Glaser, J. (2022). Does being authentic promote self-actualization at Work? Examining the links between work-related resources, authenticity at work, and occupational self-actualization. *Journal of Business and Psychology*. [https://doi.org/10.1007/s10869-022-09815-1](https://doi.org/10.1007/s10869-022-09815-1)</p>
+<p style="padding-left: 2em; text-indent: -2em;">Thal, S. B., Maunz, L. A., Quested, E., Bright, S. J., Myers, B., & Ntoumanis, N. (2022). Behavior change techniques in physical activity interventions for adults with substance use disorders: A systematic review. *Psychology of Addictive Behaviors*. [https://doi.org/10.1037/adb0000842](https://doi.org/10.1037/adb0000842)</p>
