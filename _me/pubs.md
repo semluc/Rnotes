@@ -34,6 +34,7 @@ nav_order: 1
 
 
 # Funding
+{: .fh-default }
 University of Innsbruck Early Stage Funding: 4.518,00 EUR
 {: .lh-0 }
 - Project name: *Authentic Leadership, Follower' Motivation, Exhaustion, and Psychological Need Fulfillment: A Mixed-Methods Study*
