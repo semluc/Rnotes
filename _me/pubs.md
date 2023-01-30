@@ -17,7 +17,7 @@ nav_order: 1
 </details>
 
 
-# Peer reviewed journal articles
+# Peer-Reviewed Journal Articles
 <p style="padding-left: 2em; text-indent: -2em;margin-bottom: 0.5em;margin-top: 0.5em;">Maunz, L. A. & Glaser, J. (2022). Does being authentic promote self-actualization at Work? Examining the links between work-related resources, authenticity at work, and occupational self-actualization. <i>Journal of Business and Psychology</i>. <a href="https://doi.org/10.1007/s10869-022-09815-1">https://doi.org/10.1007/s10869-022-09815-1</a></p>
 <p style="padding-left: 2em; text-indent: -2em;margin-bottom: 0.5em;margin-top: 0.5em;">Thal, S. B., Maunz, L. A., Quested, E., Bright, S. J., Myers, B., & Ntoumanis, N. (2022). Behavior change techniques in physical activity interventions for adults with substance use disorders: A systematic review. <i>Psychology of Addictive Behaviors</i>. 
 <a href="https://doi.org/10.1037/adb0000842">https://doi.org/10.1037/adb0000842</a></p>
