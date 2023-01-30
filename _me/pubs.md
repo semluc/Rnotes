@@ -24,8 +24,8 @@ nav_order: 1
 
 # Conferences and Presentations
 - Glaser, J. & Maunz, L. A. (accepted, tbd 2023, May 24–27). Basic psychological needs, meaning in work and burnout: A three-wave study on their relationships and dynamics [Oral presentation]. In J. Hakanen (Chair), *Symposium on psychological need fulfillment, meaning in work, and burnout* [Symposium]. 21st European Work and Organizational Psychology (EAWOP) Congress, Katowice, Poland.
-- Maunz, L. A., Schoofs, L., Glaser, J. (accepted, tbd 2023, May 24–27). *Authentic leadership, authentic followership, need satisfaction, and self-actualization: A multi-level study* [Oral presentation]. 21st European Work and Organizational Psychology (EAWOP) Congress, Katowice, Poland.
-- Maunz, L. A. & Glaser, J. (accepted, tbd 2023, May 24–27). *Meta-analytic relations of self-actualization at work: An exploratory mapping of the literature* [Poster presentation]. 21st European Work and Organizational Psychology (EAWOP) Congress, Katowice, Poland.
+- Maunz, L. A., Schoofs, L., Glaser, J. (accepted, tbd 2023, May 24–27). *Authentic leadership, authentic followership, need satisfaction, and self-actualization at work: A multi-level study* [Oral presentation]. 21st European Work and Organizational Psychology (EAWOP) Congress, Katowice, Poland.
+- Maunz, L. A. & Glaser, J. (accepted, tbd 2023, May 24–27). *Self-actualization: A systematic review and meta-analysis of work-related findings* [Poster presentation]. 21st European Work and Organizational Psychology (EAWOP) Congress, Katowice, Poland.
 - Maunz, L. A. (2023, January 24). *The impact of authentic leadership on self-actualization at work: A multi-study perspective* [Invited presentation]. L&M Research Seminar, Amsterdam, Netherlands. [https://abs.uva.nl/content/events/leadership--management/01-2023/lm-research-seminar-lucas-maunz-university-of-innsbruck.html](https://abs.uva.nl/content/events/leadership--management/01-2023/lm-research-seminar-lucas-maunz-university-of-innsbruck.html)
 - Maunz, L. A. & Glaser, J. (2022, September 4–7). *Der Einfluss von Arbeitsressourcen auf Authentizität und berufliche Selbstverwirklichung* [The influence of work resources on authenticity and professional self-actualization] [Conference presentation]. 14. Tagung der Österreichischen Gesellschaft für Psychologie, Klagenfurt, Österreich.
 - Maunz, L. A. & Glaser, J. (2022, July 11–13). *Rethinking self-actualization at work: Critical suggestions for a redefinition* [Poster Session]. International Conference on Critical and Radical Humanist Work and Organizational Psychology, Innsbruck, Österreich.
@@ -38,3 +38,7 @@ University of Innsbruck Early Stage Funding: 4.518,00 EUR
 {: .mb-0 }
 - Project name: *Authentic Leadership, Follower' Motivation, Exhaustion, and Psychological Need Fulfillment: A Mixed-Methods Study*
 - PI: L. A. Maunz
+
+# Just a test
+Maunz, L. A. & Glaser, J. (2022, July 11–13). *Rethinking self-actualization*
+<p style="padding-left: 2em; text-indent: -2em;">(a) in relation to an exempt payment service provider mentioned in subsection (1)(a), means any of the following payment services:</p>
