@@ -18,11 +18,13 @@ nav_order: 1
 
 
 # Peer reviewed journal articles
+
 - Maunz, L. A. & Glaser, J. (2022). Does being authentic promote self-actualization at Work? Examining the links between work-related resources, authenticity at work, and occupational self-actualization. *Journal of Business and Psychology*. [https://doi.org/10.1007/s10869-022-09815-1](https://doi.org/10.1007/s10869-022-09815-1)
 - Thal, S. B., Maunz, L. A., Quested, E., Bright, S. J., Myers, B., & Ntoumanis, N. (2022). Behavior change techniques in physical activity interventions for adults with substance use disorders: A systematic review. *Psychology of Addictive Behaviors*. [https://doi.org/10.1037/adb0000842](https://doi.org/10.1037/adb0000842)
 
 
 # Conferences and Presentations
+
 - Glaser, J. & Maunz, L. A. (accepted, tbd 2023, May 24–27). Basic psychological needs, meaning in work and burnout: A three-wave study on their relationships and dynamics [Oral presentation]. In J. Hakanen (Chair), *Symposium on psychological need fulfillment, meaning in work, and burnout* [Symposium]. 21st European Work and Organizational Psychology (EAWOP) Congress, Katowice, Poland.
 - Maunz, L. A., Schoofs, L., Glaser, J. (accepted, tbd 2023, May 24–27). *Authentic leadership, authentic followership, need satisfaction, and self-actualization: A multi-level study* [Oral presentation]. 21st European Work and Organizational Psychology (EAWOP) Congress, Katowice, Poland.
 - Maunz, L. A. & Glaser, J. (accepted, tbd 2023, May 24–27). *Meta-analytic relations of self-actualization at work: An exploratory mapping of the literature* [Poster presentation]. 21st European Work and Organizational Psychology (EAWOP) Congress, Katowice, Poland.
@@ -34,7 +36,7 @@ nav_order: 1
 
 
 # Funding
-{: .fh-default }
+
 University of Innsbruck Early Stage Funding: 4.518,00 EUR
 {: .lh-0 }
 - Project name: *Authentic Leadership, Follower' Motivation, Exhaustion, and Psychological Need Fulfillment: A Mixed-Methods Study*
