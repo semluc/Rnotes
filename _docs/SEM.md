@@ -332,7 +332,7 @@ summary(fit2, fit.measures=T, standardized=T, rsquare=T)
     ##     ag         (b)    0.005    0.064    0.071    0.943    0.005    0.005
 
 
-# Interaction effects: Moderation
+# Interaction effects: "Moderation"
 
 Basic interaction term with “:” in lavaan. But it only works with
 manifest variables. You could also do a quick lm model with m <- lm(y ~ r * s, data=d)
