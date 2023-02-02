@@ -612,7 +612,7 @@ semPaths(fit, style = "lisrel", whatLabels= "std", nCharNodes = 0, edge.label.ce
 ## Plot the interaction
 
 Find slopes for plot interaction via probe function.  
-USE differnt probe functions for two and tree way moderation, and different centering techniques!!  
+USE differnt probe functions for two and tree way interaction, and different centering techniques!!  
 You can do more interaction values valProbe = c(-3,0,3…)). Sufficient to do 3 simple slopes at the 1 SD below the mean of var (−1), the mean of var (0), and 1 SD above the mean of var (1).
 
 ``` r
