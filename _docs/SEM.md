@@ -635,3 +635,44 @@ Main and interaction effects are significant. Higher test value -\>
 lower fear appeal; More sources of teacher stress -\> higher fear
 appeal; Interaction: test value reduces the negative positive effect of
 sources on fear.
+
+# Test multiple models at once
+This is a little example to specify a model and then change the name of the predictor  then test each model individually.
+
+``` r
+library(lavaan)
+#create random dataset
+x <- sample(0:10, 1000, rep = TRUE)
+y <- sample(0:10, 1000, rep = TRUE)
+x2<- sample(0:10, 1000, rep = TRUE)
+x3<- sample(0:10, 1000, rep = TRUE)
+f <- data.frame(x,x2,x3,m1,m2,y)
+
+#this is the model, I want to iterate on
+model <- 'y ~ pred'
+
+#these are the x vars I want to test as predictors
+preds <- c("x", "x2", "x3")
+#function to replace the word pred with list in preds
+fx <- function(x) {
+  model <- str_replace(model, "pred", x)
+  return(model)
+}
+#this generates a list of  models for all preds
+models <- lapply(preds, FUN = fx)
+
+
+#this runs every model and stores them in the object fit
+fit <- list()
+for(i in seq_along(models)) {
+  fit[[i]] <- sem(models[[i]], f)
+}
+#rename list to predictors
+names(fit) <- preds
+#move to global vars
+list2env(fit, globalenv())
+
+#sumamry(x)
+#sumamry(x2)
+#sumamry(x3)
+```
