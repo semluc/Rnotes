@@ -636,7 +636,7 @@ lower fear appeal; More sources of teacher stress -\> higher fear
 appeal; Interaction: test value reduces the negative positive effect of
 sources on fear.
 
-# Test multiple models at once
+# Test multiple models in a row
 This is a little example to specify a model and then change the name of the predictor  then test each model individually.
 
 ``` r
@@ -646,7 +646,7 @@ x <- sample(0:10, 1000, rep = TRUE)
 y <- sample(0:10, 1000, rep = TRUE)
 x2<- sample(0:10, 1000, rep = TRUE)
 x3<- sample(0:10, 1000, rep = TRUE)
-f <- data.frame(x,x2,x3,m1,m2,y)
+f <- data.frame(x,x2,x3,y)
 
 #this is the model, I want to iterate on
 model <- 'y ~ pred'
