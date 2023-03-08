@@ -661,7 +661,6 @@ fx <- function(x) {
 #this generates a list of  models for all preds
 models <- lapply(preds, FUN = fx)
 
-
 #this runs every model and stores them in the object fit
 fit <- list()
 for(i in seq_along(models)) {
