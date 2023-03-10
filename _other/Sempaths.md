@@ -57,6 +57,13 @@ lmt <- layout_matrix(al = c(2, 1),
                      btl = c(3, 3))
                      
 # plot the model
-semPaths(test, whatLabels="std", style="ram", residuals=FALSE, label.scale=TRUE,
+s <- semPaths(test, whatLabels="std", style="ram", residuals=FALSE, label.scale=TRUE,
          edge.label.cex=2, rotation=2, layout=lmt, edge.label.position=0.45)
+```
+
+Also, you can see sig. signs by
+
+``` r
+s2 <- mark_sig(s, test)
+plot(s2)
 ```
