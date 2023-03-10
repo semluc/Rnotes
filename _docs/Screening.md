@@ -21,12 +21,15 @@ nav_order: 1
 I use these libraries:
 
 ``` r
-#import libraries
-library(psych)
-library(psychTools)
-library(clipr)
-library(car)
-library(haven)
+#import libraries and attach libs
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load(psych, psychTools, clipr, sjPlot, car, haven)
+#alternatively
+#library(psych)
+#library(psychTools)
+#library(clipr)
+#library(car)
+#library(haven)
 ```
 
 Import our datasets:
