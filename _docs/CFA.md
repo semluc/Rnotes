@@ -319,7 +319,9 @@ inter-factor correlations!
 
 ``` r
 library(semTools)
-semTools::reliability(fit.cfa.pers1)
+#semTools::reliability(fit.cfa.pers1)
+# this is the updated command
+compRelSEM(fit.cfa.pers1, higher = "pers")
 ```
 
     ##               op        ag        ne
