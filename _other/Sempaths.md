@@ -3,7 +3,7 @@ layout: default
 title: Semplot
 nav_order: 3
 ---
-
+# Hard mode
 First do a normal plot, then one with nodeLabels then order vars in a grid and display with that layout
 
 Step 1:
