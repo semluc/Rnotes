@@ -61,9 +61,14 @@ s <- semPaths(test, whatLabels="std", style="ram", residuals=FALSE, label.scale=
          edge.label.cex=2, rotation=2, layout=lmt, edge.label.position=0.45)
 ```
 
-Also, you can see sig. signs by
+## Add significance signs
+Also, you can add sig. signs which is very helpful.
 
 ``` r
-s2 <- mark_sig(s, test)
+# use these signs
+alsi <- c(`†` = 0.1, `*` = 0.05, `**` = 0.01, `***` = 0.001)
+
+# update the plot
+s2 <- mark_sig(s, test, alphas = alsi)
 plot(s2)
 ```
