@@ -675,3 +675,37 @@ list2env(fit, globalenv())
 #sumamry(x2)
 #sumamry(x3)
 ```
+
+In this example, I change "pred" and "outcome" to generate 15 models
+``` r
+# These are the x vars I want to test as predictors
+preds <- c("auton", "compe", "relat")
+# These are the y vars I want to test as outcomes
+outs <- c("bat", "bat_exhaus", "bat_psydis", "bat_emocont", "bat_cogcont")
+# In total this creates 15 models, name the models
+mnames <- c(c(paste0(preds,"-", outs[1])), c(paste0(preds,"-", outs[2])), c(paste0(preds,"-", outs[3])),
+            c(paste0(preds,"-", outs[4])),c(paste0(preds,"-", outs[5])))
+
+# Function to replace the word "pred" with list in relats
+fx <- function(x) {
+  model <- str_replace_all(model, "pred", x)
+  return(model)
+}
+
+# This generates a list of  models for all preds
+models <- lapply(preds, FUN = fx)
+
+# Generate a model for each outcome
+fy <- function(x) {
+  models <- str_replace_all(models, "out", x)
+  return(models)
+}
+models <- lapply(outs, FUN = fy)
+models <- unlist(models2)
+
+# Name modelsin the list
+names(models) <- mnames
+
+# Generate a object for each list element in the global env
+list2env(models, globalenv())
+```
