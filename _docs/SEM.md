@@ -683,8 +683,8 @@ preds <- c("auton", "compe", "relat")
 # These are the y vars I want to test as outcomes
 outs <- c("bat", "bat_exhaus", "bat_psydis", "bat_emocont", "bat_cogcont")
 # In total this creates 15 models, name the models
-mnames <- c(c(paste0(preds,"-", outs[1])), c(paste0(preds,"-", outs[2])), c(paste0(preds,"-", outs[3])),
-            c(paste0(preds,"-", outs[4])),c(paste0(preds,"-", outs[5])))
+mnames <- c(c(paste0(preds, outs[1])), c(paste0(preds, outs[2])), c(paste0(preds, outs[3])),
+            c(paste0(preds, outs[4])),c(paste0(preds, outs[5])))
 
 # Function to replace the word "pred" with list in relats
 fx <- function(x) {
