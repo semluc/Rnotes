@@ -701,7 +701,7 @@ fy <- function(x) {
   return(models)
 }
 models <- lapply(outs, FUN = fy)
-models <- unlist(models2)
+models <- flatten(models)
 
 # Name modelsin the list
 names(models) <- mnames
