@@ -655,7 +655,7 @@ model <- 'y ~ pred'
 preds <- c("x", "x2", "x3")
 #function to replace the word pred with list in preds
 fx <- function(x) {
-  model <- str_replace(model, "pred", x)
+  model <- str_replace_all(model, "pred", x)
   return(model)
 }
 #this generates a list of  models for all preds
