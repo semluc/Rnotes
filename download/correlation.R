@@ -48,7 +48,7 @@ correlation_matrix <- function(df,
   # add significance levels if desired
   if (show_significance) {
     # define notions for significance levels; spacing is important.
-    stars <- ifelse(is.na(p), "", ifelse(p < .001, "**", ifelse(p < .01, "**", ifelse(p < .05, "*", ""))))
+    stars <- ifelse(is.na(p), "", ifelse(p < .001, "***", ifelse(p < .01, "**", ifelse(p < .05, "*", ""))))
     Rformatted = paste0(Rformatted, stars)
   }
   
