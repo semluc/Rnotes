@@ -5,7 +5,7 @@ nav_order: 2
 ---
 
 
-## correlation.R
+## Easy Model Fit Overview & Table
 
 meval() function interprets the modelfit from a lavaan object. Typical interpretation cutoffs are used (Hu and Bentler, 1999). Regular fit estimates and scaled fit estimates (Satorra & Bentler, 2001; 2010) are reported.  
 meval.table(models, names) function outputs a table with model fits, ready for publication  
