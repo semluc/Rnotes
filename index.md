@@ -43,7 +43,8 @@ title: Home
     I'm a research assistant and PhD student at the Department of Psychology at the University of Innsbruck, Austria. My Phd project focuses on self-actualization and authenticity in occupational settings—a topic that I explore empirically via quantitative and qualitative data. I am particularly interested in work-related predictors and outcomes of self-actualization and am currently working on a more modern conceptualization of self-actualization that can be applied to the workplace. 
     <div style="margin-bottom:0.5em;"></div>
     I am a strong proponent of open and collaborative science. Next to applied psychology I very much interested in research methods. In my free time I like to tinker with hardware, software, and coding; I like to ride my road bike and play the piano.
-    <br><br>
+    <br>
+    <i class="fa fa-download" aria-hidden="true"></i> Download my [CV](/download/CV-Lucas-Maunz.pdf) <br>
     <div class="row">
     <div class="column">
         <h3>Interests</h3>
