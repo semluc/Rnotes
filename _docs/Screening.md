@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Screening
+title: Data Screening
 nav_order: 1
 ---
 
