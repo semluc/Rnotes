@@ -44,7 +44,7 @@ title: Home
     <div style="margin-bottom:0.5em;"></div>
     I am a strong proponent of open and collaborative science. Next to applied psychology I very much interested in research methods. In my free time I like to tinker with hardware, software, and coding; I like to ride my road bike and play the piano.
     <br> <br>
-    <i class="fa fa-download" aria-hidden="true"></i> Download my <a href="/download/CV-Lucas-Maunz.pdf" title="Download CV, last update 11.23" download>CV, last update 12.23</a>
+    <i class="fa fa-download" aria-hidden="true"></i> Download my <a href="/download/CV-Lucas-Maunz.pdf" title="Download CV, last update 04.24" download>CV, last update 12.23</a>
     <br> <br>
     <div class="row">
     <div class="column">
