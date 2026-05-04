@@ -8,7 +8,8 @@ correlation_matrix <- function(df,
                                use = "all", 
                                show_significance = TRUE, 
                                replace_diagonal = FALSE, 
-                               replacement = ""){
+                               replacement = "",
+                               leading_zero = TRUE){
   
   # check arguments
   stopifnot(
@@ -17,7 +18,8 @@ correlation_matrix <- function(df,
     "use must be one of 'all', 'upper', 'lower'" = use %in% c("all", "upper", "lower"),
     "replace_diagonal must be logical" = is.logical(replace_diagonal),
     "show_significance must be logical" = is.logical(show_significance),
-    "replacement must be character" = is.character(replacement)
+    "replacement must be character" = is.character(replacement),
+    "leading_zero must be logical" = is.logical(leading_zero)
   )
 
   # we need the Hmisc package for this
@@ -43,6 +45,11 @@ correlation_matrix <- function(df,
   
   # transform correlations to specific character format
   Rformatted = formatC(R, format = 'f', digits = digits, decimal.mark = decimal.mark)
+
+  # APA style: strip leading zero from correlations (which are bounded by ±1)
+  if (!leading_zero) {
+  Rformatted = sub("^(-?)0", "\\1", Rformatted)
+  }
   
   # if there are any negative numbers, we want to put a space before the positives to align all
   if (sum(!is.na(R) & R < 0) > 0) {
