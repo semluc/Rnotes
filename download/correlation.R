@@ -11,21 +11,25 @@ correlation_matrix <- function(df,
                                replacement = ""){
   
   # check arguments
-  stopifnot({
-    is.numeric(digits)
-    digits >= 0
-    use %in% c("all", "upper", "lower")
-    is.logical(replace_diagonal)
-    is.logical(show_significance)
-    is.character(replacement)
-  })
+  stopifnot(
+    "digits must be numeric" = is.numeric(digits),
+    "digits must be non-negative" = digits >= 0,
+    "use must be one of 'all', 'upper', 'lower'" = use %in% c("all", "upper", "lower"),
+    "replace_diagonal must be logical" = is.logical(replace_diagonal),
+    "show_significance must be logical" = is.logical(show_significance),
+    "replacement must be character" = is.character(replacement)
+  )
+
   # we need the Hmisc package for this
-  require(Hmisc)
+   if (!requireNamespace("Hmisc", quietly = TRUE)) {
+   stop("Package 'Hmisc' is required. Install it with install.packages('Hmisc').")
+  }
   
   # retain only numeric and boolean columns
   isNumericOrBoolean = vapply(df, function(x) is.numeric(x) | is.logical(x), logical(1))
   if (sum(!isNumericOrBoolean) > 0) {
-    cat('Dropping non-numeric/-boolean column(s):', paste(names(isNumericOrBoolean)[!isNumericOrBoolean], collapse = ', '), '\n\n')
+  message("Dropping non-numeric/-boolean column(s): ", 
+          paste(names(isNumericOrBoolean)[!isNumericOrBoolean], collapse = ", "))
   }
   df = df[isNumericOrBoolean]
   
@@ -33,16 +37,16 @@ correlation_matrix <- function(df,
   x <- as.matrix(df)
   
   # run correlation analysis using Hmisc package
-  correlation_matrix <- Hmisc::rcorr(x, type = type)
-  R <- correlation_matrix$r # Matrix of correlation coeficients
-  p <- correlation_matrix$P # Matrix of p-value 
+  cor_result <- Hmisc::rcorr(x, type = type)
+  R <- cor_result$r # Matrix of correlation coefficients
+  p <- cor_result$P # Matrix of p-values
   
   # transform correlations to specific character format
   Rformatted = formatC(R, format = 'f', digits = digits, decimal.mark = decimal.mark)
   
   # if there are any negative numbers, we want to put a space before the positives to align all
   if (sum(!is.na(R) & R < 0) > 0) {
-    Rformatted = ifelse(!is.na(R) & R > 0, paste0(" ", Rformatted), Rformatted)
+    Rformatted = ifelse(!is.na(R) & R >= 0, paste0(" ", Rformatted), Rformatted)
   }
   
   # add significance levels if desired
