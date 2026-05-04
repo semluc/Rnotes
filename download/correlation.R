@@ -89,6 +89,56 @@ correlation_matrix <- function(df,
 
 
 
-save_correlation_matrix = function(df, filename, ...) {
-  return(write.csv2(correlation_matrix(df, ...), file = filename))
+
+cor2flex <- function(x, var_labels = NULL, extra_cols = NULL) {
+
+  # Check dependency
+  if (!requireNamespace("flextable", quietly = TRUE)) {
+    stop("Package 'flextable' is required. Install it with install.packages('flextable').")
+  }
+  
+  flextable::set_flextable_defaults(
+    border.color = "black",
+    border.width = 0.5,
+    line_spacing = 1,
+    padding = 2,
+    table.layout = "autofit",
+    font.family = "Times New Roman"
+  )
+  
+  out <- as.data.frame(x)
+  n_rows <- nrow(out)
+  
+  # Detect extra columns automatically if not specified.
+  # Heuristic: a column is "extra" if its name isn't already a row name
+  # (i.e., it's not one of the correlation variables).
+  if (is.null(extra_cols)) {
+    extra_cols <- setdiff(names(out), rownames(out))
+  }
+  n_extra <- length(extra_cols)
+  n_cor <- ncol(out) - n_extra
+  
+  # Use provided labels or fall back to row names
+  if (is.null(var_labels)) {
+    var_labels <- rownames(out)
+  } else {
+    stopifnot(
+      "var_labels must match the number of rows" = 
+        length(var_labels) == n_rows
+    )
+  }
+  
+  # Prepend Variable column
+  out <- cbind(Variable = var_labels, out)
+  rownames(out) <- NULL
+  
+  # Header: "Variable", any extra column names as-is, then 1, 2, 3, ... for correlations
+  names(out) <- c("Variable", extra_cols, as.character(seq_len(n_cor)))
+  
+  ft <- flextable::flextable(out)
+  ft <- flextable::autofit(ft)
+  ft <- flextable::padding(ft, padding.top = 0, padding.bottom = 0)
+  
+  return(ft)
 }
+
