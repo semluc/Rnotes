@@ -2,6 +2,7 @@
 layout: default
 title: Difference two groups
 nav_order: 3
+nav_exclude: true
 ---
 
 # Navigation Structure

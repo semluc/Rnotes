@@ -2,6 +2,7 @@
 layout: default
 title: Data Screening
 nav_order: 1
+nav_exclude: true
 ---
 
 # Navigation Structure
