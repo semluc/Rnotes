@@ -70,8 +70,8 @@ title: Home
       I am a strong proponent of open and collaborative science. Next to applied psychology I am very much interested in research methods. In my free time I like to tinker with hardware, software, and coding.
     </p>
     <p>
-      <a href="/download/CV-Lucas-Maunz.pdf" title="Download CV, last update 01.2025" download>
-        <i class="fa fa-download" aria-hidden="true"></i> Download my CV (last update 01.25)
+      <a href="/download/CV-Lucas-Maunz.pdf" title="My CV, last update 05.2026" download>
+        <i class="fa fa-download" aria-hidden="true"></i> My CV (last update 05.26)
       </a>
     </p>
 
